@@ -50,6 +50,18 @@ std::vector<char> answer;
 POINTS last_mouse_p;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 // ---------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+//modifica chiara
 ///////////////////////////////////////////////////////////
 //modifica gian
 //modifica2
