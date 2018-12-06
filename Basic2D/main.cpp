@@ -51,6 +51,7 @@ POINTS last_mouse_p;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 // ---------------------------------------------------------
 ///////////////////////////////////////////////////////////
+//modifica gian
 //  kill the window
 GLvoid KillGLWindow(GLvoid)								// Properly Kill The Window
 {
