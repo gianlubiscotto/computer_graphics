@@ -50,11 +50,6 @@ std::vector<char> answer;
 POINTS last_mouse_p;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 // ---------------------------------------------------------
-<<<<<<< HEAD
-//vtvfytgvttt
-=======
-//hjhh
->>>>>>> 6823cb8abe3aa10736c9e3fe6f8b0d2402ba4dbe
 ///////////////////////////////////////////////////////////
 //  kill the window
 GLvoid KillGLWindow(GLvoid)								// Properly Kill The Window
