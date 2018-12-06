@@ -63,6 +63,7 @@ LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
 //modifica chiara
 ///////////////////////////////////////////////////////////
+//modifica gian
 //  kill the window
 GLvoid KillGLWindow(GLvoid)								// Properly Kill The Window
 {
