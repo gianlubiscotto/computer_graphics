@@ -122,7 +122,7 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/bookshelf.jpg", 7)) return false;
 	//porta
 	if (!this->Load_a_texture("../Data/door.jpg", 8)) return false;
-	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 10)) return false;
+	if (!this->Load_a_texture("../Data/door2.png", 10)) return false;
 	//indovinello
 	if (!this->Load_a_texture("../Data/question.jpg", 9)) return false;
 
@@ -229,27 +229,17 @@ void MyModel::DrawRiddleFullview() {
 	glBindTexture(GL_TEXTURE_2D, tex);	
 
 		glBegin(GL_QUADS);
-		glColor3f(.6, .6, .6);	
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(8,0.5,0);
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(2,.5, 0);	
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(2, .5, 8);	
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(8, .5, 8);
-		glColor3f(1.0, 1.0, 1.0);
-		glVertex3f(7, 0.6, 2);
-		glVertex3f(3, 0.6, 2);
-		glVertex3f(3, 0.6, 5);
-		glVertex3f(7, 0.6, 5);
-	glEnd();
+			//glColor3f(.6, .6, .6);	
+			glTexCoord2f(0.0f, 0.0f); glVertex3f(8,0.5,0);
+			glTexCoord2f(1.0f, 0.0f); glVertex3f(2,.5, 0);	
+			glTexCoord2f(1.0f, 1.0f); glVertex3f(2, .5, 8);	
+			glTexCoord2f(0.0f, 1.0f); glVertex3f(8, .5, 8);
+		glEnd();
 	
 	// Position The Text On The Screen
 	glDisable(GL_TEXTURE_2D);
-	glColor3f(0.2f, 1, 0.2f);
-	glRasterPos3f(7,0.6,7);
-	this->glPrint("Prova indovinello");
-
-	// Position The Text On The Screen
-	glDisable(GL_TEXTURE_2D);
-	//glColor3f(0.2f, 1, 0.2f);
+	glColor3f(0.2f, 0.2f, 0.2f);
+	//risposta dell'utente
 	glRasterPos3f(7.5f, 0.7f, 4.0f);
 	Data.glPrint(this->answer);
 
@@ -533,6 +523,17 @@ void MyModel::verifica_risposta(char* answer) {
 	//std::vector<char> hogwarts_correct;
 	if (this->matrix_fullview) {
 		//controllo se answer corrisponde alla risposta esatta
+		for (int j = 0; j < 6; j++) {
+			if (matrix_solution[j]!=answer[j]) {
+				//TODO: suoni
+				//suono di errore
+
+			}
+			else {
+				//suono giusto
+				int x = 2;
+			}
+		}
 		//se risposta esatta
 		//this->matrix_vinto=true;
 		this->matrix_fullview = false;
@@ -631,9 +632,10 @@ OKMOVE:
 		this->hogwarts_fullview = true;
 		tex = 11;
 	}
-	if (oi != ni && ni==57 && !matrix_vinto) {
+	if (oi != ni && ni==55 && !matrix_vinto) {
 		this->riddle_fullview = true;
 		this->matrix_fullview = true;
+		//TODO: texture di matrix
 		tex = 10;
 	}
 	return true;
