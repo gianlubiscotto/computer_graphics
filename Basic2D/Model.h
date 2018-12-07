@@ -57,10 +57,13 @@ public:
   bool captured;        // true if the mouse is captured
   int cx, cy;           // client position of the cursor
   bool	fullscreen;	    // Fullscreen Flag 
-	//std::vector<char> answer;
-	char answer[ans_size];
+	//riddles' stuff...
 	int indice;
-  CLabR *Maze;		// maze - labirinto
+	char answer[ans_size];
+	char matrix_solution[7] = { 'B','I','N','A','R','Y','\0' };
+	char hogwarts_solution[7];
+  
+	CLabR *Maze;		// maze - labirinto
   int ldx, ldz;		// dimensions of the maze
   bool fullview;	// top view of the whole maze
 	bool riddle_fullview, hogwarts_fullview,matrix_fullview; //matrix riddle dialog box
@@ -95,7 +98,9 @@ public:
     fullscreen(false), frames(0), fps(0), cursor(true), captured(false),
   fullview(true), riddle_fullview(false),matrix_fullview(false), hogwarts_fullview(false), angle(0.0), angley(0.0), px (0.5), pz(0.5), NoWalls(false),
   StartScreen (true), Vinto (false), matrix_vinto(false), hogwarts_vinto(false), illumin (false) {
+		
 		indice = 0;
+
 		ldx = 10; ldz = 8;
     Maze = new CLabR(ldx, ldz);
     Maze->Init_Perfect0();
