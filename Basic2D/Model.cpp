@@ -522,6 +522,7 @@ void MyModel::verifica_risposta(char* answer) {
 	//std::vector<char> matrix_correct;
 	//std::vector<char> hogwarts_correct;
 	if (this->matrix_fullview) {
+		int y = 2;
 		//controllo se answer corrisponde alla risposta esatta
 		for (int j = 0; j < 6; j++) {
 			if (matrix_solution[j]!=answer[j]) {
