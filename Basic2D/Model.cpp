@@ -120,7 +120,7 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/wallpaper.jpg", 6)) return false;
 	if (!this->Load_a_texture("../Data/bookshelf.jpg", 7)) return false;
 	//porta
-	if (!this->Load_a_texture("../Data/gate.png", 8)) return false;
+	if (!this->Load_a_texture("../Data/gate1.png", 8)) return false;
 	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 10)) return false;
 	//muro matrix
 	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 11)) return false;
