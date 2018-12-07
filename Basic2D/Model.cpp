@@ -123,7 +123,7 @@ bool MyModel::LoadGLTextures(void)
 	//porta
 	if (!this->Load_a_texture("../Data/door.jpg", 8)) return false;
 	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 10)) return false;
-	if (!this->Load_a_texture("../Data/matrix.jpeg", 11)) return false;
+	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 11)) return false;
 
 	//indovinello
 	if (!this->Load_a_texture("../Data/question.jpg", 9)) return false;
@@ -239,7 +239,7 @@ void MyModel::DrawRiddleFullview() {
 		glEnd();
 	
 	// Position The Text On The Screen
-	glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_TEXTURE_2D);
 	glColor3f(0.2f, 1.0f, 0.2f);
 	//risposta dell'utente
 	glRasterPos3f(8.0f, 0.7f, 2.3f);
@@ -489,7 +489,14 @@ bool MyModel::DrawGLScene(void)
   if( this->fullview ) this->DrawWallsFullview();
 	//matrix riddle
 	if (this->riddle_fullview) this->DrawRiddleFullview(); 
+	
+	if (!illumin) glDisable(GL_LIGHTING);
+	else {
+		glEnable(GL_LIGHTING);
+		GLfloat LightPosition[] = { (float)px, 0.8f, (float)pz, 1.0f };
+		glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
 
+	}
   //  Some text in map mode
   if( this->fullview ) {
     glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
