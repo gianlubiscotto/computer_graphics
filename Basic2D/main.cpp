@@ -46,7 +46,6 @@ using namespace audiere;
 class MyModel Data;
 int i = 0;
 char risp[99];
-std::vector<char> answer;
 POINTS last_mouse_p;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
@@ -358,30 +357,29 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 					//tutti gli indovinelli false...
 
 					//pulire il vettore o l'array di caratteri
-					answer.clear();
+					Data.answer.clear();
 				}
 				else if (wParam == VK_RETURN) {
 					//Confrontare la stringa immessa con la risposta.
-					Data.verifica_risposta(answer);
+					Data.verifica_risposta(Data.answer);
 					Data.riddle_fullview = false;
 
 					//pulire il vettore o l'array di caratteri
-					answer.clear();
+					Data.answer.clear();
 				}
 				else {
 					if (wParam == VK_BACK) {
 						//Cancellare dall'array o dal vector l'ultimo carattere
-						if (answer.size()>0) {
-							answer.pop_back();
+						if (Data.answer.size()>0) {
+							Data.answer.pop_back();
 						}
 					}
-					//Codice per stampare a video i caratteri schiacciati dall'utente
-					//o gestiamo l'input in un vector o in un array
-					answer.push_back(static_cast<char>(wParam));
-					/*risp[i] = static_cast<char>(wParam);
-					i++;*/
-					//visualizzare in live i caratteri premuti
-					//Data.glPrint(risp);
+					else {
+						//Codice per stampare a video i caratteri schiacciati dall'utente
+						//gestiamo l'input in un vector o in un array
+						Data.answer.push_back(static_cast<char>(wParam));
+					}
+					
 				}
 
 			}

@@ -30,7 +30,6 @@ public:
   float Nx, Ny, Nz;     // Normal to the surface (if present)
 	float u, v;			// texture coordinates
 	float r, g, b;		// Color (0.0 -  1.0)
-
   Vertex() {}
 	Vertex(float x, float y, float z): x(x), y(y), z(z) { }
 	Vertex(float x, float y, float z, float u, float v): x(x), y(y), z(z),
@@ -57,7 +56,7 @@ public:
   bool captured;        // true if the mouse is captured
   int cx, cy;           // client position of the cursor
   bool	fullscreen;	    // Fullscreen Flag 
-
+	std::vector<char> answer;
   CLabR *Maze;		// maze - labirinto
   int ldx, ldz;		// dimensions of the maze
   bool fullview;	// top view of the whole maze

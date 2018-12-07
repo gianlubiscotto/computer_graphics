@@ -104,7 +104,6 @@ bool MyModel::Load_a_texture(const char *name, int id)
 	return true;										// Return Success
 }
 
-
 // Load Bitmaps And Convert To Textures
 bool MyModel::LoadGLTextures(void)
 {
@@ -162,7 +161,6 @@ void MyModel::SetProjection()
 		gluLookAt(ex, ey, ez,  cx, cy, cz,  0.0, 1.0, 0.0);
 	}
 }
-
 
 //  DRAW THE FLOOR - TEXTURE - NO ILLUMINATION
 void MyModel::DrawFloorText()
@@ -243,6 +241,12 @@ void MyModel::DrawRiddleFullview() {
 	//glColor3f(0.2f, 1, 0.2f);
 	glRasterPos3f(7,0.6,7);
 	this->glPrint("Prova indovinello");
+
+	// Position The Text On The Screen
+	glDisable(GL_TEXTURE_2D);
+	//glColor3f(0.2f, 1, 0.2f);
+	glRasterPos3f(7.5f, 0.7f, 4.0f);
+	Data.glPrint(this->answer.data());
 
 }
 
