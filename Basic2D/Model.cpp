@@ -123,7 +123,7 @@ bool MyModel::LoadGLTextures(void)
 	//porta
 	if (!this->Load_a_texture("../Data/door.jpg", 8)) return false;
 	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 10)) return false;
-	if (!this->Load_a_texture("../Data/matrix.jpg", 11)) return false;
+	if (!this->Load_a_texture("../Data/matrix.jpeg", 11)) return false;
 
 	//indovinello
 	if (!this->Load_a_texture("../Data/question.jpg", 9)) return false;
