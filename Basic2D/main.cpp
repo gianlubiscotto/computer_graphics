@@ -48,7 +48,7 @@ int i = 0;
 char risp[99];
 POINTS last_mouse_p;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
-// ---------------------------------------------------------
+
 //  kill the window
 GLvoid KillGLWindow(GLvoid)								// Properly Kill The Window
 {
