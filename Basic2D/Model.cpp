@@ -229,18 +229,18 @@ void MyModel::DrawRiddleFullview() {
 	glBindTexture(GL_TEXTURE_2D, tex);	
 
 		glBegin(GL_QUADS);
-			//glColor3f(.6, .6, .6);	
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(8,0.5,0);
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(2,.5, 0);	
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(2, .5, 8);	
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(8, .5, 8);
+			glColor3f(1, 1, 1);	
+			glTexCoord2f(0.0f, 0.0f); glVertex3f(10,0.5,-.5);
+			glTexCoord2f(1.0f, 0.0f); glVertex3f(0,.5,-.5);	
+			glTexCoord2f(1.0f, 1.0f); glVertex3f(0, .5, 8.5);	
+			glTexCoord2f(0.0f, 1.0f); glVertex3f(10, .5, 8.5);
 		glEnd();
 	
 	// Position The Text On The Screen
 	glDisable(GL_TEXTURE_2D);
-	glColor3f(0.2f, 0.2f, 0.2f);
+	glColor3f(0.2f, 1.0f, 0.2f);
 	//risposta dell'utente
-	glRasterPos3f(7.5f, 0.7f, 4.0f);
+	glRasterPos3f(7.5f, 0.7f, 2.5f);
 	Data.glPrint(this->answer);
 
 }
@@ -531,13 +531,12 @@ bool MyModel::verifica_risposta(char* answer) {
 			}
 			else j++;
 		}
+		this->matrix_fullview = false;
 		if (flag == false) {
 			this->matrix_vinto = true;
 			return true;
-			//suono vinto
 		}
 		else {
-			//suono errore
 			return false;
 		}
 	}

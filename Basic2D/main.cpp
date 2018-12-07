@@ -362,10 +362,12 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 				else if (wParam == VK_RETURN) {
 					//Confrontare la stringa immessa con la risposta.
 					if (Data.verifica_risposta(Data.answer)) {
+						//suono giusto
 
 					}
 					else {
-						
+						//suono sbagliato
+
 					}
 					Data.riddle_fullview = false;
 					//pulire il vettore o l'array di caratteri
