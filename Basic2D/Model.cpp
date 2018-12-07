@@ -123,6 +123,8 @@ bool MyModel::LoadGLTextures(void)
 	//porta
 	if (!this->Load_a_texture("../Data/door.jpg", 8)) return false;
 	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 10)) return false;
+	if (!this->Load_a_texture("../Data/matrix.jpg", 11)) return false;
+
 	//indovinello
 	if (!this->Load_a_texture("../Data/question.jpg", 9)) return false;
 
@@ -240,7 +242,7 @@ void MyModel::DrawRiddleFullview() {
 	glDisable(GL_TEXTURE_2D);
 	glColor3f(0.2f, 1.0f, 0.2f);
 	//risposta dell'utente
-	glRasterPos3f(7.5f, 0.7f, 2.5f);
+	glRasterPos3f(8.0f, 0.7f, 2.3f);
 	Data.glPrint(this->answer);
 
 }
