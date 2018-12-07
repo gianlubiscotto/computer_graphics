@@ -17,8 +17,7 @@ bool MyModel::InitGL(void)
 {
 	if (!this->LoadGLTextures())				// Jump To Texture Loading Routine
   {	return false; }							// If Texture Didn't Load Return FALSE
-
-
+	
 	glEnable(GL_TEXTURE_2D);							// Enable Texture Mapping ( NEW )
 	glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);				// Black Background
@@ -121,8 +120,9 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/wallpaper.jpg", 6)) return false;
 	if (!this->Load_a_texture("../Data/bookshelf.jpg", 7)) return false;
 	//porta
-	if (!this->Load_a_texture("../Data/door.jpg", 8)) return false;
+	if (!this->Load_a_texture("../Data/gate.png", 8)) return false;
 	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 10)) return false;
+	//muro matrix
 	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 11)) return false;
 
 	//indovinello
@@ -308,6 +308,8 @@ void MyModel::DrawWallsFullview()
 void MyModel::DrawWallsText()
 {
 	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		//  Loop on the maze cells
 	for (int i = 0; i < this->Maze->L.size(); i++) {
