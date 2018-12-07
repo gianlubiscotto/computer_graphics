@@ -308,7 +308,6 @@ void MyModel::DrawWallsFullview()
 void MyModel::DrawWallsText()
 {
 	glEnable(GL_TEXTURE_2D);
-	//  glDisable(GL_TEXTURE_2D);
 
 		//  Loop on the maze cells
 	for (int i = 0; i < this->Maze->L.size(); i++) {
@@ -493,7 +492,7 @@ bool MyModel::DrawGLScene(void)
 	if (!illumin) glDisable(GL_LIGHTING);
 	else {
 		glEnable(GL_LIGHTING);
-		GLfloat LightPosition[] = { (float)px, 0.8f, (float)pz, 1.0f };
+		GLfloat LightPosition[] = { (float)px, .8f, (float)pz, 1.0f };
 		glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
 
 	}
