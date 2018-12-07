@@ -518,26 +518,28 @@ bool MyModel::DrawGLScene(void)
   return true;
 }
 
-void MyModel::verifica_risposta(char* answer) {
+bool MyModel::verifica_risposta(char* answer) {
 	//std::vector<char> matrix_correct;
 	//std::vector<char> hogwarts_correct;
 	if (this->matrix_fullview) {
-		int y = 2;
 		//controllo se answer corrisponde alla risposta esatta
-		for (int j = 0; j < 6; j++) {
-			if (matrix_solution[j]!=answer[j]) {
-				//TODO: suoni
-				//suono di errore
-
+		int j = 0;
+		bool flag = false;
+		while (!flag && j<7) {
+			if (matrix_solution[j] != answer[j]) {
+				flag = true;
 			}
-			else {
-				//suono giusto
-				int x = 2;
-			}
+			else j++;
 		}
-		//se risposta esatta
-		//this->matrix_vinto=true;
-		this->matrix_fullview = false;
+		if (flag == false) {
+			this->matrix_vinto = true;
+			return true;
+			//suono vinto
+		}
+		else {
+			//suono errore
+			return false;
+		}
 	}
 	else if (this->hogwarts_fullview) {
 		//controllo se answer corrisponde alla risposta esatta

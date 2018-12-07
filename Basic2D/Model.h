@@ -186,7 +186,7 @@ public:
   bool InitGL(void);
   void ReSizeGLScene(int width, int height);
   void glPrint(const char *fmt, ...);			// Custom GL "Print" Routine
-	void verifica_risposta(char* answer);
+	bool verifica_risposta(char* answer);
 
 private:
   void DrawFloorText();

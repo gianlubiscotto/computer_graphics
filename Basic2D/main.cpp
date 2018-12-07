@@ -358,24 +358,23 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 					//pulire il vettore o l'array di caratteri
 					Data.indice = 0;
 					Data.answer[Data.indice] = '\0';
-					//Data.answer.clear();
 				}
 				else if (wParam == VK_RETURN) {
 					//Confrontare la stringa immessa con la risposta.
-					Data.verifica_risposta(Data.answer);
-					Data.riddle_fullview = false;
+					if (Data.verifica_risposta(Data.answer)) {
 
+					}
+					else {
+						
+					}
+					Data.riddle_fullview = false;
 					//pulire il vettore o l'array di caratteri
 					Data.indice = 0;
 					Data.answer[Data.indice] = '\0';
-					//Data.answer.clear();
 				}
 				else {
 					if (wParam == VK_BACK) {
 						//Cancellare dall'array o dal vector l'ultimo carattere
-						/*if (Data.answer.size()>0) {
-							Data.answer.pop_back();
-						}*/
 						if (Data.indice > 0) {
 							Data.indice--;
 							Data.answer[Data.indice] = '\0';
@@ -388,8 +387,6 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 							Data.answer[Data.indice] = static_cast<char>(wParam);
 							Data.answer[Data.indice + 1] = '\0';
 							Data.indice++;
-							//Datdd
-
 						}
 					}
 				}
@@ -400,7 +397,6 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 			}
 			else if (Data.fullview && wParam == 'V') {
 				Data.fullview = false;
-				//Data.keys[wParam] = false;
 			}
 		}
 
