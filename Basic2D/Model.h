@@ -20,6 +20,7 @@
 #include "Labirinto.h"
 
 #define PI 3.141592654
+#define ans_size 40
 
 // A class for storing vertices
 //  Vertex
@@ -56,7 +57,9 @@ public:
   bool captured;        // true if the mouse is captured
   int cx, cy;           // client position of the cursor
   bool	fullscreen;	    // Fullscreen Flag 
-	std::vector<char> answer;
+	//std::vector<char> answer;
+	char answer[ans_size];
+	int indice;
   CLabR *Maze;		// maze - labirinto
   int ldx, ldz;		// dimensions of the maze
   bool fullview;	// top view of the whole maze
@@ -92,8 +95,8 @@ public:
     fullscreen(false), frames(0), fps(0), cursor(true), captured(false),
   fullview(true), riddle_fullview(false),matrix_fullview(false), hogwarts_fullview(false), angle(0.0), angley(0.0), px (0.5), pz(0.5), NoWalls(false),
   StartScreen (true), Vinto (false), matrix_vinto(false), hogwarts_vinto(false), illumin (false) {
-
-	  ldx = 10; ldz = 8;
+		indice = 0;
+		ldx = 10; ldz = 8;
     Maze = new CLabR(ldx, ldz);
     Maze->Init_Perfect0();
     //Maze->QuasiRisolvi();
@@ -178,7 +181,7 @@ public:
   bool InitGL(void);
   void ReSizeGLScene(int width, int height);
   void glPrint(const char *fmt, ...);			// Custom GL "Print" Routine
-	void verifica_risposta(std::vector<char> answer);
+	void verifica_risposta(char* answer);
 
 private:
   void DrawFloorText();

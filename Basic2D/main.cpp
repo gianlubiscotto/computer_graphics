@@ -355,9 +355,10 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 					Data.riddle_fullview = false;
 					Data.matrix_fullview = false;
 					//tutti gli indovinelli false...
-
 					//pulire il vettore o l'array di caratteri
-					Data.answer.clear();
+					Data.indice = 0;
+					Data.answer[Data.indice] = '\0';
+					//Data.answer.clear();
 				}
 				else if (wParam == VK_RETURN) {
 					//Confrontare la stringa immessa con la risposta.
@@ -365,23 +366,33 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 					Data.riddle_fullview = false;
 
 					//pulire il vettore o l'array di caratteri
-					Data.answer.clear();
+					Data.indice = 0;
+					Data.answer[Data.indice] = '\0';
+					//Data.answer.clear();
 				}
 				else {
 					if (wParam == VK_BACK) {
 						//Cancellare dall'array o dal vector l'ultimo carattere
-						if (Data.answer.size()>0) {
+						/*if (Data.answer.size()>0) {
 							Data.answer.pop_back();
+						}*/
+						if (Data.indice > 0) {
+							Data.indice--;
+							Data.answer[Data.indice] = '\0';
 						}
 					}
 					else {
 						//Codice per stampare a video i caratteri schiacciati dall'utente
 						//gestiamo l'input in un vector o in un array
-						Data.answer.push_back(static_cast<char>(wParam));
-					}
-					
-				}
+						if (Data.indice < ans_size-1 && ((wParam > 47 && wParam < 58) || (wParam > 64 && wParam < 91) || wParam == 32)) {
+							Data.answer[Data.indice] = static_cast<char>(wParam);
+							Data.answer[Data.indice + 1] = '\0';
+							Data.indice++;
+							//Datdd
 
+						}
+					}
+				}
 			}
 			else if(!Data.fullview){
 				Data.keys[wParam] = TRUE;		// If So, Mark It As TRUE
