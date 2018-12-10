@@ -57,6 +57,7 @@ public:
   bool captured;        // true if the mouse is captured
   int cx, cy;           // client position of the cursor
   bool	fullscreen;	    // Fullscreen Flag 
+	bool suono_giusto,suono_sbagliato;
 	//riddles' stuff...
 	int indice;
 	char answer[ans_size];
@@ -98,7 +99,7 @@ public:
   MyModel(): hDC(NULL), hRC (NULL), hWnd (NULL), active (true),
     fullscreen(false), frames(0), fps(0), cursor(true), captured(false),
   fullview(true), riddle_fullview(false),matrix_fullview(false), hogwarts_fullview(false), angle(0.0), angley(0.0), px (0.5), pz(0.5), NoWalls(false),
-  StartScreen (true), Vinto (false), matrix_vinto(false), hogwarts_vinto(false), illumin (false) {
+  StartScreen (true), Vinto (false), matrix_vinto(false), hogwarts_vinto(false), illumin (true), suono_giusto(false), suono_sbagliato(false) {
 		
 		indice = 0;
 

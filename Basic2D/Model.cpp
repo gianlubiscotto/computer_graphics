@@ -225,7 +225,7 @@ void MyModel::DrawCeilText()
 
 //draw the matrix dialog box
 void MyModel::DrawRiddleFullview() {
-
+	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 	glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
 	glLoadIdentity();
@@ -488,6 +488,13 @@ bool MyModel::DrawGLScene(void)
   //  In this way texture and surface color are blended
   glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
 
+	if (!illumin) glDisable(GL_LIGHTING);
+	else {
+		glEnable(GL_LIGHTING);
+		GLfloat LightPosition[] = { (float)px, .8f, (float)pz, 1.0f };
+		glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+
+	}
   //  floor solo se mappa dall'alto o dentro il gioco
 	if (!this->riddle_fullview) {
 		this->DrawWallsText(false);	//non trasp
@@ -501,13 +508,7 @@ bool MyModel::DrawGLScene(void)
 	//matrix riddle
 	if (this->riddle_fullview) this->DrawRiddleFullview(); 
 	
-	if (!illumin) glDisable(GL_LIGHTING);
-	else {
-		glEnable(GL_LIGHTING);
-		GLfloat LightPosition[] = { (float)px, .8f, (float)pz, 1.0f };
-		glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-
-	}
+	
   //  Some text in map mode
   if( this->fullview ) {
     glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix

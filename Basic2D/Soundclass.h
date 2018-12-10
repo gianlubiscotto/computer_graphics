@@ -9,9 +9,10 @@ public:
 		device = OpenDevice();
 		
 	}
-	void play(char* path) {
+	OutputStreamPtr play(char* path) {
 		OutputStreamPtr sound(OpenSound(device, path, false));
-			sound->play();
+		sound->play();
+		return sound;
 	}
 };
 

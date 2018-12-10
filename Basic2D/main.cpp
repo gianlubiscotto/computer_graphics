@@ -47,7 +47,7 @@ class MyModel Data;
 int i = 0;
 char risp[99];
 POINTS last_mouse_p;
-Soundclass classe_suono;
+//Soundclass classe_suono;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
 //  kill the window
@@ -364,11 +364,11 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 					//Confrontare la stringa immessa con la risposta.
 					if (Data.verifica_risposta(Data.answer)) {
 						//suono giusto
-						classe_suono.play("../Data/bell.wav");
+						Data.suono_giusto = true;
 					}
 					else {
 						//suono sbagliato
-						classe_suono.play("../Data/stupid.wav");
+						Data.suono_sbagliato = true;
 					}
 					Data.riddle_fullview = false;
 					//pulire il vettore o l'array di caratteri
@@ -614,7 +614,14 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				bool provaDialog(HWND parent, HINSTANCE instance);
 				provaDialog(Data.hWnd, Data.hInstance);
 			}
-		
+			if (Data.suono_giusto) {
+				bell->play();
+				Data.suono_giusto = false;
+			}
+			if (Data.suono_sbagliato) {
+				stupid->play();
+				Data.suono_sbagliato = false;
+			}
 		}
 	}
 	// Shutdown
