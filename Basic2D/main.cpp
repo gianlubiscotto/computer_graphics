@@ -36,6 +36,7 @@
 #include "Model.h"
 #include "resource.h"
 #include "audiere.h"
+#include "Soundclass.h"
 using namespace audiere;
 //  LIBRERIE OPENGL e multimendia
 //	OpenGL libraries
@@ -47,6 +48,7 @@ class MyModel Data;
 int i = 0;
 char risp[99];
 POINTS last_mouse_p;
+Soundclass classe_suono;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
 //  kill the window
@@ -270,14 +272,6 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 							WPARAM	wParam,			// Additional Message Information
 							LPARAM	lParam)			// Additional Message Information
 {
-	/*AudioDevicePtr feedback(OpenDevice());
-	OutputStreamPtr stupid(OpenSound(feedback, "../Data/stupid.wav", false));
-	OutputStreamPtr bell(OpenSound(feedback, "../Data/bell.wav", false));
-
-
-	if (!feedback) {
-		return 0;         // failure
-	}*/
 	switch (uMsg)									// Check For Windows Messages
 	{
 		case WM_ACTIVATE:							// Watch For Window Activate Message
@@ -371,11 +365,11 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 					//Confrontare la stringa immessa con la risposta.
 					if (Data.verifica_risposta(Data.answer)) {
 						//suono giusto
-						
+						classe_suono.play_correct();
 					}
 					else {
 						//suono sbagliato
-						
+						classe_suono.play_wrong();
 					}
 					Data.riddle_fullview = false;
 					//pulire il vettore o l'array di caratteri
