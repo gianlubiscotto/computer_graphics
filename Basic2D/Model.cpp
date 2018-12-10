@@ -334,19 +334,23 @@ void MyModel::DrawWallsText(bool transparency)
 			glEnd();
 
 			// An now... the WEST(OVEST) rear wall!
-			it = this->Maze->L[i + 1].WallsTexture[OVEST];
-			glBindTexture(GL_TEXTURE_2D, texture[it]);
-			glLoadIdentity();
-			glTranslatef((float)ix + 1, 0, (float)iy + 0.5f);
-			glRotatef(-90.0f, 0, 1.0f, 0);
-			glBegin(GL_QUADS);
-			for (int j = 0; j < this->wall.size(); j++) {
-				glTexCoord2f(wall[j].u, wall[j].v);
-				glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-				glColor3f(wall[j].r, wall[j].g, wall[j].b);
-				glVertex3f(wall[j].x, wall[j].y, wall[j].z);
+			
+			if (i < this->Maze->L.size() - 1) {
+				it = this->Maze->L[i + 1].WallsTexture[OVEST];
+				glBindTexture(GL_TEXTURE_2D, texture[it]);
+				glLoadIdentity();
+				glTranslatef((float)ix + 1, 0, (float)iy + 0.5f);
+				glRotatef(-90.0f, 0, 1.0f, 0);
+				glBegin(GL_QUADS);
+				for (int j = 0; j < this->wall.size(); j++) {
+					glTexCoord2f(wall[j].u, wall[j].v);
+					glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
+					glColor3f(wall[j].r, wall[j].g, wall[j].b);
+					glVertex3f(wall[j].x, wall[j].y, wall[j].z);
+				}
+				glEnd();
 			}
-			glEnd();
+			
 		}
 
 		// SOUTH wall?
@@ -365,19 +369,22 @@ void MyModel::DrawWallsText(bool transparency)
 			glEnd();
 
 			// An now... the NORTH(NORD) rear wall!
-			it = this->Maze->L[i + 10].WallsTexture[NORD];
-			glBindTexture(GL_TEXTURE_2D, texture[it]);
-			glLoadIdentity();
-			glTranslatef((float)ix + 0.5f, 0, (float)iy + 1.0f);
-			glRotatef(180.0f, 0, 1.0f, 0);
-			glBegin(GL_QUADS);
-			for (int j = 0; j < this->wall.size(); j++) {
-				glTexCoord2f(wall[j].u, wall[j].v);
-				glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-				glColor3f(wall[j].r, wall[j].g, wall[j].b);
-				glVertex3f(wall[j].x, wall[j].y, wall[j].z);
+			if (i < this->Maze->L.size() - this->ldx) {
+				it = this->Maze->L[i + this->ldx].WallsTexture[NORD];
+				glBindTexture(GL_TEXTURE_2D, texture[it]);
+				glLoadIdentity();
+				glTranslatef((float)ix + 0.5f, 0, (float)iy + 1.0f);
+				glRotatef(180.0f, 0, 1.0f, 0);
+				glBegin(GL_QUADS);
+				for (int j = 0; j < this->wall.size(); j++) {
+					glTexCoord2f(wall[j].u, wall[j].v);
+					glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
+					glColor3f(wall[j].r, wall[j].g, wall[j].b);
+					glVertex3f(wall[j].x, wall[j].y, wall[j].z);
+				}
+				glEnd();
 			}
-			glEnd();
+			
 		}
 	}   // END Loop on the maze cells
 
