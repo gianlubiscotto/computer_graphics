@@ -232,7 +232,7 @@ void MyModel::DrawRiddleFullview() {
 	glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
 	glLoadIdentity();
 	//tex viene modificata in move or collide con la texture corrispondente
-	glBindTexture(GL_TEXTURE_2D, tex);	
+	glBindTexture(GL_TEXTURE_2D, this->fullview_texture);
 		glBegin(GL_QUADS);
 			glColor3f(1, 1, 1);	
 			glTexCoord2f(0.0f, 0.0f); glVertex3f(10,0.5,-.5);
@@ -655,18 +655,18 @@ OKMOVE:
 	px = npx; pz = npz;
 
 	if (oi != ni && ni == 51 && !hogwarts_vinto) { //se hogwarts non risolto
-		tex = 9;
+		this->fullview_texture = 9;
 		this->riddle_fullview = true;
 		this->hogwarts_fullview = true;
 	}
 	else if (oi != ni && ni == 55 && !matrix_vinto) {	//se matrix non risolto
-		tex = 10;
+		this->fullview_texture = 10;
 		this->riddle_fullview = true;
 		this->matrix_fullview = true;
 		//TODO: texture di matrix
 	}
 	else if (oi != ni && ni == 38 && !cancello_vinto) {	//se cancello non aperto
-		tex = 12;	//todo texture cancello
+		this->fullview_texture = 12;	//todo texture cancello
 		this->riddle_fullview = true;
 		this->cancello_fullview = true;
 		//TODO: texture di matrix

@@ -54,6 +54,7 @@ public:
   bool	keys[256];			// Array Used For The Keyboard Routine
   bool	active;		      // Window Active Flag Set To TRUE By Default
   bool cursor;          // true if visible
+	int fullview_texture;
   bool captured;        // true if the mouse is captured
   int cx, cy;           // client position of the cursor
   bool	fullscreen;	    // Fullscreen Flag 
