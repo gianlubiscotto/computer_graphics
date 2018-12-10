@@ -270,6 +270,14 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 							WPARAM	wParam,			// Additional Message Information
 							LPARAM	lParam)			// Additional Message Information
 {
+	/*AudioDevicePtr feedback(OpenDevice());
+	OutputStreamPtr stupid(OpenSound(feedback, "../Data/stupid.wav", false));
+	OutputStreamPtr bell(OpenSound(feedback, "../Data/bell.wav", false));
+
+
+	if (!feedback) {
+		return 0;         // failure
+	}*/
 	switch (uMsg)									// Check For Windows Messages
 	{
 		case WM_ACTIVATE:							// Watch For Window Activate Message
@@ -363,11 +371,11 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 					//Confrontare la stringa immessa con la risposta.
 					if (Data.verifica_risposta(Data.answer)) {
 						//suono giusto
-
+						
 					}
 					else {
 						//suono sbagliato
-
+						
 					}
 					Data.riddle_fullview = false;
 					//pulire il vettore o l'array di caratteri

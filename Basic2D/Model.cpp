@@ -11,6 +11,7 @@
 
 #include "Model.h"
 #include "SOIL.h"
+
 int tex;
 // All Setup For OpenGL Goes Here
 bool MyModel::InitGL(void)
@@ -66,6 +67,7 @@ bool MyModel::InitGL(void)
   glEnable(GL_LIGHT0);
   //  Set the light source - end
 
+	
   return true;										// Initialization Went OK
 }
 
@@ -544,9 +546,11 @@ bool MyModel::verifica_risposta(char* answer) {
 		this->matrix_fullview = false;
 		if (flag == false) {
 			this->matrix_vinto = true;
+			
 			return true;
 		}
 		else {
+		
 			return false;
 		}
 	}

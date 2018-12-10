@@ -62,6 +62,7 @@ public:
 	char answer[ans_size];
 	char matrix_solution[7] = { 'B','I','N','A','R','Y','\0' };
 	char hogwarts_solution[7];
+
   
 	CLabR *Maze;		// maze - labirinto
   int ldx, ldz;		// dimensions of the maze
