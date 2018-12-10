@@ -547,11 +547,9 @@ bool MyModel::verifica_risposta(char* answer) {
 		this->matrix_fullview = false;
 		if (flag == false) {
 			this->matrix_vinto = true;
-			
 			return true;
 		}
 		else {
-		
 			return false;
 		}
 	}

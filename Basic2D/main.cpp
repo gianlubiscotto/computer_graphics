@@ -35,7 +35,6 @@
 #include <gl\glu.h>			// Header File For The GLu32 Library
 #include "Model.h"
 #include "resource.h"
-#include "audiere.h"
 #include "Soundclass.h"
 using namespace audiere;
 //  LIBRERIE OPENGL e multimendia
@@ -365,11 +364,11 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 					//Confrontare la stringa immessa con la risposta.
 					if (Data.verifica_risposta(Data.answer)) {
 						//suono giusto
-						classe_suono.play_correct();
+						classe_suono.play("../Data/bell.wav");
 					}
 					else {
 						//suono sbagliato
-						classe_suono.play_wrong();
+						classe_suono.play("../Data/stupid.wav");
 					}
 					Data.riddle_fullview = false;
 					//pulire il vettore o l'array di caratteri
