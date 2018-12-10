@@ -110,12 +110,8 @@ bool MyModel::LoadGLTextures(void)
 {
 	// Floor textures
 	if (!this->Load_a_texture("../Data/floor2.png", 0)) return false;
-	//faccia tipa
-	if (!this->Load_a_texture("../Data/bbb.jpg", 1)) return false;
 	//soffitto
 	if (!this->Load_a_texture("../Data/ceil.jpg", 2)) return false;
-	//zucca
-	if (!this->Load_a_texture("../Data/PumpkinQ.jpg", 3)) return false;
 	// Walls textures
 	if (!this->Load_a_texture("../Data/wallpaper3.jpg", 4)) return false;
 	if (!this->Load_a_texture("../Data/wall.png", 5)) return false;
@@ -232,7 +228,7 @@ void MyModel::DrawRiddleFullview() {
 	glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
 	glLoadIdentity();
 	//tex viene modificata in move or collide con la texture corrispondente
-	glBindTexture(GL_TEXTURE_2D, this->fullview_texture);
+	glBindTexture(GL_TEXTURE_2D, texture[this->fullview_texture]);
 		glBegin(GL_QUADS);
 			glColor3f(1, 1, 1);	
 			glTexCoord2f(0.0f, 0.0f); glVertex3f(10,0.5,-.5);
