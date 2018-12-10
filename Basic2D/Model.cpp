@@ -655,7 +655,7 @@ OKMOVE:
 	px = npx; pz = npz;
 
 	if (oi != ni && ni == 51 && !hogwarts_vinto) { //se hogwarts non risolto
-		this->fullview_texture = 9;
+		this->fullview_texture = 9; //todo texture
 		this->riddle_fullview = true;
 		this->hogwarts_fullview = true;
 	}
