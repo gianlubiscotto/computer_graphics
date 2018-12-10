@@ -192,7 +192,7 @@ public:
 private:
   void DrawFloorText();
   void DrawCeilText();
-  void DrawWallsText();
+  void DrawWallsText(bool transparency);
   void DrawWallsFullview();
 	void DrawRiddleFullview();
   bool LoadGLTextures(void);

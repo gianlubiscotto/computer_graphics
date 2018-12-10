@@ -307,7 +307,7 @@ void MyModel::DrawWallsFullview()
 
 //  DRAW THE WALLS - TEXTURE - NO ILLUMINATION
 
-void MyModel::DrawWallsText()
+void MyModel::DrawWallsText(bool transparency)
 {
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
@@ -318,7 +318,7 @@ void MyModel::DrawWallsText()
 		int ix, iy;
 		this->Maze->GetXY(i, ix, iy);
 		// EST wall?
-		if (this->Maze->L[i].muroE) {
+		if (this->Maze->L[i].muroE && this->Maze->L[i].WallsTransparency[1]==transparency) {
 			int it = this->Maze->L[i].WallsTexture[EST];
 			glBindTexture(GL_TEXTURE_2D, texture[it]);
 			glLoadIdentity();
@@ -350,7 +350,7 @@ void MyModel::DrawWallsText()
 		}
 
 		// SOUTH wall?
-		if (this->Maze->L[i].muroS) {
+		if (this->Maze->L[i].muroS && this->Maze->L[i].WallsTransparency[0] == transparency) {
 			int it = this->Maze->L[i].WallsTexture[SUD];
 			glBindTexture(GL_TEXTURE_2D, texture[it]);
 			glLoadIdentity();
@@ -483,9 +483,10 @@ bool MyModel::DrawGLScene(void)
 
   //  floor solo se mappa dall'alto o dentro il gioco
 	if (!this->riddle_fullview) {
-		this->DrawWallsText();
+		this->DrawWallsText(false);	//non trasp
 		this->DrawCeilText();
 		this->DrawFloorText();
+		this->DrawWallsText(true);//trasp
 	}
  
   //  walls

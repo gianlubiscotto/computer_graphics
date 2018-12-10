@@ -39,14 +39,16 @@ public:
   //  Casella speciale colorata (non di labirinto)
   //  Special cell (solid)
   bool special;
+  
   COLORREF colore;
   //  texture indices
   int floorTexture;
   int ceilTexture;
   int WallsTexture[4];  // 0-3 see NORT EST ...
+  bool WallsTransparency[2]; //0 per nord/sud 1 per est/ovest
 	//dare id per facciata e retro
 public:
-  CellaR(): visitata(0), a(0), muroE(true), muroS(true),
+  CellaR(): visitata(0), a(0), muroE(true), muroS(true), 
     special(false), floorTexture(0), ceilTexture(2)
 
   { colore = RGB(0,0,0);
@@ -54,6 +56,8 @@ public:
   WallsTexture[1] = 5;
   WallsTexture[2] = 6;
   WallsTexture[3] = 7;
+  WallsTransparency[0] = false;
+  WallsTransparency[1] = false;
   }
 };
 
