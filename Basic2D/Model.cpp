@@ -231,7 +231,7 @@ void MyModel::DrawRiddleFullview() {
 	glLoadIdentity();
 	//tex viene modificata in move or collide con la texture corrispondente
 	glBindTexture(GL_TEXTURE_2D, tex);	
-
+	int prova = tex;
 		glBegin(GL_QUADS);
 			glColor3f(1, 1, 1);	
 			glTexCoord2f(0.0f, 0.0f); glVertex3f(10,0.5,-.5);
@@ -239,13 +239,16 @@ void MyModel::DrawRiddleFullview() {
 			glTexCoord2f(1.0f, 1.0f); glVertex3f(0, .5, 8.5);	
 			glTexCoord2f(0.0f, 1.0f); glVertex3f(10, .5, 8.5);
 		glEnd();
-	
+
 	// Position The Text On The Screen
 	//glDisable(GL_TEXTURE_2D);
 	glColor3f(0.2f, 1.0f, 0.2f);
 	//risposta dell'utente
 	glRasterPos3f(8.0f, 0.7f, 2.3f);
-	Data.glPrint(this->answer);
+	if (!this->cancello_fullview) {
+		Data.glPrint(this->answer);
+	}
+	
 
 }
 
@@ -312,7 +315,21 @@ void MyModel::DrawWallsText(bool transparency)
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+	if ((this->px > 8 && this->px < 9) && (this->pz > 3 && this->pz < 4) && (this->Maze->L[37].muroE) && (cancello_vinto)) {
+		this->Maze->L[37].muroE = false;
+	
+		glBindTexture(GL_TEXTURE_2D, 10);
+		glBegin(GL_QUADS);
+			glTexCoord2f(0,0);
+			glVertex3f(8, 0, 4);
+			glTexCoord2f(1, 0);
+			glVertex3f(8, 0, 3);
+			glTexCoord2f(1, 1);
+			glVertex3f(8, 1, 3);
+			glTexCoord2f(0, 1);
+			glVertex3f(8, 1, 4);
+		glEnd();
+	}
 		//  Loop on the maze cells
 	for (int i = 0; i < this->Maze->L.size(); i++) {
 		int ix, iy;
@@ -555,6 +572,7 @@ bool MyModel::verifica_risposta(char* answer) {
 		this->matrix_fullview = false;
 		if (flag == false) {
 			this->matrix_vinto = true;
+			this->cancello_vinto = true;
 			return true;
 		}
 		else {
@@ -626,40 +644,50 @@ void MyModel::glPrint(const char *fmt, ...)					// Custom GL "Print" Routine
 //  return true if move
 bool MyModel::MoveOrCollide(double npx, double npz, double enpx, double enpz)
 {
-  int nx = (int) enpx, nz = (int) enpz;
-  int ni = this->Maze->GetIn(nx,nz);
+	int nx = (int)enpx, nz = (int)enpz;
+	int ni = this->Maze->GetIn(nx, nz);
 
-  if( this->NoWalls ) goto OKMOVE;
+	if (this->NoWalls) goto OKMOVE;
 
-  // maze limits
-  if( enpx < 0 || enpx > ldx || enpz < 0 || enpz > ldz ) return false;
+	// maze limits
+	if (enpx < 0 || enpx > ldx || enpz < 0 || enpz > ldz) return false;
 
-  int ox = (int) px, oz = (int) pz;
-  
-  int oi;
-  oi = this->Maze->GetIn(ox,oz);
-  if( oi == ni ) goto OKMOVE; // same cell
+	int ox = (int)px, oz = (int)pz;
 
-  int V[4], nv;
-  nv = this->Maze->GetViciniRaggiungibili(oi,V);
-  for(int i=0; i < nv; i++)
-    if( V[i] == ni ) goto OKMOVE;
+	int oi;
+	oi = this->Maze->GetIn(ox, oz);
+	if (oi == ni) goto OKMOVE; // same cell
 
-  return false;
+	int V[4], nv;
+	nv = this->Maze->GetViciniRaggiungibili(oi, V);
+	for (int i = 0; i < nv; i++)
+		if (V[i] == ni) goto OKMOVE;
+
+	return false;
 
 OKMOVE:
-  if( nx == this->Maze->xu && nz == this->Maze->yu ) this->Vinto = true;
-  px=npx; pz = npz; 
-	if (oi!=ni && ni== 51 && !hogwarts_vinto) {
+	if (nx == this->Maze->xu && nz == this->Maze->yu) this->Vinto = true;
+	px = npx; pz = npz;
+
+	if (oi != ni && ni == 51 && !hogwarts_vinto) { //se hogwarts non risolto
+		tex = 9;
 		this->riddle_fullview = true;
 		this->hogwarts_fullview = true;
-		tex = 11;
 	}
-	if (oi != ni && ni==55 && !matrix_vinto) {
+	else if (oi != ni && ni == 55 && !matrix_vinto) {	//se matrix non risolto
+		tex = 10;
 		this->riddle_fullview = true;
 		this->matrix_fullview = true;
 		//TODO: texture di matrix
-		tex = 10;
+	}
+	else if (oi != ni && ni == 38 && !cancello_vinto) {	//se cancello non aperto
+		tex = 11;	//todo texture cancello
+		this->riddle_fullview = true;
+		this->cancello_fullview = true;
+		//TODO: texture di matrix
+	}
+	else if (oi != ni && ni == 38 && cancello_vinto && this->Maze->L[37].muroE) {
+		//this->Maze->L[37].muroE = false;
 	}
 	return true;
 }

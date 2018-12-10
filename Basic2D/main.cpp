@@ -355,43 +355,54 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 				if (wParam == VK_ESCAPE) {
 					Data.riddle_fullview = false;
 					Data.matrix_fullview = false;
+					Data.hogwarts_fullview = false;
+					Data.cancello_fullview = false;
 					//tutti gli indovinelli false...
 					//pulire il vettore o l'array di caratteri
 					Data.indice = 0;
 					Data.answer[Data.indice] = '\0';
 				}
 				else if (wParam == VK_RETURN) {
-					//Confrontare la stringa immessa con la risposta.
-					if (Data.verifica_risposta(Data.answer)) {
-						//suono giusto
-						Data.suono_giusto = true;
+					if (!Data.cancello_fullview) {
+						//Confrontare la stringa immessa con la risposta.
+						if (Data.verifica_risposta(Data.answer)) {
+							//suono giusto
+							Data.suono_giusto = true;
+						}
+						else {
+							//suono sbagliato
+							Data.suono_sbagliato = true;
+						}
+						Data.riddle_fullview = false;
+						//pulire il vettore o l'array di caratteri
+						Data.indice = 0;
+						Data.answer[Data.indice] = '\0';
 					}
 					else {
-						//suono sbagliato
-						Data.suono_sbagliato = true;
+						Data.riddle_fullview = false;
+						Data.cancello_fullview = false;
 					}
-					Data.riddle_fullview = false;
-					//pulire il vettore o l'array di caratteri
-					Data.indice = 0;
-					Data.answer[Data.indice] = '\0';
 				}
 				else {
-					if (wParam == VK_BACK) {
-						//Cancellare dall'array o dal vector l'ultimo carattere
-						if (Data.indice > 0) {
-							Data.indice--;
-							Data.answer[Data.indice] = '\0';
+					if (!Data.cancello_fullview) {
+						if (wParam == VK_BACK) {
+							//Cancellare dall'array o dal vector l'ultimo carattere
+							if (Data.indice > 0) {
+								Data.indice--;
+								Data.answer[Data.indice] = '\0';
+							}
+						}
+						else {
+							//Codice per stampare a video i caratteri schiacciati dall'utente
+							//gestiamo l'input in un vector o in un array
+							if (Data.indice < ans_size - 1 && ((wParam > 47 && wParam < 58) || (wParam > 64 && wParam < 91) || wParam == 32)) {
+								Data.answer[Data.indice] = static_cast<char>(wParam);
+								Data.answer[Data.indice + 1] = '\0';
+								Data.indice++;
+							}
 						}
 					}
-					else {
-						//Codice per stampare a video i caratteri schiacciati dall'utente
-						//gestiamo l'input in un vector o in un array
-						if (Data.indice < ans_size-1 && ((wParam > 47 && wParam < 58) || (wParam > 64 && wParam < 91) || wParam == 32)) {
-							Data.answer[Data.indice] = static_cast<char>(wParam);
-							Data.answer[Data.indice + 1] = '\0';
-							Data.indice++;
-						}
-					}
+					
 				}
 			}
 			else if(!Data.fullview){

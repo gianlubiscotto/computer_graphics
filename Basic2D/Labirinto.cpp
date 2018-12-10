@@ -441,7 +441,7 @@ void CLabR::mettiMuri() {
 	}
 
 	//creo labirinto come voglio
-	std::vector<int> muriE = { 0, 3, 6, 12, 14, 15, 17, 18, 20, 21, 22, 23, 24, 26, 27, 28, 30, 35, 43, 46, 48, 50, 51, 54, 55, 57, 60, 61, 62, 63, 64, 66, 68, 71, 72, 73, 75 };
+	std::vector<int> muriE = { 0, 3, 6, 12, 14, 15, 17, 18, 20, 21, 22, 23, 24, 26, 27, 28, 30, 35, 37, 43, 46, 48, 50, 51, 54, 55, 60, 61, 62, 63, 64, 66, 68, 71, 72, 73, 75 };
 	for (int i = 0; i < size(muriE); i++) {
 		L[muriE[i]].muroE = true;
 	}
@@ -452,9 +452,9 @@ void CLabR::mettiMuri() {
 
 	//modifico le texture
 	
-	L[57].WallsTexture[1] = 8; //porta
-	L[58].WallsTexture[3] = 8; //porta dall'altro lato
-	L[57].WallsTransparency[1] = true;
+	L[37].WallsTexture[1] = 8; //porta
+	L[38].WallsTexture[3] = 8; //porta dall'altro lato
+	L[37].WallsTransparency[1] = true;
 
 	L[51].WallsTexture[0] = 9;	
 	L[55].WallsTexture[0] = 11;	//matrix wall

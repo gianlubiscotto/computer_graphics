@@ -68,9 +68,9 @@ public:
 	CLabR *Maze;		// maze - labirinto
   int ldx, ldz;		// dimensions of the maze
   bool fullview;	// top view of the whole maze
-	bool riddle_fullview, hogwarts_fullview,matrix_fullview; //matrix riddle dialog box
+	bool riddle_fullview, hogwarts_fullview,matrix_fullview,cancello_fullview; //riddle dialog box
   bool StartScreen;
-  bool Vinto,matrix_vinto,hogwarts_vinto;
+  bool Vinto,matrix_vinto,hogwarts_vinto,cancello_vinto;
   double px, pz;  // player position
   double angle;   // and orientation
 	double angley;
@@ -98,8 +98,8 @@ public:
   //  methods
   MyModel(): hDC(NULL), hRC (NULL), hWnd (NULL), active (true),
     fullscreen(false), frames(0), fps(0), cursor(true), captured(false),
-  fullview(true), riddle_fullview(false),matrix_fullview(false), hogwarts_fullview(false), angle(0.0), angley(0.0), px (0.5), pz(0.5), NoWalls(false),
-  StartScreen (true), Vinto (false), matrix_vinto(false), hogwarts_vinto(false), illumin (true), suono_giusto(false), suono_sbagliato(false) {
+  fullview(true), riddle_fullview(false),matrix_fullview(false), hogwarts_fullview(false),cancello_fullview(false), angle(0.0), angley(0.0), px (0.5), pz(0.5), NoWalls(false),
+  StartScreen (true), Vinto (false), matrix_vinto(false), hogwarts_vinto(false), cancello_vinto(false), illumin (true), suono_giusto(false), suono_sbagliato(false) {
 		
 		indice = 0;
 
