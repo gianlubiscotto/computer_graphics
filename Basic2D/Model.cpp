@@ -126,9 +126,11 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 10)) return false;
 	//muro matrix
 	if (!this->Load_a_texture("../Data/matrix.png", 11)) return false;
-
 	//indovinello
 	if (!this->Load_a_texture("../Data/question.jpg", 9)) return false;
+	//cancello fullview
+	if (!this->Load_a_texture("../Data/gatefullview.jpg", 12)) return false;
+
 
 	return true;										// Return Success
 }
@@ -231,7 +233,6 @@ void MyModel::DrawRiddleFullview() {
 	glLoadIdentity();
 	//tex viene modificata in move or collide con la texture corrispondente
 	glBindTexture(GL_TEXTURE_2D, tex);	
-	int prova = tex;
 		glBegin(GL_QUADS);
 			glColor3f(1, 1, 1);	
 			glTexCoord2f(0.0f, 0.0f); glVertex3f(10,0.5,-.5);
@@ -248,8 +249,6 @@ void MyModel::DrawRiddleFullview() {
 	if (!this->cancello_fullview) {
 		Data.glPrint(this->answer);
 	}
-	
-
 }
 
 //  Draw the walls: special case for the map
@@ -667,7 +666,7 @@ OKMOVE:
 		//TODO: texture di matrix
 	}
 	else if (oi != ni && ni == 38 && !cancello_vinto) {	//se cancello non aperto
-		tex = 8;	//todo texture cancello
+		tex = 12;	//todo texture cancello
 		this->riddle_fullview = true;
 		this->cancello_fullview = true;
 		//TODO: texture di matrix
