@@ -371,9 +371,6 @@ void MyModel::DrawWallsText(bool transparency)
 			// An now... the NORTH(NORD) rear wall!
 			if (i < this->Maze->L.size() - this->ldx) {
 				it = this->Maze->L[i + this->ldx].WallsTexture[NORD];
-				if (it > 27 || it < 0) {
-					MessageBox(NULL, "Fuori dal range.", "ERROR", MB_OK | MB_ICONEXCLAMATION);
-				}
 				glBindTexture(GL_TEXTURE_2D, texture[it]);
 				glLoadIdentity();
 				glTranslatef((float)ix + 0.5f, 0, (float)iy + 1.0f);
