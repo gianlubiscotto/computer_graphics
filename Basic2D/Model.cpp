@@ -315,21 +315,7 @@ void MyModel::DrawWallsText(bool transparency)
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	if ((this->px > 8 && this->px < 9) && (this->pz > 3 && this->pz < 4) && (this->Maze->L[37].muroE) && (cancello_vinto)) {
-		this->Maze->L[37].muroE = false;
 	
-		glBindTexture(GL_TEXTURE_2D, 10);
-		glBegin(GL_QUADS);
-			glTexCoord2f(0,0);
-			glVertex3f(8, 0, 4);
-			glTexCoord2f(1, 0);
-			glVertex3f(8, 0, 3);
-			glTexCoord2f(1, 1);
-			glVertex3f(8, 1, 3);
-			glTexCoord2f(0, 1);
-			glVertex3f(8, 1, 4);
-		glEnd();
-	}
 		//  Loop on the maze cells
 	for (int i = 0; i < this->Maze->L.size(); i++) {
 		int ix, iy;
@@ -519,7 +505,7 @@ bool MyModel::DrawGLScene(void)
 		this->DrawFloorText();
 		this->DrawWallsText(true);//trasp
 	}
- 
+	
   //  walls
   if( this->fullview ) this->DrawWallsFullview();
 	//matrix riddle
@@ -681,13 +667,13 @@ OKMOVE:
 		//TODO: texture di matrix
 	}
 	else if (oi != ni && ni == 38 && !cancello_vinto) {	//se cancello non aperto
-		tex = 11;	//todo texture cancello
+		tex = 8;	//todo texture cancello
 		this->riddle_fullview = true;
 		this->cancello_fullview = true;
 		//TODO: texture di matrix
 	}
 	else if (oi != ni && ni == 38 && cancello_vinto && this->Maze->L[37].muroE) {
-		//this->Maze->L[37].muroE = false;
+		this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
 	}
 	return true;
 }
