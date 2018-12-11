@@ -35,7 +35,6 @@
 #include <gl\glu.h>			// Header File For The GLu32 Library
 #include "Model.h"
 #include "resource.h"
-#include "Soundclass.h"
 using namespace audiere;
 //  LIBRERIE OPENGL e multimendia
 //	OpenGL libraries
@@ -44,10 +43,9 @@ using namespace audiere;
 //#pragma comment( lib, "winmm.lib" )						// Search For WinMM Library While Linking
 
 class MyModel Data;
-int i = 0;
-char risp[99];
+int i = 0;	//index for char array for user input answering riddles 
+char risp[99];	//array for answering riddles
 POINTS last_mouse_p;
-//Soundclass classe_suono;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
 //  kill the window
@@ -105,6 +103,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 	WindowRect.right=(long)width;		// Set Right Value To Requested Width
 	WindowRect.top=(long)0;				// Set Top Value To 0
 	WindowRect.bottom=(long)height;		// Set Bottom Value To Requested Height
+	
 	POINT init;
 	GetCursorPos(&init);
 	Data.cx = init.x;
@@ -288,7 +287,7 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
       break;
 
     case WM_MOUSEMOVE:
-      if(!Data.fullview && !Data.riddle_fullview){
+      if(!Data.fullview && !Data.riddle_fullview){	//se non sono in una schermata fullview il mouse muove la visuale
          POINTS p;
          p = MAKEPOINTS(lParam);
 				 RECT rt;
@@ -350,65 +349,79 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 		}
 
 		case WM_KEYDOWN: // Is A Key Being Held Down?
-		{							
-			if (Data.riddle_fullview) {		//Schermata indovinello?
-				if (wParam == VK_ESCAPE) {
+		{		
+			//se in schermata fullview
+			if (Data.riddle_fullview) {		
+				//Se si è in una schermata indovinello, i tasti premuti corrispondono alla risposta dell'utente (vano dentro all'array di char answer)
+	
+				//ESC
+				if (wParam == VK_ESCAPE) {	
+					//tutte le fullview a false
 					Data.riddle_fullview = false;
 					Data.matrix_fullview = false;
 					Data.hogwarts_fullview = false;
 					Data.cancello_fullview = false;
-					//tutti gli indovinelli false...
-					//pulire il vettore o l'array di caratteri
+					//l'array answer deve essere resettato
 					Data.indice = 0;
 					Data.answer[Data.indice] = '\0';
 				}
+
+				//ENTER, l'utente conferma la rispostas
 				else if (wParam == VK_RETURN) {
+					//se non sono nella fullview del cancello
 					if (!Data.cancello_fullview) {
-						//Confrontare la stringa immessa con la risposta.
+						//Confrontare la stringa immessa con la risposta relativa all'indovinello attivo.
 						if (Data.verifica_risposta(Data.answer)) {
 							//suono giusto
 							Data.suono_giusto = true;
 						}
+						//se la risposta è sbagliata
 						else {
 							//suono sbagliato
 							Data.suono_sbagliato = true;
 						}
+						//a prescindere che la risposta sia giusta o sbagliata
 						Data.riddle_fullview = false;
-						//pulire il vettore o l'array di caratteri
+						//pulire l'array di caratteri
 						Data.indice = 0;
 						Data.answer[Data.indice] = '\0';
 					}
+					//se sono nella fullview del cancello enter mi fa uscire
 					else {
 						Data.riddle_fullview = false;
 						Data.cancello_fullview = false;
 					}
 				}
-				else {
+				//BACK, se non si è in cancello fullview si cancella un carattere nell'array
+				else if (wParam == VK_BACK) {
+					//Cancellare dall'array o dal vector l'ultimo carattere
 					if (!Data.cancello_fullview) {
-						if (wParam == VK_BACK) {
-							//Cancellare dall'array o dal vector l'ultimo carattere
-							if (Data.indice > 0) {
-								Data.indice--;
-								Data.answer[Data.indice] = '\0';
-							}
-						}
-						else {
-							//Codice per stampare a video i caratteri schiacciati dall'utente
-							//gestiamo l'input in un vector o in un array
-							if (Data.indice < ans_size - 1 && ((wParam > 47 && wParam < 58) || (wParam > 64 && wParam < 91) || wParam == 32)) {
-								Data.answer[Data.indice] = static_cast<char>(wParam);
-								Data.answer[Data.indice + 1] = '\0';
-								Data.indice++;
-							}
+						if (Data.indice > 0) {
+							Data.indice--;
+							Data.answer[Data.indice] = '\0';
 						}
 					}
-					
+				}
+				//viene premuto un tasto diverso dai precedenti
+				else {
+						//stampare a video i caratteri schiacciati dall'utente
+					if (!Data.cancello_fullview) {
+						if (Data.indice < ans_size - 1 && ((wParam > 47 && wParam < 58) || (wParam > 64 && wParam < 91) || wParam == 32)) {
+							Data.answer[Data.indice] = static_cast<char>(wParam);
+							Data.answer[Data.indice + 1] = '\0';
+							Data.indice++;
+						}
+					}
 				}
 			}
+			
+			//se non in schermata fullview
 			else if(!Data.fullview){
 				Data.keys[wParam] = TRUE;		// If So, Mark It As TRUE
 				return 0;								// Jump Back
 			}
+
+			//mappa
 			else if (Data.fullview && wParam == 'V') {
 				Data.fullview = false;
 			}
