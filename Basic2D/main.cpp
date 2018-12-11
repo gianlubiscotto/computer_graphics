@@ -35,6 +35,7 @@
 #include <gl\glu.h>			// Header File For The GLu32 Library
 #include "Model.h"
 #include "resource.h"
+#include "audiere.h"
 using namespace audiere;
 //  LIBRERIE OPENGL e multimendia
 //	OpenGL libraries
@@ -349,11 +350,10 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 		}
 
 		case WM_KEYDOWN: // Is A Key Being Held Down?
-		{		
-			//se in schermata fullview
+		{							
 			if (Data.riddle_fullview) {		
 				//Se si è in una schermata indovinello, i tasti premuti corrispondono alla risposta dell'utente (vano dentro all'array di char answer)
-	
+				
 				//ESC
 				if (wParam == VK_ESCAPE) {	
 					//tutte le fullview a false
@@ -392,36 +392,33 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 						Data.cancello_fullview = false;
 					}
 				}
-				//BACK, se non si è in cancello fullview si cancella un carattere nell'array
-				else if (wParam == VK_BACK) {
-					//Cancellare dall'array o dal vector l'ultimo carattere
-					if (!Data.cancello_fullview) {
-						if (Data.indice > 0) {
-							Data.indice--;
-							Data.answer[Data.indice] = '\0';
-						}
-					}
-				}
-				//viene premuto un tasto diverso dai precedenti
+				//qualsiasi altro tasto all'infuori di ESC e ENTER
 				else {
-						//stampare a video i caratteri schiacciati dall'utente
 					if (!Data.cancello_fullview) {
-						if (Data.indice < ans_size - 1 && ((wParam > 47 && wParam < 58) || (wParam > 64 && wParam < 91) || wParam == 32)) {
-							Data.answer[Data.indice] = static_cast<char>(wParam);
-							Data.answer[Data.indice + 1] = '\0';
-							Data.indice++;
+						if (wParam == VK_BACK) {
+							//Cancellare dall'array o dal vector l'ultimo carattere
+							if (Data.indice > 0) {
+								Data.indice--;
+								Data.answer[Data.indice] = '\0';
+							}
+						}
+						else {
+							//Codice per stampare a video i caratteri schiacciati dall'utente
+							//gestiamo l'input in un vector o in un array
+							if (Data.indice < ans_size - 1 && ((wParam > 47 && wParam < 58) || (wParam > 64 && wParam < 91) || wParam == 32)) {
+								Data.answer[Data.indice] = static_cast<char>(wParam);
+								Data.answer[Data.indice + 1] = '\0';
+								Data.indice++;
+							}
 						}
 					}
+					
 				}
 			}
-			
-			//se non in schermata fullview
 			else if(!Data.fullview){
 				Data.keys[wParam] = TRUE;		// If So, Mark It As TRUE
 				return 0;								// Jump Back
 			}
-
-			//mappa
 			else if (Data.fullview && wParam == 'V') {
 				Data.fullview = false;
 			}
