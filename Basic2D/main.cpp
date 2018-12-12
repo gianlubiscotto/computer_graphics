@@ -283,7 +283,9 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 
     case WM_LBUTTONUP:
       if( Data.StartScreen ) {
-				Data.fullview = false; Data.StartScreen = false; break;
+				Data.fullview = false; 
+				Data.StartScreen = false; 
+				break;
       }
       break;
 
@@ -419,13 +421,13 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 					
 				}
 			}
-			else if(!Data.fullview){
-				Data.keys[wParam] = TRUE;		// If So, Mark It As TRUE
-				return 0;								// Jump Back
+			else{
+				if (!Data.fullview) {
+					Data.keys[wParam] = TRUE;		// If So, Mark It As TRUE
+				}
+				return 0;// Jump Back
 			}
-			else if (Data.fullview && wParam == 'V') {
-				Data.fullview = false;
-			}
+			
 		}
 
 		case WM_KEYUP:								// Has A Key Been Released? And different from M?
@@ -629,7 +631,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			if (!Data.StartScreen) {
 				if (Data.keys['V']) {
 					Data.fullview = true;
-				}
+				}else Data.fullview = false;
 			}
 			if( Data.keys['N'] ) {
 				Data.NoWalls = true;
