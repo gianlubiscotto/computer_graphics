@@ -133,9 +133,8 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/qrtexture.jpg", 18)) return false;
 	//sheldon-hogwarts
 	if (!this->Load_a_texture("../Data/bazinga.jpg", 19)) return false;
-
-
-
+	//solved
+	if (!this->Load_a_texture("../Data/solved.jpg", 20)) return false;
 
 	return true;										// Return Success
 }
@@ -145,7 +144,7 @@ void MyModel::SetProjection()
 	glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
 	glLoadIdentity();									// Reset The Projection Matrix
 
-	if( this->fullview || this->riddle_fullview || this->gameover_fullview) {
+	if( this->fullview || this->riddle_fullview || this->gameover_fullview || this->solved_fullview) {
     double a = 22.5 * Wwidth / ((double) Wheight);
     double hx;  // minimum y to see all the maze in the x direction
     hx = (((double) this->ldx+0.5)/2 ) / atan(a* PI /180.0);
@@ -251,7 +250,7 @@ void MyModel::DrawRiddleFullview() {
 	glColor3f(0.2f, 1.0f, 0.2f);
 	//risposta dell'utente
 	glRasterPos3f(8.0f, 0.7f, 2.3f);
-	if (!this->cancello_fullview && !this->gameover_fullview) {
+	if (!this->cancello_fullview && !this->gameover_fullview && !this->solved_fullview) {
 		Data.glPrint(this->answer);
 	}
 }
@@ -538,6 +537,15 @@ bool MyModel::DrawGLScene(void)
   return true;
 }
 
+void MyModel::levelSolved() {
+	if (this->solved_riddles==1) {
+		this->solved_fullview = true;
+		this->riddle_fullview = true;
+		this->fullview_texture = 20;
+		this->DrawGLScene();
+	}
+}
+
 bool MyModel::verifica_risposta(char* answer) {
 	
 	if (this->matrix_fullview) {
@@ -660,15 +668,15 @@ bool MyModel::MoveOrCollide(double npx, double npz, double enpx, double enpz)
 	int nx = (int)enpx, nz = (int)enpz;
 	int ni = this->Maze->GetIn(nx, nz);
 
+	int ox = (int)px, oz = (int)pz;
+	int oi;
+	oi = this->Maze->GetIn(ox, oz);
+
 	if (this->NoWalls) goto OKMOVE;
 
 	// maze limits
 	if (enpx < 0 || enpx > ldx || enpz < 0 || enpz > ldz) return false;
-
-	int ox = (int)px, oz = (int)pz;
-
-	int oi;
-	oi = this->Maze->GetIn(ox, oz);
+	
 	if (oi == ni) goto OKMOVE; // same cell
 
 	int V[4], nv;

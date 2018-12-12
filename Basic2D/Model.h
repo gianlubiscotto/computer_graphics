@@ -69,9 +69,10 @@ public:
   
 	CLabR *Maze;		// maze - labirinto
   int ldx, ldz;		// dimensions of the maze
-  bool fullview,gameover_fullview;	// top view of the whole maze
+  bool fullview,gameover_fullview,solved_fullview;	// top view of the whole maze
 	bool riddle_fullview, hogwarts_fullview,matrix_fullview,cancello_fullview,qr_fullview; //riddle dialog box
   bool StartScreen;
+	int solved_riddles;
   bool Vinto,matrix_vinto,hogwarts_vinto,cancello_vinto, qr_vinto;
   double px, pz;  // player position
   double angle;   // and orientation
@@ -105,9 +106,10 @@ public:
     fullscreen(false), frames(0), fps(0), cursor(true), captured(false),
   fullview(true),gameover_fullview(false), riddle_fullview(false),matrix_fullview(false), hogwarts_fullview(false),cancello_fullview(false),qr_fullview(false), angle(0.0), angley(0.0), px (0.5), pz(0.5), NoWalls(false),
   StartScreen (true), Vinto (false), qr_vinto(false), matrix_vinto(false), hogwarts_vinto(false), cancello_vinto(false), illumin (true), suono_giusto(false), suono_sbagliato(false),
-  timeleft(100000),timeout(false){
+  timeleft(100000),timeout(false),solved_fullview(false){
 		
 		indice = 0;
+		solved_riddles = 0;
 
 		ldx = 10; ldz = 8;
     Maze = new CLabR(ldx, ldz);
@@ -186,6 +188,8 @@ public:
   void ReSizeGLScene(int width, int height);
   void glPrint(const char *fmt, ...);			// Custom GL "Print" Routine
 	bool verifica_risposta(char* answer);
+	void levelSolved();
+
 
 private:
   void DrawFloorText();

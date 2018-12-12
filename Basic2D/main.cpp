@@ -316,13 +316,13 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 
 					 //visuale in giù
 					 if (Data.cy < p.y) {
-						 if(Data.angley>-0.5){
+						 if(Data.angley>-1.6){
 							 Data.angley -= (p.y - Data.cy) / 1000.0;
 						 }
 					 }
 					 //visuale in su
 					 else if (Data.cy > p.y) {
-						 if (Data.angley < 0.2) {
+						 if (Data.angley < 0.8) {
 							 Data.angley += (Data.cy - p.y) / 1000.0;
 						 }
 					 }
@@ -375,6 +375,8 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 						if (Data.verifica_risposta(Data.answer)) {
 							//suono giusto
 							Data.suono_giusto = true;
+							Data.solved_riddles += 1;
+							Data.levelSolved();
 						}
 						//se la risposta è sbagliata
 						else {
@@ -490,10 +492,12 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
   stream->setVolume(0.5f); // 50% volume
   stream->play();
 
-  OutputStreamPtr explosion(OpenSound(device, "../Data/explosion.wav", false));
+  //OutputStreamPtr explosion(OpenSound(device, "../Data/explosion.wav", false));
   OutputStreamPtr bell(OpenSound(device, "../Data/bell.wav", false));
   OutputStreamPtr stupid(OpenSound(device, "../Data/stupid.wav", false));
 	OutputStreamPtr gameover(OpenSound(device, "../Data/gameover.wav", false));
+	OutputStreamPtr solved(OpenSound(device, "../Data/win.wav", false));
+
 
   //  AUDIO - end
 
@@ -526,8 +530,8 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			if (Data.keys[VK_F2])						// Is F2 Being Pressed?
 			{
 				Data.keys[VK_F2] = FALSE;					// If So Make Key FALSE
-				if (explosion->isPlaying()) explosion->reset();
-				else explosion->play();
+				/*if (explosion->isPlaying()) explosion->reset();
+				else explosion->play();*/
 			}
 			if (Data.keys[VK_F3])						// Is F3 Being Pressed?
 			{
@@ -651,6 +655,14 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				stream->stop();
 				gameover->play();
 				while (gameover->isPlaying()) {
+				}
+				done = true;
+			}
+			//risolto tutti gli indovinelli
+			if (Data.solved_fullview) {
+				stream->stop();
+				solved->play();
+				while (solved->isPlaying()) {
 				}
 				done = true;
 			}
