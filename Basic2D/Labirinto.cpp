@@ -459,7 +459,7 @@ void CLabR::mettiMuri() {
 
 	L[51].WallsTexture[0] = 9;	
 	L[55].WallsTexture[0] = 11;	//matrix wall
-	L[6].WallsTexture[1] = 9;	
+	L[6].WallsTexture[1] = 17;	
 
 }
 

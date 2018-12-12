@@ -127,9 +127,10 @@ bool MyModel::LoadGLTextures(void)
 	//cancello fullview
 	if (!this->Load_a_texture("../Data/gatefullview.jpg", 12)) return false;
 	if (!this->Load_a_texture("../Data/gameover.jpg", 15)) return false;
-
-
 	if (!this->Load_a_texture("../Data/murooltrepassabile.png", 16)) return false;
+	//qr
+	if (!this->Load_a_texture("../Data/frame.jpg", 17)) return false;
+
 
 	return true;										// Return Success
 }
