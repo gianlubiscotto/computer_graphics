@@ -188,8 +188,6 @@ public:
   void ReSizeGLScene(int width, int height);
   void glPrint(const char *fmt, ...);			// Custom GL "Print" Routine
 	bool verifica_risposta(char* answer);
-	void levelSolved();
-
 
 private:
   void DrawFloorText();

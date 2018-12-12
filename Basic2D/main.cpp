@@ -374,9 +374,10 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 						//Confrontare la stringa immessa con la risposta relativa all'indovinello attivo.
 						if (Data.verifica_risposta(Data.answer)) {
 							//suono giusto
-							Data.suono_giusto = true;
 							Data.solved_riddles += 1;
-							Data.levelSolved();
+							if (Data.solved_riddles != 3) {
+								Data.suono_giusto = true;
+							}
 						}
 						//se la risposta è sbagliata
 						else {
@@ -496,8 +497,10 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
   OutputStreamPtr bell(OpenSound(device, "../Data/bell.wav", false));
   OutputStreamPtr stupid(OpenSound(device, "../Data/stupid.wav", false));
 	OutputStreamPtr gameover(OpenSound(device, "../Data/gameover.wav", false));
-	OutputStreamPtr solved(OpenSound(device, "../Data/win.wav", false));
-
+	OutputStreamPtr win(OpenSound(device, "../Data/win.wav", false));
+	if (!win){
+		MessageBox(NULL, "cazz", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
+	}
 
   //  AUDIO - end
 
@@ -661,8 +664,8 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			//risolto tutti gli indovinelli
 			if (Data.solved_fullview) {
 				stream->stop();
-				solved->play();
-				while (solved->isPlaying()) {
+				win->play();
+				while (win->isPlaying()) {
 				}
 				done = true;
 			}

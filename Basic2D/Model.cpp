@@ -239,10 +239,10 @@ void MyModel::DrawRiddleFullview() {
 	glBindTexture(GL_TEXTURE_2D, texture[this->fullview_texture]);
 		glBegin(GL_QUADS);
 			glColor3f(1, 1, 1);	
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(12,0.5,-.5);
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(-2,0.5,-.5);	
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(-2, .5, 8.5);	
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(12, .5, 8.5);
+			glTexCoord2f(0.0f, 0.0f); glVertex3f(11,0.5,-.5);
+			glTexCoord2f(1.0f, 0.0f); glVertex3f(-1,0.5,-.5);	
+			glTexCoord2f(1.0f, 1.0f); glVertex3f(-1, .5, 8.5);	
+			glTexCoord2f(0.0f, 1.0f); glVertex3f(11, .5, 8.5);
 		glEnd();
 
 	// Position The Text On The Screen
@@ -488,6 +488,13 @@ bool MyModel::DrawGLScene(void)
 		this->SetProjection();
 		this->timeout = true;
 	}
+
+	if (this->solved_riddles == 3) {
+		this->solved_fullview = true;
+		this->riddle_fullview = true;
+		this->fullview_texture = 20;
+		this->SetProjection();
+	}
 	//timer to be displayed
 	this->timeleft = double(15 * 60) - this->Full_elapsed;
   //  TIMING - end
@@ -535,15 +542,6 @@ bool MyModel::DrawGLScene(void)
   }
 
   return true;
-}
-
-void MyModel::levelSolved() {
-	if (this->solved_riddles==1) {
-		this->solved_fullview = true;
-		this->riddle_fullview = true;
-		this->fullview_texture = 20;
-		this->DrawGLScene();
-	}
 }
 
 bool MyModel::verifica_risposta(char* answer) {
