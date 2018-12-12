@@ -128,6 +128,9 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/gatefullview.jpg", 12)) return false;
 	if (!this->Load_a_texture("../Data/gameover.jpg", 15)) return false;
 
+
+	if (!this->Load_a_texture("../Data/murooltrepassabile.png", 16)) return false;
+
 	return true;										// Return Success
 }
 
