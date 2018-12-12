@@ -352,7 +352,7 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 		case WM_KEYDOWN: // Is A Key Being Held Down?
 		{							
 			if (Data.riddle_fullview) {		
-				//Se si è in una schermata indovinello, i tasti premuti corrispondono alla risposta dell'utente (vano dentro all'array di char answer)
+				//Se si è in una schermata indovinello, i tasti premuti corrispondono alla risposta dell'utente (vanno dentro all'array di char answer)
 				
 				//ESC
 				if (wParam == VK_ESCAPE) {	
@@ -642,6 +642,11 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			if (Data.suono_sbagliato) {
 				stupid->play();
 				Data.suono_sbagliato = false;
+			}
+
+			if (Data.timeleft <= 0) {
+				Data.fullview = true;
+				Data.matrix_fullview = true;
 			}
 		}
 	}

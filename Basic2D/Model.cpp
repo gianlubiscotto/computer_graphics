@@ -528,9 +528,9 @@ bool MyModel::DrawGLScene(void)
       this->frames = 0; this->frameTime = 0;
     }*/
 
-	this->timeleft = double(15*60) - this->Full_elapsed;
+	this->timeleft = double(0.2*60) - this->Full_elapsed;
     this->glPrint("Time left: %6.2f sec.  ", timeleft);
-
+	
    /* glColor3f(0.1f,0.9f,0.1f);
     glRasterPos3f((float) ldx,0.3f, -0.44f);
     this->glPrint("Click to START (after that: V W L O)"); */
