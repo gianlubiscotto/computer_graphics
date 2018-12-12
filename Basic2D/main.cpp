@@ -361,6 +361,7 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 					Data.matrix_fullview = false;
 					Data.hogwarts_fullview = false;
 					Data.cancello_fullview = false;
+					Data.qr_fullview = false;
 					//l'array answer deve essere resettato
 					Data.indice = 0;
 					Data.answer[Data.indice] = '\0';

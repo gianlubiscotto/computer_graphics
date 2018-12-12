@@ -64,6 +64,7 @@ public:
 	char answer[ans_size];
 	char matrix_solution[7] = { 'B','I','N','A','R','Y','\0' };
 	char hogwarts_solution[7];
+	char qr_solution[18] = { 'W','E',' ','F','I','N','I','S','H','E','D',' ','I','D','E','A','S','\0' };
 
   
 	CLabR *Maze;		// maze - labirinto

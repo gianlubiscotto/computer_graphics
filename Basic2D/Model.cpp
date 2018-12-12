@@ -534,8 +534,7 @@ bool MyModel::DrawGLScene(void)
 }
 
 bool MyModel::verifica_risposta(char* answer) {
-	//std::vector<char> matrix_correct;
-	//std::vector<char> hogwarts_correct;
+	
 	if (this->matrix_fullview) {
 		//controllo se answer corrisponde alla risposta esatta
 		int j = 0;
@@ -561,6 +560,25 @@ bool MyModel::verifica_risposta(char* answer) {
 		//se risposta esatta
 		//this->hogwarts_vinto=true;
 		this->hogwarts_fullview = false;
+	}
+	else if (this->qr_fullview) {
+		//controllo se answer corrisponde alla risposta esatta
+		int j = 0;
+		bool flag = false;
+		while (!flag && j < 18) {
+			if (qr_solution[j] != answer[j]) {
+				flag = true;
+			}
+			else j++;
+		}
+		this->qr_fullview = false;
+		if (flag == false) {
+			this->qr_vinto = true;
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
 //////////////////////////////////////////////////////////////////////
