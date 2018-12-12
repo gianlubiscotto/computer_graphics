@@ -131,6 +131,9 @@ bool MyModel::LoadGLTextures(void)
 	//qr
 	if (!this->Load_a_texture("../Data/frame.png", 17)) return false;
 	if (!this->Load_a_texture("../Data/qrtexture.jpg", 18)) return false;
+	//sheldon-hogwarts
+	if (!this->Load_a_texture("../Data/bazinga.jpg", 19)) return false;
+
 
 
 
@@ -557,12 +560,6 @@ bool MyModel::verifica_risposta(char* answer) {
 			return false;
 		}
 	}
-	else if (this->hogwarts_fullview) {
-		//controllo se answer corrisponde alla risposta esatta
-		//se risposta esatta
-		//this->hogwarts_vinto=true;
-		this->hogwarts_fullview = false;
-	}
 	else if (this->qr_fullview) {
 		//controllo se answer corrisponde alla risposta esatta
 		int j = 0;
@@ -576,6 +573,25 @@ bool MyModel::verifica_risposta(char* answer) {
 		this->qr_fullview = false;
 		if (flag == false) {
 			this->qr_vinto = true;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else if (this->hogwarts_fullview) {
+		//controllo se answer corrisponde alla risposta esatta
+		int j = 0;
+		bool flag = false;
+		while (!flag && j < 3) {
+			if (hogwarts_solution[j] != answer[j]) {
+				flag = true;
+			}
+			else j++;
+		}
+		this->hogwarts_fullview = false;
+		if (flag == false) {
+			this->hogwarts_vinto = true;
 			return true;
 		}
 		else {
