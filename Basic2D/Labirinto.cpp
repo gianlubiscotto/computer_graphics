@@ -451,7 +451,8 @@ void CLabR::mettiMuri() {
 	}
 
 	//modifico le texture
-	
+	L[0].WallsTexture[0] = 16; //9 e 3/4
+
 	L[37].WallsTexture[1] = 8; //porta
 	L[38].WallsTexture[3] = 8; //porta dall'altro lato
 	L[37].WallsTransparency[1] = true;
