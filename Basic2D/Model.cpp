@@ -126,7 +126,7 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/question.jpg", 9)) return false;
 	//cancello fullview
 	if (!this->Load_a_texture("../Data/gatefullview.jpg", 12)) return false;
-	if (!this->Load_a_texture("../Data/gameover.png", 15)) return false;
+	if (!this->Load_a_texture("../Data/gameover.jpg", 15)) return false;
 
 	return true;										// Return Success
 }
@@ -231,10 +231,10 @@ void MyModel::DrawRiddleFullview() {
 	glBindTexture(GL_TEXTURE_2D, texture[this->fullview_texture]);
 		glBegin(GL_QUADS);
 			glColor3f(1, 1, 1);	
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(10,0.5,-.5);
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(0,.5,-.5);	
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(0, .5, 8.5);	
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(10, .5, 8.5);
+			glTexCoord2f(0.0f, 0.0f); glVertex3f(12,0.5,-.5);
+			glTexCoord2f(1.0f, 0.0f); glVertex3f(-2,0.5,-.5);	
+			glTexCoord2f(1.0f, 1.0f); glVertex3f(-2, .5, 8.5);	
+			glTexCoord2f(0.0f, 1.0f); glVertex3f(12, .5, 8.5);
 		glEnd();
 
 	// Position The Text On The Screen
@@ -500,9 +500,9 @@ bool MyModel::DrawGLScene(void)
   //  floor solo se mappa dall'alto o dentro il gioco
 	if (!this->riddle_fullview) {
 		this->DrawWallsText(false);	//non png
-		this->DrawWallsText(true);//trasp
 		this->DrawCeilText();
 		this->DrawFloorText();
+		this->DrawWallsText(true);	//png files
 	}
 	
   //  walls
