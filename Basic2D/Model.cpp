@@ -129,7 +129,7 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/gameover.jpg", 15)) return false;
 	if (!this->Load_a_texture("../Data/murooltrepassabile.png", 16)) return false;
 	//qr
-	if (!this->Load_a_texture("../Data/frame.jpg", 17)) return false;
+	if (!this->Load_a_texture("../Data/frame.png", 17)) return false;
 
 
 	return true;										// Return Success
@@ -646,25 +646,36 @@ OKMOVE:
 	if (nx == this->Maze->xu && nz == this->Maze->yu) this->Vinto = true;
 	px = npx; pz = npz;
 
-	if (oi != ni && ni == 51 && !hogwarts_vinto) { //se hogwarts non risolto
+	//hogwarts non risolto
+	if (oi != ni && ni == 51 && !hogwarts_vinto) { 
 		this->fullview_texture = 9; //todo texture
 		this->riddle_fullview = true;
 		this->hogwarts_fullview = true;
 	}
-	else if (oi != ni && ni == 55 && !matrix_vinto) {	//se matrix non risolto
+	//matrix non risolto
+	else if (oi != ni && ni == 55 && !matrix_vinto) {	
 		this->fullview_texture = 10;
 		this->riddle_fullview = true;
 		this->matrix_fullview = true;
 		//TODO: texture di matrix
 	}
-	else if (oi != ni && ni == 38 && !cancello_vinto) {	//se cancello non aperto
+	//cancello non aperto
+	else if (oi != ni && ni == 38 && !cancello_vinto) {	
 		this->fullview_texture = 12;	//todo texture cancello
 		this->riddle_fullview = true;
 		this->cancello_fullview = true;
 		//TODO: texture di matrix
 	}
+	//cancello che si apre
 	else if (oi != ni && ni == 38 && cancello_vinto && this->Maze->L[37].muroE) {
 		this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
+	}
+	//qr non risolto
+	else if (oi != ni && ni == 6 && !qr_vinto) {
+		this->fullview_texture = 9; //todo cambiare
+		this->riddle_fullview = true;
+		this->qr_fullview = true;
+		//TODO: texture di matrix
 	}
 	return true;
 }
