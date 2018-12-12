@@ -63,7 +63,7 @@ public:
 	int indice;
 	char answer[ans_size];
 	char matrix_solution[7] = { 'B','I','N','A','R','Y','\0' };
-	char hogwarts_solution[7];
+	char hogwarts_solution[3] = {'P','I','\0'};
 	char qr_solution[18] = { 'W','E',' ','F','I','N','I','S','H','E','D',' ','I','D','E','A','S','\0' };
 
   
@@ -112,16 +112,11 @@ public:
 		ldx = 10; ldz = 8;
     Maze = new CLabR(ldx, ldz);
     Maze->Init_Perfect0();
-	Maze->cancellaMuri();
-	Maze->mettiMuri();
-	//int startc = Maze->GetIn(Maze->xs, Maze->ys);
-	px = 0.5 + 4.5;
-	pz = 0.5 + 3.5;
-	//Maze->L[startc].floorTexture = 1;
-	//Maze->L[startc].ceilTexture = 2;
-	// int endc = Maze->GetIn(Maze->xu, Maze->yu);
-	 //Maze->L[endc].floorTexture = 3;
-//	Maze->L[endc].ceilTexture = 2;
+		Maze->cancellaMuri();
+		Maze->mettiMuri();
+		//int startc = Maze->GetIn(Maze->xs, Maze->ys);
+		px = 0.5 + 4.5;
+		pz = 0.5 + 3.5;
 
 	  // floor and wall init. 
 	  // GEOMETRY: the 'y' axis is the vertical one. The maze is defined in x and z so that
@@ -151,8 +146,6 @@ public:
 			  
 		  }
 	  }
-
-	  
 
 	  //	WALL ----------------------------------------------------
 	  Nx = Ny = 0; Nz = -1.0f;
@@ -203,20 +196,7 @@ private:
   bool LoadGLTextures(void);
   bool Load_a_texture(const char *name, int id);
   void BuildFont(void);
-  void KillFont(void);
-  /*
-  //  Conversion from pixel distance to float X and Y distance
-  inline float PixToCoord_X(int pix)
-    { return ( 2.0f * (float) pix * (float) plx ) / (float) Wwidth; }
-  inline float PixToCoord_Y(int pix)
-    { return ( 2.0f * (float) pix * (float) ply ) / (float) Wheight; }
-  //  conversion from client coordinates to 3d world coordinates
-  inline float ClientX2World(int x) {
-    return ( (2.0f * float(plx) * float(x) / float(Wwidth)) - float(plx));
-  }
-  inline float ClientY2World(int y) {
-    return ( float(ply) - (2.0f * float(ply) * float(y) / float(Wheight)));
-  }*/
+	void KillFont(void);
 
 };
 
