@@ -130,6 +130,8 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/murooltrepassabile.png", 16)) return false;
 	//qr
 	if (!this->Load_a_texture("../Data/frame.png", 17)) return false;
+	if (!this->Load_a_texture("../Data/qrtexture.jpg", 18)) return false;
+
 
 
 	return true;										// Return Success
@@ -690,7 +692,7 @@ OKMOVE:
 	}
 	//qr non risolto
 	else if (oi != ni && ni == 6 && !qr_vinto) {
-		this->fullview_texture = 9; //todo cambiare
+		this->fullview_texture = 18; //todo cambiare
 		this->riddle_fullview = true;
 		this->qr_fullview = true;
 		//TODO: texture di matrix
