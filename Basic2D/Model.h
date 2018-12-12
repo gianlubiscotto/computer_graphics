@@ -78,6 +78,9 @@ public:
   bool NoWalls;           // if true i can walk across walls
   bool illumin;
   double timeleft;
+	bool timeout;
+	clock_t Tstamp, Tstart;
+	double Full_elapsed;
 
 private:
   int Wheight, Wwidth;  // window dimensions in pixels
@@ -90,8 +93,7 @@ private:
   std::vector<Vertex> floor;        // a cell floor
   std::vector<Vertex> ceil;        // a cell ceil
   std::vector<Vertex> wall;         // a cell wall
-  clock_t Tstamp, Tstart;
-  double Full_elapsed;  // elapsed time in seconds from the beginning of the program
+  // elapsed time in seconds from the beginning of the program
   
 
   GLuint	texture[28];			// Storage For 28 Textures!
@@ -102,7 +104,7 @@ public:
     fullscreen(false), frames(0), fps(0), cursor(true), captured(false),
   fullview(true), riddle_fullview(false),matrix_fullview(false), hogwarts_fullview(false),cancello_fullview(false), angle(0.0), angley(0.0), px (0.5), pz(0.5), NoWalls(false),
   StartScreen (true), Vinto (false), matrix_vinto(false), hogwarts_vinto(false), cancello_vinto(false), illumin (true), suono_giusto(false), suono_sbagliato(false),
-  timeleft(100000){
+  timeleft(100000),timeout(false){
 		
 		indice = 0;
 

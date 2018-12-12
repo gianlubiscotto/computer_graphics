@@ -644,9 +644,8 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				Data.suono_sbagliato = false;
 			}
 
-			if (Data.timeleft <= 0) {
-				Data.fullview = true;
-				Data.matrix_fullview = true;
+			if (Data.timeout) {
+				stupid->play();
 			}
 		}
 	}

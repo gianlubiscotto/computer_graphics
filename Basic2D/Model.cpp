@@ -468,16 +468,13 @@ bool MyModel::DrawGLScene(void)
 
   //  TIMING - start
   clock_t t = clock();
-  // elapsed time in seconds from the last draw
-  //double elapsed = double (t - Tstamp) /  (double) CLOCKS_PER_SEC;
-  // elapsed time in milliseconds from the last draw
-  //int ms_elapsed = (int) (t - Tstamp);
-
+  
   // elapsed time in seconds from the beginning of the program
   this->Full_elapsed = double (t - Tstart) /  (double) CLOCKS_PER_SEC;
-  //this->frameTime += double (t - Tstamp) /  (double) CLOCKS_PER_SEC;
-
-  this->Tstamp = t;
+	
+	if (this->Full_elapsed >= 1*60) {
+		this->timeout = true;
+	}
   //  TIMING - end
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
@@ -521,14 +518,7 @@ bool MyModel::DrawGLScene(void)
 	  // Position The Text On The Screen
     glRasterPos3f((float) ldx,1.0f, (float) ldz + 0.1f);
 
-    // compute fps and write text
-    /*this->frames++;
-    if( this->frames > 18 ) {
-      this->fps = frames / frameTime;
-      this->frames = 0; this->frameTime = 0;
-    }*/
-
-	this->timeleft = double(0.2*60) - this->Full_elapsed;
+	this->timeleft = double(1*60) - this->Full_elapsed;
     this->glPrint("Time left: %6.2f sec.  ", timeleft);
 	
    /* glColor3f(0.1f,0.9f,0.1f);
