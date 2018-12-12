@@ -126,7 +126,7 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/question.jpg", 9)) return false;
 	//cancello fullview
 	if (!this->Load_a_texture("../Data/gatefullview.jpg", 12)) return false;
-
+	if (!this->Load_a_texture("../Data/gameover.png", 15)) return false;
 
 	return true;										// Return Success
 }
@@ -136,7 +136,7 @@ void MyModel::SetProjection()
 	glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
 	glLoadIdentity();									// Reset The Projection Matrix
 
-	if( this->fullview || this->riddle_fullview) {
+	if( this->fullview || this->riddle_fullview || this->gameover_fullview) {
     double a = 22.5 * Wwidth / ((double) Wheight);
     double hx;  // minimum y to see all the maze in the x direction
     hx = (((double) this->ldx+0.5)/2 ) / atan(a* PI /180.0);
@@ -242,7 +242,7 @@ void MyModel::DrawRiddleFullview() {
 	glColor3f(0.2f, 1.0f, 0.2f);
 	//risposta dell'utente
 	glRasterPos3f(8.0f, 0.7f, 2.3f);
-	if (!this->cancello_fullview) {
+	if (!this->cancello_fullview && !this->gameover_fullview) {
 		Data.glPrint(this->answer);
 	}
 }
@@ -472,18 +472,23 @@ bool MyModel::DrawGLScene(void)
   // elapsed time in seconds from the beginning of the program
   this->Full_elapsed = double (t - Tstart) /  (double) CLOCKS_PER_SEC;
 	
-	if (this->Full_elapsed >= 1*60) {
+	//timeout
+	if (this->Full_elapsed >= 15*60) {
+		this->gameover_fullview = true;
+		this->riddle_fullview = true;
+		this->fullview_texture = 15;
+		this->SetProjection();
 		this->timeout = true;
 	}
+	//timer to be displayed
+	this->timeleft = double(15 * 60) - this->Full_elapsed;
   //  TIMING - end
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
   glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
 	glLoadIdentity();									// Reset The View
-
   //  In this way texture and surface color are blended
   glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
-
 	if (!illumin) glDisable(GL_LIGHTING);
 	else {
 		glEnable(GL_LIGHTING);
@@ -491,17 +496,18 @@ bool MyModel::DrawGLScene(void)
 		glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
 
 	}
+
   //  floor solo se mappa dall'alto o dentro il gioco
 	if (!this->riddle_fullview) {
-		this->DrawWallsText(false);	//non trasp
+		this->DrawWallsText(false);	//non png
+		this->DrawWallsText(true);//trasp
 		this->DrawCeilText();
 		this->DrawFloorText();
-		this->DrawWallsText(true);//trasp
 	}
 	
   //  walls
-  if( this->fullview ) this->DrawWallsFullview();
-	//matrix riddle
+  if( this->fullview ) this->DrawWallsFullview(); //disegna le righe rosse e il pg
+	//schermata indovinello
 	if (this->riddle_fullview) this->DrawRiddleFullview(); 
 	
 	
@@ -514,16 +520,10 @@ bool MyModel::DrawGLScene(void)
 
  	  // Color
 	  glColor3f(0.4f,0.4f,0.4f);
-
 	  // Position The Text On The Screen
-    glRasterPos3f((float) ldx,1.0f, (float) ldz + 0.1f);
-
-	this->timeleft = double(1*60) - this->Full_elapsed;
-    this->glPrint("Time left: %6.2f sec.  ", timeleft);
+		glRasterPos3f((float) ldx,1.0f, (float) ldz + 0.1f);
+		this->glPrint("Time left: %6.2f sec.  ", timeleft);
 	
-   /* glColor3f(0.1f,0.9f,0.1f);
-    glRasterPos3f((float) ldx,0.3f, -0.44f);
-    this->glPrint("Click to START (after that: V W L O)"); */
   }
 
   return true;

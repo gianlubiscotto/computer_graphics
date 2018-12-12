@@ -492,6 +492,8 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
   OutputStreamPtr explosion(OpenSound(device, "../Data/explosion.wav", false));
   OutputStreamPtr bell(OpenSound(device, "../Data/bell.wav", false));
   OutputStreamPtr stupid(OpenSound(device, "../Data/stupid.wav", false));
+	OutputStreamPtr gameover(OpenSound(device, "../Data/gameover.wav", false));
+
   //  AUDIO - end
 
 	while (!done)									// Loop That Runs While done=FALSE
@@ -645,7 +647,11 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			}
 
 			if (Data.timeout) {
-				stupid->play();
+				stream->stop();
+				gameover->play();
+				while (gameover->isPlaying()) {
+				}
+				done = true;
 			}
 		}
 	}
