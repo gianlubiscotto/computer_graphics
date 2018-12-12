@@ -469,12 +469,13 @@ bool MyModel::DrawGLScene(void)
   //  TIMING - start
   clock_t t = clock();
   // elapsed time in seconds from the last draw
-  double elapsed = double (t - Tstamp) /  (double) CLOCKS_PER_SEC;
+  //double elapsed = double (t - Tstamp) /  (double) CLOCKS_PER_SEC;
   // elapsed time in milliseconds from the last draw
-  int ms_elapsed = (int) (t - Tstamp);
+  //int ms_elapsed = (int) (t - Tstamp);
+
   // elapsed time in seconds from the beginning of the program
   this->Full_elapsed = double (t - Tstart) /  (double) CLOCKS_PER_SEC;
-  this->frameTime += double (t - Tstamp) /  (double) CLOCKS_PER_SEC;
+  //this->frameTime += double (t - Tstamp) /  (double) CLOCKS_PER_SEC;
 
   this->Tstamp = t;
   //  TIMING - end
@@ -518,20 +519,21 @@ bool MyModel::DrawGLScene(void)
 	  glColor3f(0.4f,0.4f,0.4f);
 
 	  // Position The Text On The Screen
-    glRasterPos3f((float) ldx,0.3f, (float) ldz + 0.2f);
+    glRasterPos3f((float) ldx,1.0f, (float) ldz + 0.1f);
 
     // compute fps and write text
-    this->frames++;
+    /*this->frames++;
     if( this->frames > 18 ) {
       this->fps = frames / frameTime;
       this->frames = 0; this->frameTime = 0;
-    }
-    this->glPrint("Elapsed time: %6.2f sec.  -  Fps %6.2f",
-      Full_elapsed, fps);
+    }*/
 
-    glColor3f(0.1f,0.9f,0.1f);
+	this->timeleft = double(15*60) - this->Full_elapsed;
+    this->glPrint("Time left: %6.2f sec.  ", timeleft);
+
+   /* glColor3f(0.1f,0.9f,0.1f);
     glRasterPos3f((float) ldx,0.3f, -0.44f);
-    this->glPrint("Click to START (after that: V W L O)");
+    this->glPrint("Click to START (after that: V W L O)"); */
   }
 
   return true;

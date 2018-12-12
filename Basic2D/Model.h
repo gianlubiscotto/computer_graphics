@@ -92,6 +92,7 @@ private:
   std::vector<Vertex> wall;         // a cell wall
   clock_t Tstamp, Tstart;
   double Full_elapsed;  // elapsed time in seconds from the beginning of the program
+  double timeleft;
 
   GLuint	texture[28];			// Storage For 28 Textures!
   GLuint	base;				// Base Display List For The Font Set
