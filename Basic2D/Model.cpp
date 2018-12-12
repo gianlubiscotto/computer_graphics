@@ -132,7 +132,7 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/frame.png", 17)) return false;
 	if (!this->Load_a_texture("../Data/qrtexture.jpg", 18)) return false;
 	//sheldon-hogwarts
-	if (!this->Load_a_texture("../Data/bazinga.jpg", 19)) return false;
+	if (!this->Load_a_texture("../Data/sheldon2.jpg", 19)) return false;
 
 
 
