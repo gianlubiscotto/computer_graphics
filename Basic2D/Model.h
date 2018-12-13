@@ -54,26 +54,27 @@ public:
   bool	keys[256];			// Array Used For The Keyboard Routine
   bool	active;		      // Window Active Flag Set To TRUE By Default
   bool cursor;          // true if visible
-	int fullview_texture;
   bool captured;        // true if the mouse is captured
   int cx, cy;           // client position of the cursor
   bool	fullscreen;	    // Fullscreen Flag 
-	bool suono_giusto,suono_sbagliato;
-	//riddles' stuff...
+	
+												//riddles' stuff...
 	int indice;
 	char answer[ans_size];
 	char matrix_solution[7] = { 'B','I','N','A','R','Y','\0' };
 	char hogwarts_solution[3] = {'P','I','\0'};
 	char qr_solution[18] = { 'W','E',' ','F','I','N','I','S','H','E','D',' ','I','D','E','A','S','\0' };
+	int fullview_texture;	//texture for riddle_fullview
+	bool suono_giusto, suono_sbagliato;
+	int solved_riddles;
+	bool fullview, gameover_fullview, solved_fullview;	// top view of the whole maze
+	bool riddle_fullview, hogwarts_fullview, matrix_fullview, cancello_fullview, qr_fullview; //riddle dialog box
+	bool Vinto, matrix_vinto, hogwarts_vinto, cancello_vinto, qr_vinto;
 
   
 	CLabR *Maze;		// maze - labirinto
   int ldx, ldz;		// dimensions of the maze
-  bool fullview,gameover_fullview,solved_fullview;	// top view of the whole maze
-	bool riddle_fullview, hogwarts_fullview,matrix_fullview,cancello_fullview,qr_fullview; //riddle dialog box
   bool StartScreen;
-	int solved_riddles;
-  bool Vinto,matrix_vinto,hogwarts_vinto,cancello_vinto, qr_vinto;
   double px, pz;  // player position
   double angle;   // and orientation
 	double angley;
@@ -87,10 +88,6 @@ public:
 private:
   int Wheight, Wwidth;  // window dimensions in pixels
 
-  int frames;           // n. of frames
-  double frameTime;     // for fps computation
-  double fps;
-
   //  model data
   std::vector<Vertex> floor;        // a cell floor
   std::vector<Vertex> ceil;        // a cell ceil
@@ -102,11 +99,11 @@ private:
   GLuint	base;				// Base Display List For The Font Set
 public:
   //  methods
-  MyModel(): hDC(NULL), hRC (NULL), hWnd (NULL), active (true),
-    fullscreen(false), frames(0), fps(0), cursor(true), captured(false),
-  fullview(true),gameover_fullview(false), riddle_fullview(false),matrix_fullview(false), hogwarts_fullview(false),cancello_fullview(false),qr_fullview(false), angle(0.0), angley(0.0), px (0.5), pz(0.5), NoWalls(false),
-  StartScreen (true), Vinto (false), qr_vinto(false), matrix_vinto(false), hogwarts_vinto(false), cancello_vinto(false), illumin (true), suono_giusto(false), suono_sbagliato(false),
-  timeleft(100000),timeout(false),solved_fullview(false){
+  MyModel(): hDC(NULL), hRC (NULL), hWnd (NULL), active (true),fullscreen(false), cursor(true), captured(false), illumin(true),
+		fullview(true), gameover_fullview(false), riddle_fullview(false),matrix_fullview(false),hogwarts_fullview(false),cancello_fullview(false),qr_fullview(false),
+		angle(0.0), angley(0.0), px (0.5), pz(0.5), NoWalls(false), StartScreen (true), 
+		Vinto (false), qr_vinto(false), matrix_vinto(false), hogwarts_vinto(false), cancello_vinto(false), suono_giusto(false), suono_sbagliato(false),
+		timeleft(100000),timeout(false),solved_fullview(false){
 		
 		indice = 0;
 		solved_riddles = 0;
@@ -116,7 +113,6 @@ public:
     Maze->Init_Perfect0();
 		Maze->cancellaMuri();
 		Maze->mettiMuri();
-		//int startc = Maze->GetIn(Maze->xs, Maze->ys);
 		px = 0.5 + 4.5;
 		pz = 0.5 + 3.5;
 
@@ -171,7 +167,6 @@ public:
     // timing
     this->Tstart = this->Tstamp = clock();
     this->Full_elapsed = 0;
-    this->frameTime = 0;
   }
 
   ~MyModel() {
