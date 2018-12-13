@@ -500,9 +500,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
   OutputStreamPtr stupid(OpenSound(device, "../Data/stupid.wav", false));
 	OutputStreamPtr gameover(OpenSound(device, "../Data/gameover.wav", false));
 	OutputStreamPtr win(OpenSound(device, "../Data/win.wav", false));
-	if (!win){
-		MessageBox(NULL, "cazz", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
-	}
+	OutputStreamPtr grass_footstep(OpenSound(device, "../Data/grass1.wav", false));
 
   //  AUDIO - end
 
@@ -560,7 +558,9 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				double enpx = Data.px + r * cos(Data.angle);
 				double enpz = Data.pz + r * sin(Data.angle);
 
-				Data.MoveOrCollide(npx, npz, enpx, enpz);
+				if (Data.MoveOrCollide(npx, npz, enpx, enpz)) {
+					grass_footstep->play();
+				}
 			}
 			//andare avanti
 			if (Data.keys['W']) {
@@ -572,7 +572,9 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				double enpx = Data.px + r * cos(Data.angle);
 				double enpz = Data.pz + r * sin(Data.angle);
 
-				Data.MoveOrCollide(npx, npz, enpx, enpz);
+				if (Data.MoveOrCollide(npx, npz, enpx, enpz)) {
+					grass_footstep->play();
+				}
 			}
 			if (Data.keys[VK_DOWN]) {
 				double r = 0.01;
@@ -582,7 +584,9 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				r += 0.051;
 				double enpx = Data.px - r * cos(Data.angle);
 				double enpz = Data.pz - r * sin(Data.angle);
-				Data.MoveOrCollide(npx, npz, enpx, enpz);
+				if (Data.MoveOrCollide(npx, npz, enpx, enpz)) {
+					grass_footstep->play();
+				}
 			}
 			//andare indietro
 			if (Data.keys['S']) {
@@ -593,7 +597,9 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				r += 0.051;
 				double enpx = Data.px - r * cos(Data.angle);
 				double enpz = Data.pz - r * sin(Data.angle);
-				Data.MoveOrCollide(npx, npz, enpx, enpz);
+				if (Data.MoveOrCollide(npx, npz, enpx, enpz)) {
+					grass_footstep->play();
+				}
 			}
 			//muoversi a destra
 			if (Data.keys['D']) {
@@ -605,7 +611,9 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				r += 0.051;
 				double enpx = Data.px - r * cos(Data.angle - PI / 2.0);
 				double enpz = Data.pz - r * sin(Data.angle - PI / 2.0);
-				Data.MoveOrCollide(npx, npz, enpx, enpz);
+				if (Data.MoveOrCollide(npx, npz, enpx, enpz)) {
+					grass_footstep->play();
+				}
 			}
 
 
@@ -619,8 +627,9 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				r += 0.051;
 				double enpx = Data.px - r * cos(Data.angle + PI / 2.0);
 				double enpz = Data.pz - r * sin(Data.angle + PI / 2.0);
-				Data.MoveOrCollide(npx, npz, enpx, enpz);
-
+				if (Data.MoveOrCollide(npx, npz, enpx, enpz)) {
+					grass_footstep->play();
+				}
 			}
 			if (Data.keys[VK_RIGHT]) {
 				Data.angle += 0.01;
