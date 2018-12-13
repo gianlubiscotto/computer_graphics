@@ -128,8 +128,6 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/matrix3_1.jpg", 29)) return false;
 	if (!this->Load_a_texture("../Data/matrix4_1.jpg", 30)) return false;
 
-
-
 	//indovinello
 	if (!this->Load_a_texture("../Data/question.jpg", 9)) return false;
 	//cancello fullview
@@ -139,6 +137,9 @@ bool MyModel::LoadGLTextures(void)
 	//qr
 	if (!this->Load_a_texture("../Data/frame.png", 17)) return false;
 	if (!this->Load_a_texture("../Data/qrtexture.jpg", 18)) return false;
+	//qr textures
+	if (!this->Load_a_texture("../Data/qr1.png", 31)) return false;
+
 	//sheldon-hogwarts
 	if (!this->Load_a_texture("../Data/bazinga.jpg", 19)) return false;
 	//solved
@@ -605,7 +606,7 @@ bool MyModel::verifica_risposta(char* answer) {
 		if (flag == false) {
 			this->qr_vinto = true;
 			for (int i = 0; i < this->Maze->L.size(); i++) {
-				this->Maze->L[i].WallsTexture[0] = 18;
+				this->Maze->L[i].WallsTexture[0] = 31;
 				this->Maze->L[i].WallsTexture[1] = 18;
 				this->Maze->L[i].WallsTexture[2] = 18;
 				this->Maze->L[i].WallsTexture[3] = 18;

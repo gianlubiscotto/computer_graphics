@@ -52,7 +52,7 @@ public:
     special(false), floorTexture(0), ceilTexture(2)
 
   { colore = RGB(0,0,0);
-  WallsTexture[0] = 4;
+  WallsTexture[0] = 31;
   WallsTexture[1] = 5;
   WallsTexture[2] = 6;
   WallsTexture[3] = 7;
