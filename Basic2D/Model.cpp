@@ -139,6 +139,12 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/qrtexture.jpg", 18)) return false;
 	//qr textures
 	if (!this->Load_a_texture("../Data/qr1.png", 31)) return false;
+	if (!this->Load_a_texture("../Data/qr2.png", 32)) return false;
+	if (!this->Load_a_texture("../Data/qr3.png", 33)) return false;
+	if (!this->Load_a_texture("../Data/qr4.png", 34)) return false;
+	if (!this->Load_a_texture("../Data/qr5.png", 35)) return false;
+
+
 
 	//sheldon-hogwarts
 	if (!this->Load_a_texture("../Data/bazinga.jpg", 19)) return false;
@@ -607,10 +613,10 @@ bool MyModel::verifica_risposta(char* answer) {
 			this->qr_vinto = true;
 			for (int i = 0; i < this->Maze->L.size(); i++) {
 				this->Maze->L[i].WallsTexture[0] = 31;
-				this->Maze->L[i].WallsTexture[1] = 18;
-				this->Maze->L[i].WallsTexture[2] = 18;
-				this->Maze->L[i].WallsTexture[3] = 18;
-				this->Maze->L[i].floorTexture = 18;
+				this->Maze->L[i].WallsTexture[1] = 32;
+				this->Maze->L[i].WallsTexture[2] = 33;
+				this->Maze->L[i].WallsTexture[3] = 34;
+				this->Maze->L[i].floorTexture = 35;
 				this->Maze->L[i].ceilTexture = 18;
 			}
 			this->Maze->mettiMuri();
