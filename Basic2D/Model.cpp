@@ -144,8 +144,6 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/math4_2.jpg", 26)) return false;
 
 
-
-
 	return true;										// Return Success
 }
 
