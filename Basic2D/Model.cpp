@@ -109,14 +109,12 @@ bool MyModel::Load_a_texture(const char *name, int id)
 bool MyModel::LoadGLTextures(void)
 {
 	// Floor textures
-	if (!this->Load_a_texture("../Data/floor2.png", 0)) return false;
+	if (!this->Load_a_texture("../Data/floor.jpg", 0)) return false;
 	//soffitto
-	if (!this->Load_a_texture("../Data/ceil.jpg", 2)) return false;
+	//if (!this->Load_a_texture("../Data/floor.jpg", 2)) return false;
 	// Walls textures
-	if (!this->Load_a_texture("../Data/wallpaper3.jpg", 4)) return false;
-	if (!this->Load_a_texture("../Data/wall.png", 5)) return false;
-	if (!this->Load_a_texture("../Data/wallpaper.jpg", 6)) return false;
-	if (!this->Load_a_texture("../Data/bookshelf.jpg", 7)) return false;
+	if (!this->Load_a_texture("../Data/wallz.jpg", 4)) return false;
+	
 	//porta
 	if (!this->Load_a_texture("../Data/gate1.png", 8)) return false;
 	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 10)) return false;
