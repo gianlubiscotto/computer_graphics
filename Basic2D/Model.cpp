@@ -595,7 +595,6 @@ bool MyModel::verifica_risposta(char* answer) {
 		this->matrix_fullview = false;
 		if (flag == false) {
 			this->matrix_vinto = true;
-			this->cancello_vinto = true;
 			for (int i = 0; i < this->Maze->L.size(); i++) {
 				this->Maze->L[i].WallsTexture[0] = 27;
 				this->Maze->L[i].WallsTexture[1] = 28;
@@ -607,6 +606,9 @@ bool MyModel::verifica_risposta(char* answer) {
 			this->height = 1;
 			this->walls_height();
 			this->Maze->mettiMuri();
+			if (this->cancello_vinto) {
+				this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
+			}
 			return true;
 		}
 		else {
@@ -614,6 +616,7 @@ bool MyModel::verifica_risposta(char* answer) {
 		}
 	}
 	else if (this->qr_fullview) {
+		
 		//controllo se answer corrisponde alla risposta esatta
 		int j = 0;
 		bool flag = false;
@@ -637,6 +640,9 @@ bool MyModel::verifica_risposta(char* answer) {
 			this->height = 1;
 			this->walls_height();
 			this->Maze->mettiMuri();
+			if (this->cancello_vinto) {
+				this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
+			}
 			return true;
 		}
 		else {
@@ -667,6 +673,9 @@ bool MyModel::verifica_risposta(char* answer) {
 			this->height = 1;
 			this->walls_height();
 			this->Maze->mettiMuri();
+			if (this->cancello_vinto) {
+				this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
+			}
 			return true;
 		}
 		else {
@@ -771,14 +780,15 @@ OKMOVE:
 		//TODO: texture di matrix
 	}
 	//cancello non aperto
-	else if (oi != ni && ni == 38 && !cancello_vinto) {	
+	else if (oi != ni && ni == 38 && !matrix_vinto) {	
 		this->fullview_texture = 12;	//todo texture cancello
 		this->riddle_fullview = true;
 		this->cancello_fullview = true;
 		//TODO: texture di matrix
 	}
 	//cancello che si apre
-	else if (oi != ni && ni == 38 && cancello_vinto && this->Maze->L[37].muroE) {
+	else if (oi != ni && ni == 38 && matrix_vinto && this->Maze->L[37].muroE) {
+		this->cancello_vinto = true;
 		this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
 	}
 	//qr non risolto
