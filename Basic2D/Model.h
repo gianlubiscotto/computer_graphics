@@ -57,8 +57,8 @@ public:
   bool captured;        // true if the mouse is captured
   int cx, cy;           // client position of the cursor
   bool	fullscreen;	    // Fullscreen Flag 
-	
-												//riddles' stuff...
+	int height;						//altezza soffitto
+	//riddles' stuff...
 	int indice;
 	char answer[ans_size];
 	char matrix_solution[7] = { 'B','I','N','A','R','Y','\0' };
@@ -92,8 +92,7 @@ private:
   std::vector<Vertex> floor;        // a cell floor
   std::vector<Vertex> ceil;        // a cell ceil
   std::vector<Vertex> wall;         // a cell wall
-  // elapsed time in seconds from the beginning of the program
-  
+	void walls_height();
 
   GLuint	texture[40];			// Storage For 40 Textures!
   GLuint	base;				// Base Display List For The Font Set
@@ -113,58 +112,11 @@ public:
     Maze->Init_Perfect0();
 		Maze->cancellaMuri();
 		Maze->mettiMuri();
+		height = 6;
 		px = 0.5 + 4.5;
 		pz = 0.5 + 3.5;
-
-	  // floor and wall init. 
-	  // GEOMETRY: the 'y' axis is the vertical one. The maze is defined in x and z so that
-	  // 0 < x < ldx and 0 < z < ldy
-	  //	A floor cell is defined in y=0, 0 < x < 1 and 0 < z < 1
-	  //	A wall is defined in z=0, -0.5 < x < 0.5 and 0 < y < 1
-	  //	Each element is splitted in small parts to allow good lightning... (5x5 parts)
-
-	  //	FLOOR ----------------------------------------------------
-	  float Nx, Ny, Nz;	// normals
-	  Nx = Nz = 0; Ny = 1.0f;
-	  int parts = 5;
-	  Vertex V;
-	  V.SetColor(0.3f,0.3f,0.3f);				// all vertex colors are equals
-	  V.SetN(Nx, Ny, Nz);					      // all vertex normals are equals
-    // One floor cell: y = 0, x in [0,1], z in [0,1]
-	  float d = 1.0f / ((float) parts);
-	  for(int ix = 0; ix < parts; ix++) {
-		  float x = ix * d;
-		  for(int iz = 0; iz < parts; iz++) {
-			  float z = iz * d;
-			  V.SetP(x,0.0f,z);       V.SetTexture(x,z);      floor.push_back(V);
-        V.SetP(x,0.0f,z+d);     V.SetTexture(x,z+d);    floor.push_back(V);
-
-			  V.SetP(x+d,0.0f,z+d);   V.SetTexture(x+d,z+d);  floor.push_back(V);
-			  V.SetP(x+d,0.0f,z);     V.SetTexture(x+d,z);    floor.push_back(V);
-			  
-		  }
-	  }
-
-	  //	WALL ----------------------------------------------------
-	  Nx = Ny = 0; Nz = -1.0f;
-	  parts = 5;
-		int yparts = 10;
-		float dy = 2.0f / ((float)yparts);
-	  V.SetColor(0.8f,0.8f,0.8f);				// all vertex colors are equals
-	  V.SetN(Nx, Ny, Nz);					      // all vertex normals are equals
-    // One wall cell: z = 0, x in [-0.5, 0.5], y in [0,1]
-	  for(int ix = 0; ix < parts; ix++) {
-		  float x = ix * d - 0.5f;
-      float xt = x + 0.5f;
-		  for(int iy = 0; iy < yparts; iy++) {
-			  float y = iy * dy;
-			  V.SetP(x, y, 0.0f);       V.SetTexture(xt,y/2);      wall.push_back(V);
-			  V.SetP(x, y+dy, 0.0f);     V.SetTexture(xt,(y+d)/2);    wall.push_back(V);
-			  
-			  V.SetP(x+d, y+dy, 0.0f);   V.SetTexture(xt+d,(y+d)/2);  wall.push_back(V);
-        V.SetP(x+d, y, 0.0f);     V.SetTexture(xt+d,y/2);    wall.push_back(V);
-		  }
-	  }
+		
+		walls_height();
 
     // timing
     this->Tstart = this->Tstamp = clock();

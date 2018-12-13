@@ -226,17 +226,16 @@ void MyModel::DrawFloorText()
 }
 
 void MyModel::DrawCeilText() {
-	int height = 6;
 	glEnable(GL_TEXTURE_2D);
 	int it = this->Maze->L[0].ceilTexture;
 	glBindTexture(GL_TEXTURE_2D, texture[it]);
 	for (int i = -30; i < 30;i++) {
 		for (int j = -30; j < 30; j++) {
 			glBegin(GL_QUADS);
-			glTexCoord2f(0,0); glVertex3f(i+1,height,j);
-			glTexCoord2f(0, 1); glVertex3f(i+1, height, j+1);
-			glTexCoord2f(1, 1); glVertex3f(i, height, j + 1);
-			glTexCoord2f(1, 0); glVertex3f(i, height, j);
+			glTexCoord2f(0,0); glVertex3f(i+1,this->height,j);
+			glTexCoord2f(0, 1); glVertex3f(i+1, this->height, j+1);
+			glTexCoord2f(1, 1); glVertex3f(i, this->height, j + 1);
+			glTexCoord2f(1, 0); glVertex3f(i, this->height, j);
 			glEnd();
 		}
 	}
@@ -605,6 +604,8 @@ bool MyModel::verifica_risposta(char* answer) {
 				this->Maze->L[i].floorTexture = 27;
 				this->Maze->L[i].ceilTexture = 11;
 			}
+			this->height = 1;
+			this->walls_height();
 			this->Maze->mettiMuri();
 			return true;
 		}
@@ -633,6 +634,8 @@ bool MyModel::verifica_risposta(char* answer) {
 				this->Maze->L[i].floorTexture = 35;
 				this->Maze->L[i].ceilTexture = 36;
 			}
+			this->height = 1;
+			this->walls_height();
 			this->Maze->mettiMuri();
 			return true;
 		}
@@ -661,6 +664,8 @@ bool MyModel::verifica_risposta(char* answer) {
 				this->Maze->L[i].floorTexture = 25;
 				this->Maze->L[i].ceilTexture = 26;
 			}
+			this->height = 1;
+			this->walls_height();
 			this->Maze->mettiMuri();
 			return true;
 		}
@@ -784,4 +789,67 @@ OKMOVE:
 		//TODO: texture di matrix
 	}
 	return true;
+}
+
+void MyModel::walls_height() {
+	// floor and wall init. 
+	 // GEOMETRY: the 'y' axis is the vertical one. The maze is defined in x and z so that
+	 // 0 < x < ldx and 0 < z < ldy
+	 //	A floor cell is defined in y=0, 0 < x < 1 and 0 < z < 1
+	 //	A wall is defined in z=0, -0.5 < x < 0.5 and 0 < y < 1
+	 //	Each element is splitted in small parts to allow good lightning... (5x5 parts)
+
+	 //	FLOOR ----------------------------------------------------
+	float Nx, Ny, Nz;	// normals
+	Nx = Nz = 0; Ny = 1.0f;
+	int parts = 5;
+	Vertex V;
+	V.SetColor(0.3f, 0.3f, 0.3f);				// all vertex colors are equals
+	V.SetN(Nx, Ny, Nz);					      // all vertex normals are equals
+	// One floor cell: y = 0, x in [0,1], z in [0,1]
+	float d = 1.0f / ((float)parts);
+	for (int ix = 0; ix < parts; ix++) {
+		float x = ix * d;
+		for (int iz = 0; iz < parts; iz++) {
+			float z = iz * d;
+			V.SetP(x, 0.0f, z);       V.SetTexture(x, z);      floor.push_back(V);
+			V.SetP(x, 0.0f, z + d);     V.SetTexture(x, z + d);    floor.push_back(V);
+
+			V.SetP(x + d, 0.0f, z + d);   V.SetTexture(x + d, z + d);  floor.push_back(V);
+			V.SetP(x + d, 0.0f, z);     V.SetTexture(x + d, z);    floor.push_back(V);
+
+		}
+	}
+
+	//	WALL ----------------------------------------------------
+	Nx = Ny = 0; Nz = -1.0f;
+	int div;
+	int yparts;
+	float dy;
+	if (this->height==6) {
+		div = 2;
+		yparts = 10;
+		dy = 2.0f / ((float)yparts);
+	}
+	else {
+		div = 1;
+		yparts = 5;
+		dy = 1.0f / ((float)yparts);
+	}
+	 
+	V.SetColor(0.8f, 0.8f, 0.8f);				// all vertex colors are equals
+	V.SetN(Nx, Ny, Nz);					      // all vertex normals are equals
+	// One wall cell: z = 0, x in [-0.5, 0.5], y in [0,1]
+	for (int ix = 0; ix < parts; ix++) {
+		float x = ix * d - 0.5f;
+		float xt = x + 0.5f;
+		for (int iy = 0; iy < yparts; iy++) {
+			float y = iy * dy;
+			V.SetP(x, y, 0.0f);       V.SetTexture(xt, y / div);      wall.push_back(V);
+			V.SetP(x, y + dy, 0.0f);     V.SetTexture(xt, (y + d) / div);    wall.push_back(V);
+
+			V.SetP(x + d, y + dy, 0.0f);   V.SetTexture(xt + d, (y + d) / div);  wall.push_back(V);
+			V.SetP(x + d, y, 0.0f);     V.SetTexture(xt + d, y / div);    wall.push_back(V);
+		}
+	}
 }
