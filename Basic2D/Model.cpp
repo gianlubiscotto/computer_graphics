@@ -560,6 +560,15 @@ bool MyModel::verifica_risposta(char* answer) {
 		if (flag == false) {
 			this->matrix_vinto = true;
 			this->cancello_vinto = true;
+			for (int i = 0; i < this->Maze->L.size(); i++) {
+				this->Maze->L[i].WallsTexture[0] = 11;
+				this->Maze->L[i].WallsTexture[1] = 11;
+				this->Maze->L[i].WallsTexture[2] = 11;
+				this->Maze->L[i].WallsTexture[3] = 11;
+				this->Maze->L[i].floorTexture = 11;
+				this->Maze->L[i].ceilTexture = 11;
+			}
+			this->Maze->mettiMuri();
 			return true;
 		}
 		else {
@@ -579,6 +588,15 @@ bool MyModel::verifica_risposta(char* answer) {
 		this->qr_fullview = false;
 		if (flag == false) {
 			this->qr_vinto = true;
+			for (int i = 0; i < this->Maze->L.size(); i++) {
+				this->Maze->L[i].WallsTexture[0] = 18;
+				this->Maze->L[i].WallsTexture[1] = 18;
+				this->Maze->L[i].WallsTexture[2] = 18;
+				this->Maze->L[i].WallsTexture[3] = 18;
+				this->Maze->L[i].floorTexture = 18;
+				this->Maze->L[i].ceilTexture = 18;
+			}
+			this->Maze->mettiMuri();
 			return true;
 		}
 		else {
@@ -598,6 +616,15 @@ bool MyModel::verifica_risposta(char* answer) {
 		this->hogwarts_fullview = false;
 		if (flag == false) {
 			this->hogwarts_vinto = true;
+			for (int i = 0; i < this->Maze->L.size(); i++) {
+				this->Maze->L[i].WallsTexture[0] = 18;
+				this->Maze->L[i].WallsTexture[1] = 18;
+				this->Maze->L[i].WallsTexture[2] = 18;
+				this->Maze->L[i].WallsTexture[3] = 18;
+				this->Maze->L[i].floorTexture = 18;
+				this->Maze->L[i].ceilTexture = 18;
+			}
+			this->Maze->mettiMuri();
 			return true;
 		}
 		else {
