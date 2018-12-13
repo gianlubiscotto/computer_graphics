@@ -143,7 +143,7 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/qr3.png", 33)) return false;
 	if (!this->Load_a_texture("../Data/qr4.png", 34)) return false;
 	if (!this->Load_a_texture("../Data/qr5.png", 35)) return false;
-
+	if (!this->Load_a_texture("../Data/qr6.png", 36)) return false;
 
 
 	//sheldon-hogwarts
@@ -617,7 +617,7 @@ bool MyModel::verifica_risposta(char* answer) {
 				this->Maze->L[i].WallsTexture[2] = 33;
 				this->Maze->L[i].WallsTexture[3] = 34;
 				this->Maze->L[i].floorTexture = 35;
-				this->Maze->L[i].ceilTexture = 18;
+				this->Maze->L[i].ceilTexture = 36;
 			}
 			this->Maze->mettiMuri();
 			return true;

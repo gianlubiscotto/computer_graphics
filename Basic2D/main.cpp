@@ -324,7 +324,7 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 					 }
 					 //visuale in su
 					 else if (Data.cy > p.y) {
-						 if (Data.angley < 0.8) {
+						 if (Data.angley < 1.5) {
 							 Data.angley += (Data.cy - p.y) / 1000.0;
 						 }
 					 }
