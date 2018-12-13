@@ -674,10 +674,6 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			if (Data.keys['O']) {
 				Data.illumin = false;
 			}
-			if (Data.keys['K']) {
-				bool provaDialog(HWND parent, HINSTANCE instance);
-				provaDialog(Data.hWnd, Data.hInstance);
-			}
 			if (Data.suono_giusto) {
 				bell->play();
 				Data.suono_giusto = false;
@@ -708,18 +704,4 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	KillGLWindow();									// Kill The Window
 	return (msg.wParam);							// Exit The Program
 
-}
-
-static int CALLBACK matrix(HWND h, UINT msg, WPARAM wp, LPARAM lp) {
-	switch (msg) {
-	case WM_COMMAND:
-		break;
-	};
-	return 1;
-}
-
-bool provaDialog(HWND parent, HINSTANCE instance) {
-	int r = DialogBox(instance, MAKEINTRESOURCE(IDD_DIALOG1), parent, (DLGPROC) matrix);
-	if (r != 0) return false;
-	return true;
 }
