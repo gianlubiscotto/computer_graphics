@@ -135,6 +135,13 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/bazinga.jpg", 19)) return false;
 	//solved
 	if (!this->Load_a_texture("../Data/solved.jpg", 20)) return false;
+	//math textures
+	if (!this->Load_a_texture("../Data/math1.jpg", 21)) return false;
+	if (!this->Load_a_texture("../Data/math2_1.jpg", 22)) return false;
+	if (!this->Load_a_texture("../Data/math3.jpg", 23)) return false;
+	if (!this->Load_a_texture("../Data/math4_1.jpg", 24)) return false;
+
+
 
 	return true;										// Return Success
 }
