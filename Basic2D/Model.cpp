@@ -133,7 +133,7 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/gameover.jpg", 15)) return false;
 	if (!this->Load_a_texture("../Data/murooltrepassabile.png", 16)) return false;
 	//qr
-	if (!this->Load_a_texture("../Data/frame.png", 17)) return false;
+	if (!this->Load_a_texture("../Data/frame1.png", 17)) return false;
 	if (!this->Load_a_texture("../Data/qrtexture.jpg", 18)) return false;
 	//qr textures
 	if (!this->Load_a_texture("../Data/qr1.png", 31)) return false;
