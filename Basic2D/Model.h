@@ -95,7 +95,7 @@ private:
   // elapsed time in seconds from the beginning of the program
   
 
-  GLuint	texture[28];			// Storage For 28 Textures!
+  GLuint	texture[40];			// Storage For 40 Textures!
   GLuint	base;				// Base Display List For The Font Set
 public:
   //  methods
