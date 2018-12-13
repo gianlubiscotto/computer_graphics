@@ -109,11 +109,11 @@ bool MyModel::Load_a_texture(const char *name, int id)
 bool MyModel::LoadGLTextures(void)
 {
 	// Floor textures
-	if (!this->Load_a_texture("../Data/floor.jpg", 0)) return false;
+	if (!this->Load_a_texture("../Data/floor1.jpg", 0)) return false;
 	//soffitto
-	//if (!this->Load_a_texture("../Data/floor.jpg", 2)) return false;
+	if (!this->Load_a_texture("../Data/ceil1.jpg", 2)) return false;
 	// Walls textures
-	if (!this->Load_a_texture("../Data/wallz.jpg", 4)) return false;
+	if (!this->Load_a_texture("../Data/wallz-1.jpg", 4)) return false;
 	
 	//porta
 	if (!this->Load_a_texture("../Data/gate1.png", 8)) return false;
@@ -234,7 +234,7 @@ void MyModel::DrawCeilText()
 		this->Maze->GetXY(i, ix, iy);
 		int it = this->Maze->L[i].ceilTexture;
 		glBindTexture(GL_TEXTURE_2D, texture[it]);
-		glTranslatef((float)ix, 1, (float)iy);
+		glTranslatef((float)ix, 2, (float)iy);
 
 		glBegin(GL_QUADS);
 		

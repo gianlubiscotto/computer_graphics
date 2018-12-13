@@ -148,18 +148,20 @@ public:
 	  //	WALL ----------------------------------------------------
 	  Nx = Ny = 0; Nz = -1.0f;
 	  parts = 5;
+		int yparts = 10;
+		float dy = 2.0f / ((float)yparts);
 	  V.SetColor(0.8f,0.8f,0.8f);				// all vertex colors are equals
 	  V.SetN(Nx, Ny, Nz);					      // all vertex normals are equals
     // One wall cell: z = 0, x in [-0.5, 0.5], y in [0,1]
 	  for(int ix = 0; ix < parts; ix++) {
 		  float x = ix * d - 0.5f;
       float xt = x + 0.5f;
-		  for(int iy = 0; iy < parts; iy++) {
-			  float y = iy * d;
+		  for(int iy = 0; iy < yparts; iy++) {
+			  float y = iy * dy;
 			  V.SetP(x, y, 0.0f);       V.SetTexture(xt,y);      wall.push_back(V);
-			  V.SetP(x, y+d, 0.0f);     V.SetTexture(xt,y+d);    wall.push_back(V);
+			  V.SetP(x, y+dy, 0.0f);     V.SetTexture(xt,y+d);    wall.push_back(V);
 			  
-			  V.SetP(x+d, y+d, 0.0f);   V.SetTexture(xt+d,y+d);  wall.push_back(V);
+			  V.SetP(x+d, y+dy, 0.0f);   V.SetTexture(xt+d,y+d);  wall.push_back(V);
         V.SetP(x+d, y, 0.0f);     V.SetTexture(xt+d,y);    wall.push_back(V);
 		  }
 	  }
