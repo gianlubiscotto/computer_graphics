@@ -140,6 +140,9 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/math2_1.jpg", 22)) return false;
 	if (!this->Load_a_texture("../Data/math3.jpg", 23)) return false;
 	if (!this->Load_a_texture("../Data/math4_1.jpg", 24)) return false;
+	if (!this->Load_a_texture("../Data/math2.jpg", 25)) return false;
+	if (!this->Load_a_texture("../Data/math4_2.jpg", 26)) return false;
+
 
 
 
@@ -624,12 +627,12 @@ bool MyModel::verifica_risposta(char* answer) {
 		if (flag == false) {
 			this->hogwarts_vinto = true;
 			for (int i = 0; i < this->Maze->L.size(); i++) {
-				this->Maze->L[i].WallsTexture[0] = 18;
-				this->Maze->L[i].WallsTexture[1] = 18;
-				this->Maze->L[i].WallsTexture[2] = 18;
-				this->Maze->L[i].WallsTexture[3] = 18;
-				this->Maze->L[i].floorTexture = 18;
-				this->Maze->L[i].ceilTexture = 18;
+				this->Maze->L[i].WallsTexture[0] = 21;
+				this->Maze->L[i].WallsTexture[1] = 22;
+				this->Maze->L[i].WallsTexture[2] = 23;
+				this->Maze->L[i].WallsTexture[3] = 24;
+				this->Maze->L[i].floorTexture = 25;
+				this->Maze->L[i].ceilTexture = 26;
 			}
 			this->Maze->mettiMuri();
 			return true;
