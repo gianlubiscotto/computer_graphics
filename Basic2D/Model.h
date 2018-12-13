@@ -158,11 +158,11 @@ public:
       float xt = x + 0.5f;
 		  for(int iy = 0; iy < yparts; iy++) {
 			  float y = iy * dy;
-			  V.SetP(x, y, 0.0f);       V.SetTexture(xt,y);      wall.push_back(V);
-			  V.SetP(x, y+dy, 0.0f);     V.SetTexture(xt,y+d);    wall.push_back(V);
+			  V.SetP(x, y, 0.0f);       V.SetTexture(xt,y/2);      wall.push_back(V);
+			  V.SetP(x, y+dy, 0.0f);     V.SetTexture(xt,(y+d)/2);    wall.push_back(V);
 			  
-			  V.SetP(x+d, y+dy, 0.0f);   V.SetTexture(xt+d,y+d);  wall.push_back(V);
-        V.SetP(x+d, y, 0.0f);     V.SetTexture(xt+d,y);    wall.push_back(V);
+			  V.SetP(x+d, y+dy, 0.0f);   V.SetTexture(xt+d,(y+d)/2);  wall.push_back(V);
+        V.SetP(x+d, y, 0.0f);     V.SetTexture(xt+d,y/2);    wall.push_back(V);
 		  }
 	  }
 

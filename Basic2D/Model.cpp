@@ -113,7 +113,7 @@ bool MyModel::LoadGLTextures(void)
 	//soffitto
 	if (!this->Load_a_texture("../Data/ceil1.jpg", 2)) return false;
 	// Walls textures
-	if (!this->Load_a_texture("../Data/wallz-1.jpg", 4)) return false;
+	if (!this->Load_a_texture("../Data/wallz-2.jpg", 4)) return false;
 	
 	//porta
 	if (!this->Load_a_texture("../Data/gate1.png", 8)) return false;
@@ -225,7 +225,23 @@ void MyModel::DrawFloorText()
   }
 }
 
-void MyModel::DrawCeilText()
+void MyModel::DrawCeilText() {
+	int height = 6;
+	glEnable(GL_TEXTURE_2D);
+	int it = this->Maze->L[0].ceilTexture;
+	glBindTexture(GL_TEXTURE_2D, texture[it]);
+	for (int i = -30; i < 30;i++) {
+		for (int j = -30; j < 30; j++) {
+			glBegin(GL_QUADS);
+			glTexCoord2f(0,0); glVertex3f(i+1,height,j);
+			glTexCoord2f(0, 1); glVertex3f(i+1, height, j+1);
+			glTexCoord2f(1, 1); glVertex3f(i, height, j + 1);
+			glTexCoord2f(1, 0); glVertex3f(i, height, j);
+			glEnd();
+		}
+	}
+}
+/*void MyModel::DrawCeilText()
 {
 	glEnable(GL_TEXTURE_2D);
 	for (int i = 0; i < this->Maze->L.size(); i++) {
@@ -234,7 +250,7 @@ void MyModel::DrawCeilText()
 		this->Maze->GetXY(i, ix, iy);
 		int it = this->Maze->L[i].ceilTexture;
 		glBindTexture(GL_TEXTURE_2D, texture[it]);
-		glTranslatef((float)ix, 2, (float)iy);
+		glTranslatef((float)ix, 4, (float)iy);
 
 		glBegin(GL_QUADS);
 		
@@ -248,7 +264,7 @@ void MyModel::DrawCeilText()
 		
 		glEnd();
 	}
-}
+}*/
 
 //draw the matrix dialog box
 void MyModel::DrawRiddleFullview() {
