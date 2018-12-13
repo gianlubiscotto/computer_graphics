@@ -123,7 +123,12 @@ bool MyModel::LoadGLTextures(void)
 	//muro matrix
 	if (!this->Load_a_texture("../Data/matrix5_1.jpg", 11)) return false;
 	//matrix textures
-	if (!this->Load_a_texture("../Data/matrix5_1.jpg", 1)) return false;
+	if (!this->Load_a_texture("../Data/matrix1_1.jpg", 27)) return false;
+	if (!this->Load_a_texture("../Data/matrix2_1.jpg", 28)) return false;
+	if (!this->Load_a_texture("../Data/matrix3_1.jpg", 29)) return false;
+	if (!this->Load_a_texture("../Data/matrix4_1.jpg", 30)) return false;
+
+
 
 	//indovinello
 	if (!this->Load_a_texture("../Data/question.jpg", 9)) return false;
@@ -572,11 +577,11 @@ bool MyModel::verifica_risposta(char* answer) {
 			this->matrix_vinto = true;
 			this->cancello_vinto = true;
 			for (int i = 0; i < this->Maze->L.size(); i++) {
-				this->Maze->L[i].WallsTexture[0] = 11;
-				this->Maze->L[i].WallsTexture[1] = 11;
-				this->Maze->L[i].WallsTexture[2] = 11;
-				this->Maze->L[i].WallsTexture[3] = 11;
-				this->Maze->L[i].floorTexture = 11;
+				this->Maze->L[i].WallsTexture[0] = 27;
+				this->Maze->L[i].WallsTexture[1] = 28;
+				this->Maze->L[i].WallsTexture[2] = 29;
+				this->Maze->L[i].WallsTexture[3] = 30;
+				this->Maze->L[i].floorTexture = 27;
 				this->Maze->L[i].ceilTexture = 11;
 			}
 			this->Maze->mettiMuri();
