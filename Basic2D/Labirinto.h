@@ -49,13 +49,13 @@ public:
 	//dare id per facciata e retro
 public:
   CellaR(): visitata(0), a(0), muroE(true), muroS(true), 
-    special(false), floorTexture(0), ceilTexture(2)
+    special(false), floorTexture(0), ceilTexture(1)
 
   { colore = RGB(0,0,0);
-  WallsTexture[0] = 4;
-  WallsTexture[1] = 4;
-  WallsTexture[2] = 4;
-  WallsTexture[3] = 4;
+  WallsTexture[0] = 2;
+  WallsTexture[1] = 2;
+  WallsTexture[2] = 2;
+  WallsTexture[3] = 2;
   WallsTransparency[0] = false;
   WallsTransparency[1] = false;
   }

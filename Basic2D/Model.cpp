@@ -111,43 +111,41 @@ bool MyModel::LoadGLTextures(void)
 	// Floor textures
 	if (!this->Load_a_texture("../Data/floor1.jpg", 0)) return false;
 	//soffitto
-	if (!this->Load_a_texture("../Data/ceil1.jpg", 2)) return false;
+	if (!this->Load_a_texture("../Data/ceil1.jpg", 1)) return false;
 	// Walls textures
-	if (!this->Load_a_texture("../Data/wallz-2.jpg", 4)) return false;
+	if (!this->Load_a_texture("../Data/wallz-2.jpg", 2)) return false;
 	
-	//porta
-	if (!this->Load_a_texture("../Data/gate1.png", 8)) return false;
-	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 10)) return false;
-	//muro matrix
-	if (!this->Load_a_texture("../Data/matrix5_1.jpg", 11)) return false;
-	//matrix textures
-	if (!this->Load_a_texture("../Data/matrix1_1.jpg", 27)) return false;
-	if (!this->Load_a_texture("../Data/matrix2_1.jpg", 28)) return false;
-	if (!this->Load_a_texture("../Data/matrix3_1.jpg", 29)) return false;
-	if (!this->Load_a_texture("../Data/matrix4_1.jpg", 30)) return false;
-
-	//indovinello
-	if (!this->Load_a_texture("../Data/question.jpg", 9)) return false;
+	//cancello
+	if (!this->Load_a_texture("../Data/gate1.png", 3)) return false;
 	//cancello fullview
-	if (!this->Load_a_texture("../Data/gatefullview.jpg", 12)) return false;
-	if (!this->Load_a_texture("../Data/gameover.jpg", 15)) return false;
-	if (!this->Load_a_texture("../Data/murooltrepassabile.png", 16)) return false;
-	//qr
-	if (!this->Load_a_texture("../Data/frame1.png", 17)) return false;
-	if (!this->Load_a_texture("../Data/qrtexture.jpg", 18)) return false;
+	if (!this->Load_a_texture("../Data/gatefullview.jpg", 4)) return false;
+	
+	//matrix fullview
+	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 5)) return false;
+	//muro matrix
+	if (!this->Load_a_texture("../Data/matrix5_1.jpg", 6)) return false;
+	//matrix textures
+	if (!this->Load_a_texture("../Data/matrix1_1.jpg", 7)) return false;
+	if (!this->Load_a_texture("../Data/matrix2_1.jpg", 8)) return false;
+	if (!this->Load_a_texture("../Data/matrix3_1.jpg", 9)) return false;
+	if (!this->Load_a_texture("../Data/matrix4_1.jpg", 10)) return false;
+
+	//qr muro
+	if (!this->Load_a_texture("../Data/frame1.png", 11)) return false;
+	//qr fullview
+	if (!this->Load_a_texture("../Data/qrtexture.jpg", 12)) return false;
 	//qr textures
-	if (!this->Load_a_texture("../Data/qr1.png", 31)) return false;
-	if (!this->Load_a_texture("../Data/qr2.png", 32)) return false;
-	if (!this->Load_a_texture("../Data/qr3.png", 33)) return false;
-	if (!this->Load_a_texture("../Data/qr4.png", 34)) return false;
-	if (!this->Load_a_texture("../Data/qr5.png", 35)) return false;
-	if (!this->Load_a_texture("../Data/qr6.png", 36)) return false;
+	if (!this->Load_a_texture("../Data/qr1.png", 13)) return false;
+	if (!this->Load_a_texture("../Data/qr2.png", 14)) return false;
+	if (!this->Load_a_texture("../Data/qr3.png", 15)) return false;
+	if (!this->Load_a_texture("../Data/qr4.png", 16)) return false;
+	if (!this->Load_a_texture("../Data/qr5.png", 17)) return false;
+	if (!this->Load_a_texture("../Data/qr6.png", 18)) return false;
 
-
-	//sheldon-hogwarts
+	//sheldon-hogwarts muro
 	if (!this->Load_a_texture("../Data/bazinga.jpg", 19)) return false;
-	//solved
-	if (!this->Load_a_texture("../Data/solved.jpg", 20)) return false;
+	//fullview sheldon
+	if (!this->Load_a_texture("../Data/question.jpg", 20)) return false; 
 	//math textures
 	if (!this->Load_a_texture("../Data/math1.jpg", 21)) return false;
 	if (!this->Load_a_texture("../Data/math2_1.jpg", 22)) return false;
@@ -155,11 +153,18 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/math4_1.jpg", 24)) return false;
 	if (!this->Load_a_texture("../Data/math2.jpg", 25)) return false;
 	if (!this->Load_a_texture("../Data/math4_2.jpg", 26)) return false;
+	//hint 9 3/4
+	if (!this->Load_a_texture("../Data/murooltrepassabile.png", 27)) return false;
+	
+	//game over
+	if (!this->Load_a_texture("../Data/gameover.jpg", 28)) return false;
+	//win
+	if (!this->Load_a_texture("../Data/solved.jpg", 29)) return false;
 
-	//passi
-	if (!this->Load_a_texture("../Data/footprint.jpg", 37)) return false;
-	if (!this->Load_a_texture("../Data/youarehere.jpg", 38)) return false;
-
+	//linea verticale
+	if (!this->Load_a_texture("../Data/youarehere.jpg", 30)) return false;
+	
+	
 	return true;										// Return Success
 }
 
@@ -238,7 +243,7 @@ void MyModel::DrawFloorFullview()
 			int ix, iy;
 			this->Maze->GetXY(i, ix, iy);
 			int it = this->Maze->L[i].floorTexture;
-			glBindTexture(GL_TEXTURE_2D, texture[38]);	
+			glBindTexture(GL_TEXTURE_2D, texture[30]);	
 			glTranslatef((float)ix, 0, (float)iy);
 
 			glBegin(GL_QUADS);
@@ -571,7 +576,7 @@ bool MyModel::DrawGLScene(void)
 	if (this->Full_elapsed >= 10*60) {
 		this->gameover_fullview = true;
 		this->riddle_fullview = true;
-		this->fullview_texture = 15;
+		this->fullview_texture = 28;
 		this->SetProjection();
 		this->timeout = true;
 	}
@@ -579,7 +584,7 @@ bool MyModel::DrawGLScene(void)
 	if (this->solved_riddles == 3) {
 		this->solved_fullview = true;
 		this->riddle_fullview = true;
-		this->fullview_texture = 20;
+		this->fullview_texture = 29;
 		this->SetProjection();
 	}
 	//timer to be displayed
@@ -650,12 +655,12 @@ bool MyModel::verifica_risposta(char* answer) {
 		if (flag == false) {
 			this->matrix_vinto = true;
 			for (int i = 0; i < this->Maze->L.size(); i++) {
-				this->Maze->L[i].WallsTexture[0] = 27;
-				this->Maze->L[i].WallsTexture[1] = 28;
-				this->Maze->L[i].WallsTexture[2] = 29;
-				this->Maze->L[i].WallsTexture[3] = 30;
-				this->Maze->L[i].floorTexture = 27;
-				this->Maze->L[i].ceilTexture = 11;
+				this->Maze->L[i].WallsTexture[0] = 7;
+				this->Maze->L[i].WallsTexture[1] = 8;
+				this->Maze->L[i].WallsTexture[2] = 9;
+				this->Maze->L[i].WallsTexture[3] = 10;
+				this->Maze->L[i].floorTexture = 7;
+				this->Maze->L[i].ceilTexture = 6;
 			}
 			this->height = 1;
 			this->walls_height();
@@ -684,12 +689,12 @@ bool MyModel::verifica_risposta(char* answer) {
 		if (flag == false) {
 			this->qr_vinto = true;
 			for (int i = 0; i < this->Maze->L.size(); i++) {
-				this->Maze->L[i].WallsTexture[0] = 31;
-				this->Maze->L[i].WallsTexture[1] = 32;
-				this->Maze->L[i].WallsTexture[2] = 33;
-				this->Maze->L[i].WallsTexture[3] = 34;
-				this->Maze->L[i].floorTexture = 35;
-				this->Maze->L[i].ceilTexture = 36;
+				this->Maze->L[i].WallsTexture[0] = 13;
+				this->Maze->L[i].WallsTexture[1] = 14;
+				this->Maze->L[i].WallsTexture[2] = 15;
+				this->Maze->L[i].WallsTexture[3] = 16;
+				this->Maze->L[i].floorTexture = 17;
+				this->Maze->L[i].ceilTexture = 18;
 			}
 			this->height = 1;
 			this->walls_height();
@@ -824,20 +829,20 @@ OKMOVE:
 
 	//hogwarts non risolto
 	if (oi != ni && ni == 51 && !hogwarts_vinto) { 
-		this->fullview_texture = 9; //todo texture
+		this->fullview_texture = 20;
 		this->riddle_fullview = true;
 		this->hogwarts_fullview = true;
 	}
 	//matrix non risolto
 	else if (oi != ni && ni == 55 && !matrix_vinto) {	
-		this->fullview_texture = 10;
+		this->fullview_texture = 5;
 		this->riddle_fullview = true;
 		this->matrix_fullview = true;
 		//TODO: texture di matrix
 	}
 	//cancello non aperto
 	else if (oi != ni && ni == 38 && !matrix_vinto) {	
-		this->fullview_texture = 12;	//todo texture cancello
+		this->fullview_texture = 4;	
 		this->riddle_fullview = true;
 		this->cancello_fullview = true;
 		//TODO: texture di matrix
@@ -849,7 +854,7 @@ OKMOVE:
 	}
 	//qr non risolto
 	else if (oi != ni && ni == 6 && !qr_vinto) {
-		this->fullview_texture = 18; //todo cambiare
+		this->fullview_texture = 12;
 		this->riddle_fullview = true;
 		this->qr_fullview = true;
 		//TODO: texture di matrix
