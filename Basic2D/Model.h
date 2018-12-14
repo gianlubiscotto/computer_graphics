@@ -94,7 +94,7 @@ private:
   std::vector<Vertex> wall;         // a cell wall
 	void walls_height();
 
-  GLuint	texture[40];			// Storage For 40 Textures!
+  GLuint	texture[45];			// Storage For 40 Textures!
   GLuint	base;				// Base Display List For The Font Set
 public:
   //  methods

@@ -177,6 +177,12 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/cornerN_W.png", 36)) return false;
 	//angolo sud ovest
 	if (!this->Load_a_texture("../Data/cornerS_W.png", 37)) return false;
+	//nessun muro
+	if (!this->Load_a_texture("../Data/cross.png", 38)) return false;
+	//incrocio muro N
+	if (!this->Load_a_texture("../Data/T_nord.png", 39)) return false;
+	//incrocio muro W
+	if (!this->Load_a_texture("../Data/T_ovest.png", 40)) return false;
 
 	return true;										// Return Success
 }
@@ -272,53 +278,68 @@ void MyModel::DrawFloorFullview()
 
 		glEnd();
 
-		
+		bool muro_sotto;
 		if (this->Maze->L[i].visitata) {
 			glLoadIdentity();
 			int ix, iy;
 			this->Maze->GetXY(i, ix, iy);
 			int it;
+			if (i<10) {
+				muro_sotto = true;
+			}
+			else
+				muro_sotto = this->Maze->L[i - this->ldx].muroS;
+
 			//se ha due muri a est e ovest linea verticale
 			if (this->Maze->L[i].muroE && this->Maze->L[i-1].muroE) {
 				it = 30;
 			}
 			//se ha due muri a nord e sud linea orizzontale
-			else if (this->Maze->L[i].muroS && this->Maze->L[i - this->ldx].muroS) {
+			else if (this->Maze->L[i].muroS && muro_sotto) {
 				it = 31;
 			}
 			//se ha solo un muro a est
 			else if (this->Maze->L[i].muroE && !this->Maze->L[i - 1].muroE
-				&& !this->Maze->L[i].muroS && !this->Maze->L[i - this->ldx].muroS) {
+				&& !this->Maze->L[i].muroS && !muro_sotto) {
 				it = 32;
 			}
 			//se ha solo il muro sud
 			else if (this->Maze->L[i].muroS && !this->Maze->L[i].muroE
-				&& !this->Maze->L[i-1].muroE && !this->Maze->L[i - this->ldx].muroS) {
+				&& !this->Maze->L[i-1].muroE && !muro_sotto) {
 				it = 33;
 			}
 			//se ha il muro sud e est
 			else if (this->Maze->L[i].muroS && this->Maze->L[i].muroE
-				&& !this->Maze->L[i - 1].muroE && !this->Maze->L[i - this->ldx].muroS) {
+				&& !this->Maze->L[i - 1].muroE && !muro_sotto) {
 				it = 34;
 			}
 			//se ha il muro nord e est
 			else if (!this->Maze->L[i].muroS && this->Maze->L[i].muroE
-				&& !this->Maze->L[i - 1].muroE && this->Maze->L[i - this->ldx].muroS) {
+				&& !this->Maze->L[i - 1].muroE && muro_sotto) {
 				it = 35;
 			}
 			//se ha il muro nord e ovest
 			else if (!this->Maze->L[i].muroS && !this->Maze->L[i].muroE
-				&& this->Maze->L[i - 1].muroE && this->Maze->L[i - this->ldx].muroS) {
+				&& this->Maze->L[i - 1].muroE && muro_sotto) {
 				it = 36;
 			}
 			//se ha il muro sud e ovest
 			else if (this->Maze->L[i].muroS && !this->Maze->L[i].muroE
-				&& this->Maze->L[i - 1].muroE && !this->Maze->L[i - this->ldx].muroS) {
+				&& this->Maze->L[i - 1].muroE && !muro_sotto) {
 				it = 37;
 			}
+			//se ha il muro nord e basta
+			else if (muro_sotto && !this->Maze->L[i].muroE
+				&& !this->Maze->L[i - 1].muroE && !this->Maze->L[i].muroS) {
+				it = 39;
+			}
+			//se ha il muro ovest e basta
+			else if (this->Maze->L[i - 1].muroE && !this->Maze->L[i].muroE
+				&& !this->Maze->L[i].muroS && !muro_sotto) {
+				it = 40;
+			}
 			else {
-
-				it = this->Maze->L[i].floorTexture;
+				it = 38;
 			}
 			glBindTexture(GL_TEXTURE_2D, texture[it]);	
 			glTranslatef((float)ix, 0, (float)iy);
