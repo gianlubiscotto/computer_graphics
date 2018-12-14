@@ -310,7 +310,7 @@ void MyModel::DrawCeilText() {
 	glEnable(GL_TEXTURE_2D);
 	int it = this->Maze->L[0].ceilTexture;
 	glBindTexture(GL_TEXTURE_2D, texture[it]);
-	for (int i = -30; i < 30;i++) {
+	for (int i = -30; i < 30; i++) {
 		for (int j = -30; j < 30; j++) {
 			glBegin(GL_QUADS);
 			glTexCoord2f(0,0); glVertex3f(i+1,this->height,j);
@@ -321,30 +321,7 @@ void MyModel::DrawCeilText() {
 		}
 	}
 }
-/*void MyModel::DrawCeilText()
-{
-	glEnable(GL_TEXTURE_2D);
-	for (int i = 0; i < this->Maze->L.size(); i++) {
-		glLoadIdentity();
-		int ix, iy;
-		this->Maze->GetXY(i, ix, iy);
-		int it = this->Maze->L[i].ceilTexture;
-		glBindTexture(GL_TEXTURE_2D, texture[it]);
-		glTranslatef((float)ix, 4, (float)iy);
 
-		glBegin(GL_QUADS);
-		
-			for (int i = this->floor.size()-1; i >=0; i--) {
-				glTexCoord2f(floor[i].u, floor[i].v);
-				glNormal3f(floor[i].Nx, floor[i].Ny, floor[i].Nz);
-				//glColor3f(floor[i].r, floor[i].g, floor[i].b);
-				glColor3f(1,1,1);
-				glVertex3f(floor[i].x, floor[i].y, floor[i].z);
-			}
-		
-		glEnd();
-	}
-}*/
 
 //draw the matrix dialog box
 void MyModel::DrawRiddleFullview() {
@@ -922,7 +899,7 @@ void MyModel::walls_height() {
 	int div;
 	int yparts;
 	float dy;
-	if (this->height==6) {
+	if (this->height!=1) {
 		div = 2;
 		yparts = 10;
 		dy = 2.0f / ((float)yparts);

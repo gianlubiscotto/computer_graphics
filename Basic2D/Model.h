@@ -112,7 +112,7 @@ public:
     Maze->Init_Perfect0();
 		Maze->cancellaMuri();
 		Maze->mettiMuri();
-		height = 6;
+		height = 5; //height of sky
 		px = 0.5 + 4.5;
 		pz = 0.5 + 3.5;
 		
