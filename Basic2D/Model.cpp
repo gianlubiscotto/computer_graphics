@@ -156,6 +156,9 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/math2.jpg", 25)) return false;
 	if (!this->Load_a_texture("../Data/math4_2.jpg", 26)) return false;
 
+	//passi
+	if (!this->Load_a_texture("../Data/footprint.jpg", 37)) return false;
+	if (!this->Load_a_texture("../Data/youarehere.jpg", 38)) return false;
 
 	return true;										// Return Success
 }
@@ -225,6 +228,54 @@ void MyModel::DrawFloorText()
   }
 }
 
+//  DRAW THE FLOOR - TEXTURE - NO ILLUMINATION
+void MyModel::DrawFloorFullview()
+{
+	glEnable(GL_TEXTURE_2D);
+	for (int i = 0; i < this->Maze->L.size(); i++) {
+		if (this->Maze->L[i].visitata) {
+			glLoadIdentity();
+			int ix, iy;
+			this->Maze->GetXY(i, ix, iy);
+			int it = this->Maze->L[i].floorTexture;
+			glBindTexture(GL_TEXTURE_2D, texture[38]);	
+			glTranslatef((float)ix, 0, (float)iy);
+
+			glBegin(GL_QUADS);
+			
+				for (int i = 0; i < this->floor.size(); i++) {
+					glTexCoord2f(floor[i].u, floor[i].v);
+					glNormal3f(floor[i].Nx, floor[i].Ny, floor[i].Nz);
+					glColor3f(floor[i].r, floor[i].g, floor[i].b);
+					glVertex3f(floor[i].x, floor[i].y, floor[i].z);
+				}
+			
+			glEnd();
+		}
+		else {
+
+			glLoadIdentity();
+			int ix, iy;
+			this->Maze->GetXY(i, ix, iy);
+			int it = this->Maze->L[i].floorTexture;
+			glBindTexture(GL_TEXTURE_2D, texture[it]);
+			glTranslatef((float)ix, 0, (float)iy);
+
+			glBegin(GL_QUADS);
+
+			for (int i = 0; i < this->floor.size(); i++) {
+				glTexCoord2f(floor[i].u, floor[i].v);
+				glNormal3f(floor[i].Nx, floor[i].Ny, floor[i].Nz);
+				glColor3f(1.0f, 1.0f, 1.0f);
+				glVertex3f(floor[i].x, floor[i].y, floor[i].z);
+			}
+
+			glEnd();
+
+		}
+		
+	}
+}
 void MyModel::DrawCeilText() {
 	glEnable(GL_TEXTURE_2D);
 	int it = this->Maze->L[0].ceilTexture;
@@ -517,7 +568,7 @@ bool MyModel::DrawGLScene(void)
   this->Full_elapsed = double (t - Tstart) /  (double) CLOCKS_PER_SEC;
 	
 	//timeout
-	if (this->Full_elapsed >= 15*60) {
+	if (this->Full_elapsed >= 10*60) {
 		this->gameover_fullview = true;
 		this->riddle_fullview = true;
 		this->fullview_texture = 15;
@@ -532,7 +583,7 @@ bool MyModel::DrawGLScene(void)
 		this->SetProjection();
 	}
 	//timer to be displayed
-	this->timeleft = double(15 * 60) - this->Full_elapsed;
+	this->timeleft = double(10 * 60) - this->Full_elapsed;
   //  TIMING - end
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
@@ -549,7 +600,7 @@ bool MyModel::DrawGLScene(void)
 	}
 
   //  floor solo se mappa dall'alto o dentro il gioco
-	if (!this->riddle_fullview) {
+	if (!this->riddle_fullview && !this->fullview) {
 		this->DrawWallsText(false);	//non png
 		this->DrawCeilText();
 		this->DrawFloorText();
@@ -557,7 +608,10 @@ bool MyModel::DrawGLScene(void)
 	}
 	
   //  walls
-  if( this->fullview ) this->DrawWallsFullview(); //disegna le righe rosse e il pg
+	if (this->fullview) {
+		//this->DrawWallsFullview(); //disegna le righe rosse e il pg
+		this->DrawFloorFullview();
+	}
 	//schermata indovinello
 	if (this->riddle_fullview) this->DrawRiddleFullview(); 
 	
@@ -570,10 +624,10 @@ bool MyModel::DrawGLScene(void)
     glDisable(GL_LIGHTING);
 
  	  // Color
-	  glColor3f(0.4f,0.4f,0.4f);
+	  glColor3f(0.8f,0.0f,0.0f);
 	  // Position The Text On The Screen
-		glRasterPos3f((float) ldx,1.0f, (float) ldz + 0.1f);
-		this->glPrint("Time left: %6.2f sec.  ", timeleft);
+		glRasterPos3f((float) ldx, 1.0f, (float) ldz );
+		this->glPrint("You have %2.0f minutes e %0.2d seconds left.  ", timeleft/60, (int)timeleft%60);
 	
   }
 
@@ -765,6 +819,8 @@ bool MyModel::MoveOrCollide(double npx, double npz, double enpx, double enpz)
 OKMOVE:
 	if (nx == this->Maze->xu && nz == this->Maze->yu) this->Vinto = true;
 	px = npx; pz = npz;
+	int cella = this->Maze->GetIn(px, pz);
+	this->Maze->L[cella].visitata = true;
 
 	//hogwarts non risolto
 	if (oi != ni && ni == 51 && !hogwarts_vinto) { 

@@ -27,7 +27,7 @@
 class CellaR
 {
 public:
-  unsigned visitata;    // how many times has benn visited
+  bool visitata;    // how many times has benn visited
   int a;                // spare int for processing
   //  Ogni cella ha solo due muri, gli altri sono delle celle
   //  vicine (l'ultima riga e l'ultima colonna hanno piu`

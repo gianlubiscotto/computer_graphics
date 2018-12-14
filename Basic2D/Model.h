@@ -140,6 +140,7 @@ public:
 
 private:
   void DrawFloorText();
+  void DrawFloorFullview();
   void DrawCeilText();
   void DrawWallsText(bool transparency);
   void DrawWallsFullview();
