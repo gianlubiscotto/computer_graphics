@@ -113,7 +113,7 @@ bool MyModel::LoadGLTextures(void)
 	//soffitto
 	if (!this->Load_a_texture("../Data/ceil1.jpg", 1)) return false;
 	// Walls textures
-	if (!this->Load_a_texture("../Data/wallz-2.jpg", 2)) return false;
+	if (!this->Load_a_texture("../Data/wallz-1.png", 2)) return false;
 	
 	//cancello
 	if (!this->Load_a_texture("../Data/gate1.png", 3)) return false;
