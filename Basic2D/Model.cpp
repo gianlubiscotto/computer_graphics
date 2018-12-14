@@ -121,7 +121,7 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/gatefullview.jpg", 4)) return false;
 	
 	//matrix fullview
-	if (!this->Load_a_texture("../Data/matrixtexture-1.png", 5)) return false;
+	if (!this->Load_a_texture("../Data/matrix_fullview.png", 5)) return false;
 	//muro matrix
 	if (!this->Load_a_texture("../Data/matrix5_1.jpg", 6)) return false;
 	//matrix textures
