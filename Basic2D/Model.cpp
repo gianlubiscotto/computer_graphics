@@ -386,10 +386,10 @@ void MyModel::DrawRiddleFullview() {
 	glBindTexture(GL_TEXTURE_2D, texture[this->fullview_texture]);
 		glBegin(GL_QUADS);
 			glColor3f(1, 1, 1);	
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(11,0.5,-.5);
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(-1,0.5,-.5);	
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(-1, .5, 8.5);	
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(11, .5, 8.5);
+			glTexCoord2f(0.0f, 0.0f); glVertex3f(13,0.5,-0.5);
+			glTexCoord2f(1.0f, 0.0f); glVertex3f(-3,0.5,-.5);	
+			glTexCoord2f(1.0f, 1.0f); glVertex3f(-3, .5, 8.5);	
+			glTexCoord2f(0.0f, 1.0f); glVertex3f(13, .5, 8.5);
 		glEnd();
 
 	// Position The Text On The Screen
