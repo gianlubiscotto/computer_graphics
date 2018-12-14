@@ -495,7 +495,6 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
   stream->setVolume(0.5f); // 50% volume
   stream->play();
 
-  //OutputStreamPtr explosion(OpenSound(device, "../Data/explosion.wav", false));
   OutputStreamPtr bell(OpenSound(device, "../Data/bell.wav", false));
   OutputStreamPtr stupid(OpenSound(device, "../Data/stupid.wav", false));
 	OutputStreamPtr gameover(OpenSound(device, "../Data/gameover.wav", false));
@@ -534,25 +533,6 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				SwapBuffers(Data.hDC);					// Swap Buffers (Double Buffering)
 			}
 
-			if (Data.keys[VK_F2])						// Is F2 Being Pressed?
-			{
-				Data.keys[VK_F2] = FALSE;					// If So Make Key FALSE
-				/*if (explosion->isPlaying()) explosion->reset();
-				else explosion->play();*/
-			}
-			if (Data.keys[VK_F3])						// Is F3 Being Pressed?
-			{
-				Data.keys[VK_F3] = FALSE;					// If So Make Key FALSE
-				if (bell->isPlaying()) bell->reset();
-				else bell->play();
-			}
-
-			if (Data.keys[VK_F4])						// Is F4 Being Pressed?
-			{
-				Data.keys[VK_F4] = FALSE;					// If So Make Key FALSE
-				if (stupid->isPlaying()) stupid->reset();
-				else stupid->play();
-			}
 			if (Data.keys[VK_UP]) {
 				double r = 0.01;
 				double npx, npz;
