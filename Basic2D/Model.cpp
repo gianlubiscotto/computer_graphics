@@ -173,6 +173,10 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/cornerS_E.png", 34)) return false;
 	//angolo nord est
 	if (!this->Load_a_texture("../Data/cornerN_E.png", 35)) return false;
+	//angolo nord ovest
+	if (!this->Load_a_texture("../Data/cornerN_W.png", 36)) return false;
+	//angolo sud ovest
+	if (!this->Load_a_texture("../Data/cornerS_W.png", 37)) return false;
 
 	return true;										// Return Success
 }
@@ -291,6 +295,26 @@ void MyModel::DrawFloorFullview()
 			else if (this->Maze->L[i].muroS && !this->Maze->L[i].muroE
 				&& !this->Maze->L[i-1].muroE && !this->Maze->L[i - this->ldx].muroS) {
 				it = 33;
+			}
+			//se ha il muro sud e est
+			else if (this->Maze->L[i].muroS && this->Maze->L[i].muroE
+				&& !this->Maze->L[i - 1].muroE && !this->Maze->L[i - this->ldx].muroS) {
+				it = 34;
+			}
+			//se ha il muro nord e est
+			else if (!this->Maze->L[i].muroS && this->Maze->L[i].muroE
+				&& !this->Maze->L[i - 1].muroE && this->Maze->L[i - this->ldx].muroS) {
+				it = 35;
+			}
+			//se ha il muro nord e ovest
+			else if (!this->Maze->L[i].muroS && !this->Maze->L[i].muroE
+				&& this->Maze->L[i - 1].muroE && this->Maze->L[i - this->ldx].muroS) {
+				it = 36;
+			}
+			//se ha il muro sud e ovest
+			else if (this->Maze->L[i].muroS && !this->Maze->L[i].muroE
+				&& this->Maze->L[i - 1].muroE && !this->Maze->L[i - this->ldx].muroS) {
+				it = 37;
 			}
 			else {
 
