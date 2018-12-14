@@ -285,7 +285,7 @@ void MyModel::DrawCeilText() {
 	glEnable(GL_TEXTURE_2D);
 	int it = this->Maze->L[0].ceilTexture;
 	glBindTexture(GL_TEXTURE_2D, texture[it]);
-	for (int i = -30; i < 30;i++) {
+	for (int i = -30; i < 30; i++) {
 		for (int j = -30; j < 30; j++) {
 			glBegin(GL_QUADS);
 			glTexCoord2f(0,0); glVertex3f(i+1,this->height,j);
