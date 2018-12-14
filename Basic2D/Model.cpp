@@ -133,7 +133,7 @@ bool MyModel::LoadGLTextures(void)
 	//qr muro
 	if (!this->Load_a_texture("../Data/frame1.png", 11)) return false;
 	//qr fullview
-	if (!this->Load_a_texture("../Data/qrtexture.jpg", 12)) return false;
+	if (!this->Load_a_texture("../Data/qr_fullview.png", 12)) return false;
 	//qr textures
 	if (!this->Load_a_texture("../Data/qr1.png", 13)) return false;
 	if (!this->Load_a_texture("../Data/qr2.png", 14)) return false;
@@ -145,7 +145,7 @@ bool MyModel::LoadGLTextures(void)
 	//sheldon-hogwarts muro
 	if (!this->Load_a_texture("../Data/bazinga.jpg", 19)) return false;
 	//fullview sheldon
-	if (!this->Load_a_texture("../Data/question.jpg", 20)) return false; 
+	if (!this->Load_a_texture("../Data/sheldon_fullview.png", 20)) return false; 
 	//math textures
 	if (!this->Load_a_texture("../Data/math1.jpg", 21)) return false;
 	if (!this->Load_a_texture("../Data/math2_1.jpg", 22)) return false;
