@@ -162,14 +162,18 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/solved.jpg", 29)) return false;
 
 	//linea verticale
-	if (!this->Load_a_texture("../Data/floor1linea.jpg", 30)) return false;
+	if (!this->Load_a_texture("../Data/line_vertical.png", 30)) return false;
 	//linea orizzontale
-	if (!this->Load_a_texture("../Data/floor1linea2.jpg", 31)) return false;
+	if (!this->Load_a_texture("../Data/line_horizontal.png", 31)) return false;
 	//incrocio muroE
-	//if (!this->Load_a_texture("../Data/floor1incrocioE.jpg", 32)) return false;
+	if (!this->Load_a_texture("../Data/T_est.png", 32)) return false;
 	//incrocio muro S
-	//if (!this->Load_a_texture("../Data/floor1incorcioS.jpg", 33)) return false;
-	
+	if (!this->Load_a_texture("../Data/T_sud.png", 33)) return false;
+	//angolo sud est
+	if (!this->Load_a_texture("../Data/cornerS_E.png", 34)) return false;
+	//angolo nord est
+	if (!this->Load_a_texture("../Data/cornerN_E.png", 35)) return false;
+
 	return true;										// Return Success
 }
 
@@ -242,6 +246,9 @@ void MyModel::DrawFloorText()
 void MyModel::DrawFloorFullview()
 {
 	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	for (int i = 0; i < this->Maze->L.size(); i++) {
 		glLoadIdentity();
 		int ix, iy;
@@ -261,6 +268,7 @@ void MyModel::DrawFloorFullview()
 
 		glEnd();
 
+		
 		if (this->Maze->L[i].visitata) {
 			glLoadIdentity();
 			int ix, iy;
@@ -277,12 +285,12 @@ void MyModel::DrawFloorFullview()
 			//se ha solo un muro a est
 			else if (this->Maze->L[i].muroE && !this->Maze->L[i - 1].muroE
 				&& !this->Maze->L[i].muroS && !this->Maze->L[i - this->ldx].muroS) {
-				//it = 32;
+				it = 32;
 			}
 			//se ha solo il muro sud
 			else if (this->Maze->L[i].muroS && !this->Maze->L[i].muroE
 				&& !this->Maze->L[i-1].muroE && !this->Maze->L[i - this->ldx].muroS) {
-				//it = 33;
+				it = 33;
 			}
 			else {
 
@@ -297,7 +305,7 @@ void MyModel::DrawFloorFullview()
 					glTexCoord2f(floor[i].u, floor[i].v);
 					glNormal3f(floor[i].Nx, floor[i].Ny, floor[i].Nz);
 					glColor3f(floor[i].r, floor[i].g, floor[i].b);
-					glVertex3f(floor[i].x, floor[i].y, floor[i].z);
+					glVertex3f(floor[i].x, floor[i].y+0.00001f, floor[i].z);
 				}
 			
 			glEnd();
