@@ -281,6 +281,7 @@ void MyModel::DrawFloorFullview()
 		glEnd();
 
 		bool muro_sotto;
+		bool muro_ovest;
 		if (this->Maze->L[i].visitata) {
 			glLoadIdentity();
 			int ix, iy;
@@ -289,11 +290,21 @@ void MyModel::DrawFloorFullview()
 			if (i<10) {
 				muro_sotto = true;
 			}
-			else
+			else {
 				muro_sotto = this->Maze->L[i - this->ldx].muroS;
+			}
+				
 
+			if (i == 0) {
+				muro_ovest = true;
+			}
+			else {
+				muro_ovest = this->Maze->L[i - 1].muroE;
+			}
+				
+			
 			//se ha due muri a est e ovest linea verticale
-			if (this->Maze->L[i].muroE && this->Maze->L[i-1].muroE) {
+			if (this->Maze->L[i].muroE && muro_ovest) {
 				it = 30;
 			}
 			//se ha due muri a nord e sud linea orizzontale
@@ -301,28 +312,28 @@ void MyModel::DrawFloorFullview()
 				it = 31;
 			}
 			//se ha solo un muro a est
-			else if (this->Maze->L[i].muroE && !this->Maze->L[i - 1].muroE
+			else if (this->Maze->L[i].muroE && !muro_ovest
 				&& !this->Maze->L[i].muroS && !muro_sotto) {
 				it = 32;
 			}
 			//se ha solo il muro sud
 			else if (this->Maze->L[i].muroS && !this->Maze->L[i].muroE
-				&& !this->Maze->L[i-1].muroE && !muro_sotto) {
+				&& !muro_ovest && !muro_sotto) {
 				it = 33;
 			}
 			//se ha il muro sud e est
 			else if (this->Maze->L[i].muroS && this->Maze->L[i].muroE
-				&& !this->Maze->L[i - 1].muroE && !muro_sotto) {
+				&& !muro_ovest && !muro_sotto) {
 				it = 34;
 			}
 			//se ha il muro nord e est
 			else if (!this->Maze->L[i].muroS && this->Maze->L[i].muroE
-				&& !this->Maze->L[i - 1].muroE && muro_sotto) {
+				&& !muro_ovest && muro_sotto) {
 				it = 35;
 			}
 			//se ha il muro nord e ovest
 			else if (!this->Maze->L[i].muroS && !this->Maze->L[i].muroE
-				&& this->Maze->L[i - 1].muroE && muro_sotto) {
+				&& muro_ovest && muro_sotto) {
 				it = 36;
 			}
 			//se ha il muro sud e ovest
@@ -332,11 +343,11 @@ void MyModel::DrawFloorFullview()
 			}
 			//se ha il muro nord e basta
 			else if (muro_sotto && !this->Maze->L[i].muroE
-				&& !this->Maze->L[i - 1].muroE && !this->Maze->L[i].muroS) {
+				&& !muro_ovest && !this->Maze->L[i].muroS) {
 				it = 39;
 			}
 			//se ha il muro ovest e basta
-			else if (this->Maze->L[i - 1].muroE && !this->Maze->L[i].muroE
+			else if (muro_ovest && !this->Maze->L[i].muroE
 				&& !this->Maze->L[i].muroS && !muro_sotto) {
 				it = 40;
 			}
