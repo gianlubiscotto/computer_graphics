@@ -336,63 +336,62 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 		case WM_KEYDOWN: // Is A Key Being Held Down?
 		{							
 			if (Data.riddle_fullview) {		
-				//Se si è in una schermata indovinello, i tasti premuti coransondono alla ansosta dell'utente (vanno dentro all'array di char answer)
+				//if in riddle view, keys corresponds to user's answer
 				
 				//ESC
 				if (wParam == VK_ESCAPE) {	
-					//tutte le fullview a false
+					//all fullviews to false
 					Data.riddle_fullview = false;
 					Data.matrix_fullview = false;
 					Data.hogwarts_fullview = false;
 					Data.gate_fullview = false;
 					Data.qr_fullview = false;
-					//l'array answer deve essere resettato
+					//array cleaned
 					Data.index = 0;
 					Data.answer[Data.index] = '\0';
 				}
 
-				//ENTER, l'utente conferma la ansostas
+				//ENTER, confirm answer
 				else if (wParam == VK_RETURN) {
-					//se non sono nella fullview del gate
+					//if not gate fullview
 					if (!Data.gate_fullview) {
-						//Confrontare la stringa immessa con la ansosta relativa all'indovinello attivo.
+						//verify answer
 						if (Data.verify_answer(Data.answer)) {
-							//suono giusto
+							//correct sound
 							Data.solved_riddles += 1;
 							if (Data.solved_riddles != 3) {
 								Data.correct_sound = true;
 							}
 						}
-						//se la ansosta è sbagliata
+						//if answer is wrong
 						else {
-							//suono sbagliato
+							//incorrect sound
 							Data.incorrect_sound = true;
 						}
-						//a prescindere che la ansosta sia giusta o sbagliata
+						//in any case
 						Data.riddle_fullview = false;
-						//pulire l'array di caratteri
+						//clean the char array
 						Data.index = 0;
 						Data.answer[Data.index] = '\0';
 					}
-					//se sono nella fullview del gate enter mi fa uscire
+					//if in gate fullview
 					else {
 						Data.riddle_fullview = false;
 						Data.gate_fullview = false;
 					}
 				}
-				//qualsiasi altro tasto all'infuori di ESC e ENTER
+				//any other key but ESC or ENTER
 				else {
 					if (!Data.gate_fullview) {
 						if (wParam == VK_BACK) {
-							//Cancellare dall'array o dal vector l'ultimo carattere
+							//delete last char
 							if (Data.index > 0) {
 								Data.index--;
 								Data.answer[Data.index] = '\0';
 							}
 						}
 						else {
-							//Codice per stampare a video i caratteri schiacciati dall'utente
-							//gestiamo l'input in un vector o in un array
+							//handle user input into char array
 							if (Data.index < ans_size - 1 && ((wParam > 47 && wParam < 58) || (wParam > 64 && wParam < 91) || wParam == 32)) {
 								Data.answer[Data.index] = static_cast<char>(wParam);
 								Data.answer[Data.index + 1] = '\0';
@@ -535,7 +534,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					else floor_footstep->play();
 				}
 			}
-			//andare avanti
+			//go forward
 			if (Data.keys['W']) {
 				double r = 0.01;
 				double npx, npz;
@@ -567,7 +566,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					else floor_footstep->play();
 				}
 			}
-			//andare indietro
+			//go backward
 			if (Data.keys['S']) {
 				double r = 0.01;
 				double npx, npz;
@@ -583,7 +582,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					else floor_footstep->play();
 				}
 			}
-			//muoversi a destra
+			//go right
 			if (Data.keys['D']) {
 				double r = 0.01;
 				double npx, npz;
@@ -602,7 +601,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			}
 
 
-			//muoversi a sinistra
+			//go left
 			if (Data.keys['A']) {
 				double r = 0.01;
 				double npx, npz;
@@ -659,7 +658,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				}
 				done = true;
 			}
-			//risolto tutti gli indovinelli
+			//all riddles solved
 			if (Data.solved_fullview) {
 				stream->stop();
 				sttheme->stop();
