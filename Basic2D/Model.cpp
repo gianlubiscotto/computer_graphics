@@ -159,7 +159,7 @@ bool MyModel::LoadGLTextures(void)
 	//game over
 	if (!this->Load_a_texture("../Data/gameover.jpg", 28)) return false;
 	//win
-	if (!this->Load_a_texture("../Data/solved.jpg", 29)) return false;
+	if (!this->Load_a_texture("../Data/solved2.jpg", 29)) return false;
 
 	//linea verticale
 	if (!this->Load_a_texture("../Data/line_vertical.png", 30)) return false;
