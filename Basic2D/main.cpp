@@ -659,10 +659,12 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				Data.illumin = false;
 			}
 			if (Data.suono_giusto) {
+				bell->setVolume(0.5f);
 				bell->play();
 				Data.suono_giusto = false;
 			}
 			if (Data.suono_sbagliato) {
+				stupid->setVolume(0.5f);
 				stupid->play();
 				Data.suono_sbagliato = false;
 			}
@@ -678,6 +680,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			//risolto tutti gli indovinelli
 			if (Data.solved_fullview) {
 				stream->stop();
+				sttheme->stop();
 				win->play();
 				while (win->isPlaying()) {
 				}
