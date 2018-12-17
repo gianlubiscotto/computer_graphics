@@ -20,7 +20,7 @@
 #include "Labirinto.h"
 
 #define PI 3.141592654
-#define ans_size 40
+#define ans_size 30
 
 // A class for storing vertices
 //  Vertex

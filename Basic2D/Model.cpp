@@ -394,9 +394,8 @@ void MyModel::DrawRiddleFullview() {
 
 	// Position The Text On The Screen
 	//glDisable(GL_TEXTURE_2D);
-	glColor3f(0.2f, 1.0f, 0.2f);
 	//risposta dell'utente
-	glRasterPos3f(8.0f, 0.7f, 2.3f);
+	glRasterPos3f(8.05f, 0.7f, 2.0f);
 	if (!this->cancello_fullview && !this->gameover_fullview && !this->solved_fullview) {
 		Data.glPrint(this->answer);
 	}
@@ -807,7 +806,7 @@ void MyModel::BuildFont(void)								// Build Our Bitmap Font
 
 	base = glGenLists(96);								// Storage For 96 Characters
 
-	font = CreateFont(	-20,							// Height Of Font
+	font = CreateFont(	-30,							// Height Of Font
 						0,								// Width Of Font
 						0,								// Angle Of Escapement
 						0,								// Orientation Angle
