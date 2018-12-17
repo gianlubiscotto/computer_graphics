@@ -238,14 +238,14 @@ void MyModel::DrawFloorText()
       for(int i = 0; i < this->floor.size(); i++) {
         glTexCoord2f(floor[i].u, floor[i].v);
         glNormal3f(floor[i].Nx, floor[i].Ny, floor[i].Nz);
-        glColor3f(floor[i].r, floor[i].g, floor[i].b);
+        //glColor3f(floor[i].r, floor[i].g, floor[i].b);
         glVertex3f(floor[i].x, floor[i].y,  floor[i].z);
       }
     } else {
       for(int i = 0; i < this->floor.size(); i++) {
         glTexCoord2f(floor[i].u, floor[i].v);
         glNormal3f(floor[i].Nx, floor[i].Ny, floor[i].Nz);
-        glColor3f(0.9f,0.9f,0.9f);
+        //glColor3f(0.9f,0.9f,0.9f);
         glVertex3f(floor[i].x, floor[i].y,  floor[i].z);
       }
     }
@@ -273,7 +273,7 @@ void MyModel::DrawFloorFullview()
 		for (int i = 0; i < this->floor.size(); i++) {
 			glTexCoord2f(floor[i].u, floor[i].v);
 			glNormal3f(floor[i].Nx, floor[i].Ny, floor[i].Nz);
-			glColor3f(1.0f, 1.0f, 1.0f);
+			//glColor3f(1.0f, 1.0f, 1.0f);
 			glVertex3f(floor[i].x, floor[i].y, floor[i].z);
 		}
 
@@ -350,7 +350,7 @@ void MyModel::DrawFloorFullview()
 				for (int i = 0; i < this->floor.size(); i++) {
 					glTexCoord2f(floor[i].u, floor[i].v);
 					glNormal3f(floor[i].Nx, floor[i].Ny, floor[i].Nz);
-					glColor3f(floor[i].r, floor[i].g, floor[i].b);
+					//glColor3f(floor[i].r, floor[i].g, floor[i].b);
 					glVertex3f(floor[i].x, floor[i].y+0.00001f, floor[i].z);
 				}
 			
@@ -395,9 +395,9 @@ void MyModel::DrawRiddleFullview() {
 
 	// Position The Text On The Screen
 	//glDisable(GL_TEXTURE_2D);
-	glColor3f(0.2f, 1.0f, 0.2f);
 	//risposta dell'utente
-	glRasterPos3f(8.0f, 0.7f, 2.3f);
+		glColor3f(0,0,0);
+	glRasterPos3f(8.05f, 0.7f, 2.0f);
 	if (!this->cancello_fullview && !this->gameover_fullview && !this->solved_fullview) {
 		Data.glPrint(this->answer);
 	}
@@ -409,7 +409,7 @@ void MyModel::DrawWallsFullview()
   glDisable(GL_TEXTURE_2D);
   glDisable(GL_LIGHTING);
 
-  glColor3f(1.0f, 0.1f,0.0f);
+  //glColor3f(1.0f, 0.1f,0.0f);
   glLineWidth(2.2f);
   float zz = 0.1f;
   glLoadIdentity();
@@ -432,7 +432,7 @@ void MyModel::DrawWallsFullview()
   glVertex3f(0.0f, zz, (float) this->ldz );
 
   // player
-  glColor3f(0.2f, 0.9f,0.33f);
+  //glColor3f(0.2f, 0.9f,0.33f);
   float plx = (float) this->px;
   float plz = (float) this->pz;
   float pdx = (float) (this->px + 0.4*cos(this->angle));
@@ -445,12 +445,12 @@ void MyModel::DrawWallsFullview()
   glVertex3f(plx+p, zz, plz+p );
   glVertex3f(plx-p, zz, plz-p );
 
-  glColor3f(0.99f, 0.9f,0.1f);
+  //glColor3f(0.99f, 0.9f,0.1f);
   glVertex3f(plx, zz, plz );
   glVertex3f(pdx, zz, pdz );
 
   // remove
-  glColor3f(0.2f, 0.3f,0.9f);
+  //glColor3f(0.2f, 0.3f,0.9f);
   zz += 0.01f;
   glVertex3f(0.0f, zz, 0.0f );
   glVertex3f(0.5f, zz, 0.0f );
@@ -482,7 +482,7 @@ void MyModel::DrawWallsText(bool transparency)
 			for (int j = 0; j < this->wall.size(); j++) {
 				glTexCoord2f(wall[j].u, wall[j].v);
 				glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-				glColor3f(wall[j].r, wall[j].g, wall[j].b);
+				//glColor3f(wall[j].r, wall[j].g, wall[j].b);
 				glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 			}
 			glEnd();
@@ -499,7 +499,7 @@ void MyModel::DrawWallsText(bool transparency)
 				for (int j = 0; j < this->wall.size(); j++) {
 					glTexCoord2f(wall[j].u, wall[j].v);
 					glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-					glColor3f(wall[j].r, wall[j].g, wall[j].b);
+					//glColor3f(wall[j].r, wall[j].g, wall[j].b);
 					glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 				}
 				glEnd();
@@ -517,7 +517,7 @@ void MyModel::DrawWallsText(bool transparency)
 			for (int j = 0; j < this->wall.size(); j++) {
 				glTexCoord2f(wall[j].u, wall[j].v);
 				glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-				glColor3f(wall[j].r, wall[j].g, wall[j].b);
+				//glColor3f(wall[j].r, wall[j].g, wall[j].b);
 				glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 			}
 			glEnd();
@@ -533,7 +533,7 @@ void MyModel::DrawWallsText(bool transparency)
 				for (int j = 0; j < this->wall.size(); j++) {
 					glTexCoord2f(wall[j].u, wall[j].v);
 					glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-					glColor3f(wall[j].r, wall[j].g, wall[j].b);
+					//glColor3f(wall[j].r, wall[j].g, wall[j].b);
 					glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 				}
 				glEnd();
@@ -559,7 +559,7 @@ void MyModel::DrawWallsText(bool transparency)
 		for (int j = 0; j < this->wall.size(); j++) {
 			glTexCoord2f(wall[j].u, wall[j].v);
 			glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-			glColor3f(wall[j].r, wall[j].g, wall[j].b);
+			//glColor3f(wall[j].r, wall[j].g, wall[j].b);
 			glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 		}
 		glEnd();
@@ -575,7 +575,7 @@ void MyModel::DrawWallsText(bool transparency)
 		for (int j = 0; j < this->wall.size(); j++) {
 			glTexCoord2f(wall[j].u, wall[j].v);
 			glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-			glColor3f(wall[j].r, wall[j].g, wall[j].b);
+			//glColor3f(wall[j].r, wall[j].g, wall[j].b);
 			glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 		}
 		glEnd();
@@ -594,7 +594,7 @@ void MyModel::DrawWallsText(bool transparency)
 		for (int j = 0; j < this->wall.size(); j++) {
 			glTexCoord2f(wall[j].u, wall[j].v);
 			glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-			glColor3f(wall[j].r, wall[j].g, wall[j].b);
+			//glColor3f(wall[j].r, wall[j].g, wall[j].b);
 			glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 		}
 		glEnd();
@@ -610,7 +610,7 @@ void MyModel::DrawWallsText(bool transparency)
 		for (int j = 0; j < this->wall.size(); j++) {
 			glTexCoord2f(wall[j].u, wall[j].v);
 			glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-			glColor3f(wall[j].r, wall[j].g, wall[j].b);
+			//glColor3f(wall[j].r, wall[j].g, wall[j].b);
 			glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 		}
 		glEnd();
@@ -683,11 +683,11 @@ bool MyModel::DrawGLScene(void)
  	  glLoadIdentity();									// Reset The Current Modelview Matrix
 	  glDisable(GL_TEXTURE_2D);
     glDisable(GL_LIGHTING);
-
+		
  	  // Color
 	  glColor3f(0.8f,0.0f,0.0f);
 	  // Position The Text On The Screen
-		glRasterPos3f((float) ldx, 1.0f, (float) ldz );
+		glRasterPos3f((float) ldx, 1.0f, (float) ldz-0.1f );
 		this->glPrint("You have %2.0f minutes e %0.2d seconds left.  ", timeleft/60, (int)timeleft%60);
 	
   }
@@ -808,7 +808,7 @@ void MyModel::BuildFont(void)								// Build Our Bitmap Font
 
 	base = glGenLists(96);								// Storage For 96 Characters
 
-	font = CreateFont(	-20,							// Height Of Font
+	font = CreateFont(	-30,							// Height Of Font
 						0,								// Width Of Font
 						0,								// Angle Of Escapement
 						0,								// Orientation Angle
