@@ -458,7 +458,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	else {
 		dx = 640; dy = 480;
 	}
-	if (!CreateGLWindow("Project boh",dx,dy,8,Data.fullscreen))
+	if (!CreateGLWindow("A-mazing game",dx,dy,8,Data.fullscreen))
 	{
 		return 0;									// Quit If Window Was Not Created
 	}
