@@ -239,14 +239,14 @@ void MyModel::DrawFloorText()
       for(int i = 0; i < this->floor.size(); i++) {
         glTexCoord2f(floor[i].u, floor[i].v);
         glNormal3f(floor[i].Nx, floor[i].Ny, floor[i].Nz);
-        //glColor3f(floor[i].r, floor[i].g, floor[i].b);
+        glColor3f(floor[i].r, floor[i].g, floor[i].b);
         glVertex3f(floor[i].x, floor[i].y,  floor[i].z);
       }
     } else {
       for(int i = 0; i < this->floor.size(); i++) {
         glTexCoord2f(floor[i].u, floor[i].v);
         glNormal3f(floor[i].Nx, floor[i].Ny, floor[i].Nz);
-        //glColor3f(0.9f,0.9f,0.9f);
+        glColor3f(0.9f,0.9f,0.9f);
         glVertex3f(floor[i].x, floor[i].y,  floor[i].z);
       }
     }
@@ -274,7 +274,7 @@ void MyModel::DrawFloorFullview()
 		for (int i = 0; i < this->floor.size(); i++) {
 			glTexCoord2f(floor[i].u, floor[i].v);
 			glNormal3f(floor[i].Nx, floor[i].Ny, floor[i].Nz);
-			//glColor3f(1.0f, 1.0f, 1.0f);
+			glColor3f(1.0f, 1.0f, 1.0f);
 			glVertex3f(floor[i].x, floor[i].y, floor[i].z);
 		}
 
@@ -351,7 +351,7 @@ void MyModel::DrawFloorFullview()
 				for (int i = 0; i < this->floor.size(); i++) {
 					glTexCoord2f(floor[i].u, floor[i].v);
 					glNormal3f(floor[i].Nx, floor[i].Ny, floor[i].Nz);
-					//glColor3f(floor[i].r, floor[i].g, floor[i].b);
+					glColor3f(floor[i].r, floor[i].g, floor[i].b);
 					glVertex3f(floor[i].x, floor[i].y+0.00001f, floor[i].z);
 				}
 			
@@ -410,7 +410,7 @@ void MyModel::DrawWallsFullview()
   glDisable(GL_TEXTURE_2D);
   glDisable(GL_LIGHTING);
 
-  //glColor3f(1.0f, 0.1f,0.0f);
+  glColor3f(1.0f, 0.1f,0.0f);
   glLineWidth(2.2f);
   float zz = 0.1f;
   glLoadIdentity();
