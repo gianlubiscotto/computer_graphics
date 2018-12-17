@@ -183,6 +183,8 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/T_nord.png", 39)) return false;
 	//incrocio muro W
 	if (!this->Load_a_texture("../Data/T_ovest.png", 40)) return false;
+	//startscreen
+	if (!this->Load_a_texture("../Data/istruzioni.png", 41)) return false;
 
 	return true;										// Return Success
 }
@@ -192,7 +194,7 @@ void MyModel::SetProjection()
 	glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
 	glLoadIdentity();									// Reset The Projection Matrix
 
-	if( this->fullview || this->riddle_fullview || this->gameover_fullview || this->solved_fullview) {
+	if( this->fullview || this->riddle_fullview || this->gameover_fullview || this->solved_fullview || this->startscreen_fullview) {
     double a = 22.5 * Wwidth / ((double) Wheight);
     double hx;  // minimum y to see all the maze in the x direction
     hx = (((double) this->ldx+0.5)/2 ) / atan(a* PI /180.0);
@@ -660,7 +662,7 @@ bool MyModel::DrawGLScene(void)
 	}
 
   //  floor solo se mappa dall'alto o dentro il gioco
-	if (!this->riddle_fullview && !this->fullview) {
+	if (!this->riddle_fullview && !this->fullview && !this->startscreen_fullview) {
 		this->DrawWallsText(false);	//non png
 		this->DrawCeilText();
 		this->DrawFloorText();
@@ -673,7 +675,13 @@ bool MyModel::DrawGLScene(void)
 		this->DrawFloorFullview();
 	}
 	//schermata indovinello
-	if (this->riddle_fullview) this->DrawRiddleFullview(); 
+	if (this->riddle_fullview || this->startscreen_fullview) {
+		if (this->startscreen_fullview) {
+			this->fullview_texture = 41;
+		}
+		this->DrawRiddleFullview();
+	}
+	
 	
 	
   //  Some text in map mode

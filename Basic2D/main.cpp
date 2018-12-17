@@ -283,7 +283,7 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 
     case WM_LBUTTONUP:
       if( Data.StartScreen ) {
-				Data.fullview = false; 
+				Data.startscreen_fullview = false; 
 				Data.StartScreen = false; 
 				break;
       }
