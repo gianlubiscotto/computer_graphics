@@ -491,10 +491,14 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
   if (!stream) {
     return 0;         // failure
   }
-  stream->setRepeat(true);
-  stream->setVolume(0.5f); // 50% volume
-  stream->play();
-
+	OutputStreamPtr sttheme(OpenSound(device, "../Data/strangerthings.mp3", true));
+	if (!sttheme) {
+		return 0;         // failure
+	}
+	stream->setRepeat(true);
+	stream->setVolume(0.5f); // 50% volume
+	stream->play();
+  
   OutputStreamPtr bell(OpenSound(device, "../Data/bell.wav", false));
   OutputStreamPtr stupid(OpenSound(device, "../Data/stupid.wav", false));
 	OutputStreamPtr gameover(OpenSound(device, "../Data/gameover.wav", false));
@@ -665,6 +669,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 
 			if (Data.timeout) {
 				stream->stop();
+				sttheme->stop();
 				gameover->play();
 				while (gameover->isPlaying()) {
 				}
@@ -677,6 +682,12 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				while (win->isPlaying()) {
 				}
 				done = true;
+			}
+			if (Data.solved_riddles > 0) {
+				stream->stop();
+				sttheme->setRepeat(true);
+				sttheme->setVolume(0.5f); // 50% volume
+				sttheme->play();
 			}
 		}
 	}
