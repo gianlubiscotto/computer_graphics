@@ -115,9 +115,9 @@ bool MyModel::LoadGLTextures(void)
 	// Walls textures
 	if (!this->Load_a_texture("../Data/wallz-1.png", 2)) return false;
 	
-	//cancello
+	//gate
 	if (!this->Load_a_texture("../Data/gate1.png", 3)) return false;
-	//cancello fullview
+	//gate fullview
 	if (!this->Load_a_texture("../Data/gate_fullview.png", 4)) return false;
 	
 	//matrix fullview
@@ -395,7 +395,7 @@ void MyModel::DrawRiddleFullview() {
 	glEnable(GL_TEXTURE_2D);
 	glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
 	glLoadIdentity();
-	//tex viene modificata in move or collide con la texture corrispondente
+	//tex viene modificata in move or collide con la texture coransondente
 	glBindTexture(GL_TEXTURE_2D, texture[this->fullview_texture]);
 		glBegin(GL_QUADS);
 			glColor3f(1, 1, 1);	
@@ -407,10 +407,10 @@ void MyModel::DrawRiddleFullview() {
 
 	// Position The Text On The Screen
 	//glDisable(GL_TEXTURE_2D);
-	//risposta dell'utente
+	//ansosta dell'utente
 		glColor3f(0,0,0);
 	glRasterPos3f(8.05f, 0.7f, 2.0f);
-	if (!this->cancello_fullview && !this->gameover_fullview && !this->solved_fullview) {
+	if (!this->gate_fullview && !this->gameover_fullview && !this->solved_fullview) {
 		Data.glPrint(this->answer);
 	}
 }
@@ -713,10 +713,10 @@ bool MyModel::DrawGLScene(void)
   return true;
 }
 
-bool MyModel::verifica_risposta(char* answer) {
+bool MyModel::verify_answer(char* answer) {
 	
 	if (this->matrix_fullview) {
-		//controllo se answer corrisponde alla risposta esatta
+		//controllo se answer coransonde alla ansosta esatta
 		int j = 0;
 		bool flag = false;
 		while (!flag && j<7) {
@@ -727,7 +727,7 @@ bool MyModel::verifica_risposta(char* answer) {
 		}
 		this->matrix_fullview = false;
 		if (flag == false) {
-			this->matrix_vinto = true;
+			this->matrix_won = true;
 			for (int i = 0; i < this->Maze->L.size(); i++) {
 				this->Maze->L[i].WallsTexture[0] = 7;
 				this->Maze->L[i].WallsTexture[1] = 8;
@@ -739,7 +739,7 @@ bool MyModel::verifica_risposta(char* answer) {
 			this->height = 1;
 			this->walls_height();
 			this->Maze->mettiMuri();
-			if (this->cancello_vinto) {
+			if (this->gate_won) {
 				this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
 			}
 			return true;
@@ -750,7 +750,7 @@ bool MyModel::verifica_risposta(char* answer) {
 	}
 	else if (this->qr_fullview) {
 		
-		//controllo se answer corrisponde alla risposta esatta
+		//controllo se answer coransonde alla ansosta esatta
 		int j = 0;
 		bool flag = false;
 		while (!flag && j < 18) {
@@ -761,7 +761,7 @@ bool MyModel::verifica_risposta(char* answer) {
 		}
 		this->qr_fullview = false;
 		if (flag == false) {
-			this->qr_vinto = true;
+			this->qr_won = true;
 			for (int i = 0; i < this->Maze->L.size(); i++) {
 				this->Maze->L[i].WallsTexture[0] = 13;
 				this->Maze->L[i].WallsTexture[1] = 14;
@@ -773,7 +773,7 @@ bool MyModel::verifica_risposta(char* answer) {
 			this->height = 1;
 			this->walls_height();
 			this->Maze->mettiMuri();
-			if (this->cancello_vinto) {
+			if (this->gate_won) {
 				this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
 			}
 			return true;
@@ -783,7 +783,7 @@ bool MyModel::verifica_risposta(char* answer) {
 		}
 	}
 	else if (this->hogwarts_fullview) {
-		//controllo se answer corrisponde alla risposta esatta
+		//controllo se answer coransonde alla ansosta esatta
 		int j = 0;
 		bool flag = false;
 		while (!flag && j < 3) {
@@ -794,7 +794,7 @@ bool MyModel::verifica_risposta(char* answer) {
 		}
 		this->hogwarts_fullview = false;
 		if (flag == false) {
-			this->hogwarts_vinto = true;
+			this->hogwarts_won = true;
 			for (int i = 0; i < this->Maze->L.size(); i++) {
 				this->Maze->L[i].WallsTexture[0] = 21;
 				this->Maze->L[i].WallsTexture[1] = 22;
@@ -806,7 +806,7 @@ bool MyModel::verifica_risposta(char* answer) {
 			this->height = 1;
 			this->walls_height();
 			this->Maze->mettiMuri();
-			if (this->cancello_vinto) {
+			if (this->gate_won) {
 				this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
 			}
 			return true;
@@ -896,38 +896,38 @@ bool MyModel::MoveOrCollide(double npx, double npz, double enpx, double enpz)
 	return false;
 
 OKMOVE:
-	if (nx == this->Maze->xu && nz == this->Maze->yu) this->Vinto = true;
+	if (nx == this->Maze->xu && nz == this->Maze->yu) this->won = true;
 	px = npx; pz = npz;
 	int cella = this->Maze->GetIn(px, pz);
 	this->Maze->L[cella].visitata = true;
 
 	//hogwarts non risolto
-	if (oi != ni && ni == 51 && !hogwarts_vinto) { 
+	if (oi != ni && ni == 51 && !hogwarts_won) { 
 		this->fullview_texture = 20;
 		this->riddle_fullview = true;
 		this->hogwarts_fullview = true;
 	}
 	//matrix non risolto
-	else if (oi != ni && ni == 55 && !matrix_vinto) {	
+	else if (oi != ni && ni == 55 && !matrix_won) {	
 		this->fullview_texture = 5;
 		this->riddle_fullview = true;
 		this->matrix_fullview = true;
 		//TODO: texture di matrix
 	}
-	//cancello non aperto
-	else if (oi != ni && ni == 38 && !matrix_vinto) {	
+	//gate non aperto
+	else if (oi != ni && ni == 38 && !matrix_won) {	
 		this->fullview_texture = 4;	
 		this->riddle_fullview = true;
-		this->cancello_fullview = true;
+		this->gate_fullview = true;
 		//TODO: texture di matrix
 	}
-	//cancello che si apre
-	else if (oi != ni && ni == 38 && matrix_vinto && this->Maze->L[37].muroE) {
-		this->cancello_vinto = true;
+	//gate che si apre
+	else if (oi != ni && ni == 38 && matrix_won && this->Maze->L[37].muroE) {
+		this->gate_won = true;
 		this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
 	}
 	//qr non risolto
-	else if (oi != ni && ni == 6 && !qr_vinto) {
+	else if (oi != ni && ni == 6 && !qr_won) {
 		this->fullview_texture = 12;
 		this->riddle_fullview = true;
 		this->qr_fullview = true;
