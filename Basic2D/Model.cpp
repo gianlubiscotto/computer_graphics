@@ -433,7 +433,7 @@ void MyModel::DrawWallsFullview()
   glVertex3f(0.0f, zz, (float) this->ldz );
 
   // player
-  //glColor3f(0.2f, 0.9f,0.33f);
+  glColor3f(0.2f, 0.9f,0.33f);
   float plx = (float) this->px;
   float plz = (float) this->pz;
   float pdx = (float) (this->px + 0.4*cos(this->angle));
@@ -446,12 +446,12 @@ void MyModel::DrawWallsFullview()
   glVertex3f(plx+p, zz, plz+p );
   glVertex3f(plx-p, zz, plz-p );
 
-  //glColor3f(0.99f, 0.9f,0.1f);
+  glColor3f(0.99f, 0.9f,0.1f);
   glVertex3f(plx, zz, plz );
   glVertex3f(pdx, zz, pdz );
 
   // remove
-  //glColor3f(0.2f, 0.3f,0.9f);
+	glColor3f(0.2f, 0.3f,0.9f);
   zz += 0.01f;
   glVertex3f(0.0f, zz, 0.0f );
   glVertex3f(0.5f, zz, 0.0f );
@@ -483,7 +483,7 @@ void MyModel::DrawWallsText(bool transparency)
 			for (int j = 0; j < this->wall.size(); j++) {
 				glTexCoord2f(wall[j].u, wall[j].v);
 				glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-				//glColor3f(wall[j].r, wall[j].g, wall[j].b);
+				glColor3f(wall[j].r, wall[j].g, wall[j].b);
 				glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 			}
 			glEnd();
@@ -500,7 +500,7 @@ void MyModel::DrawWallsText(bool transparency)
 				for (int j = 0; j < this->wall.size(); j++) {
 					glTexCoord2f(wall[j].u, wall[j].v);
 					glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-					//glColor3f(wall[j].r, wall[j].g, wall[j].b);
+					glColor3f(wall[j].r, wall[j].g, wall[j].b);
 					glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 				}
 				glEnd();
@@ -518,7 +518,7 @@ void MyModel::DrawWallsText(bool transparency)
 			for (int j = 0; j < this->wall.size(); j++) {
 				glTexCoord2f(wall[j].u, wall[j].v);
 				glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-				//glColor3f(wall[j].r, wall[j].g, wall[j].b);
+				glColor3f(wall[j].r, wall[j].g, wall[j].b);
 				glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 			}
 			glEnd();
@@ -534,7 +534,7 @@ void MyModel::DrawWallsText(bool transparency)
 				for (int j = 0; j < this->wall.size(); j++) {
 					glTexCoord2f(wall[j].u, wall[j].v);
 					glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-					//glColor3f(wall[j].r, wall[j].g, wall[j].b);
+					glColor3f(wall[j].r, wall[j].g, wall[j].b);
 					glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 				}
 				glEnd();
@@ -560,7 +560,7 @@ void MyModel::DrawWallsText(bool transparency)
 		for (int j = 0; j < this->wall.size(); j++) {
 			glTexCoord2f(wall[j].u, wall[j].v);
 			glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-			//glColor3f(wall[j].r, wall[j].g, wall[j].b);
+			glColor3f(wall[j].r, wall[j].g, wall[j].b);
 			glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 		}
 		glEnd();
@@ -576,7 +576,7 @@ void MyModel::DrawWallsText(bool transparency)
 		for (int j = 0; j < this->wall.size(); j++) {
 			glTexCoord2f(wall[j].u, wall[j].v);
 			glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-			//glColor3f(wall[j].r, wall[j].g, wall[j].b);
+			glColor3f(wall[j].r, wall[j].g, wall[j].b);
 			glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 		}
 		glEnd();
@@ -595,7 +595,7 @@ void MyModel::DrawWallsText(bool transparency)
 		for (int j = 0; j < this->wall.size(); j++) {
 			glTexCoord2f(wall[j].u, wall[j].v);
 			glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-			//glColor3f(wall[j].r, wall[j].g, wall[j].b);
+			glColor3f(wall[j].r, wall[j].g, wall[j].b);
 			glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 		}
 		glEnd();
@@ -611,7 +611,7 @@ void MyModel::DrawWallsText(bool transparency)
 		for (int j = 0; j < this->wall.size(); j++) {
 			glTexCoord2f(wall[j].u, wall[j].v);
 			glNormal3f(wall[j].Nx, wall[j].Ny, wall[j].Nz);
-			//glColor3f(wall[j].r, wall[j].g, wall[j].b);
+			glColor3f(wall[j].r, wall[j].g, wall[j].b);
 			glVertex3f(wall[j].x, wall[j].y, wall[j].z);
 		}
 		glEnd();
