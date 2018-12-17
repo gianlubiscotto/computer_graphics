@@ -118,7 +118,7 @@ bool MyModel::LoadGLTextures(void)
 	//cancello
 	if (!this->Load_a_texture("../Data/gate1.png", 3)) return false;
 	//cancello fullview
-	if (!this->Load_a_texture("../Data/gatefullview.jpg", 4)) return false;
+	if (!this->Load_a_texture("../Data/gate_fullview.png", 4)) return false;
 	
 	//matrix fullview
 	if (!this->Load_a_texture("../Data/matrix_fullview.png", 5)) return false;
