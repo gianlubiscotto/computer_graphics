@@ -59,17 +59,17 @@ public:
   bool	fullscreen;	    // Fullscreen Flag 
 	int height;						//altezza soffitto
 	//riddles' stuff...
-	int indice;
+	int index;
 	char answer[ans_size];
 	char matrix_solution[7] = { 'B','I','N','A','R','Y','\0' };
 	char hogwarts_solution[3] = {'P','I','\0'};
 	char qr_solution[18] = { 'W','E',' ','F','I','N','I','S','H','E','D',' ','I','D','E','A','S','\0' };
 	int fullview_texture;	//texture for riddle_fullview
-	bool suono_giusto, suono_sbagliato;
+	bool correct_sound, incorrect_sound;
 	int solved_riddles;
 	bool fullview,startscreen_fullview, gameover_fullview, solved_fullview;	// top view of the whole maze
-	bool riddle_fullview, hogwarts_fullview, matrix_fullview, cancello_fullview, qr_fullview; //riddle dialog box
-	bool Vinto, matrix_vinto, hogwarts_vinto, cancello_vinto, qr_vinto;
+	bool riddle_fullview, hogwarts_fullview, matrix_fullview, gate_fullview, qr_fullview; //riddle dialog box
+	bool won, matrix_won, hogwarts_won, gate_won, qr_won;
 
   
 	CLabR *Maze;		// maze - labirinto
@@ -99,12 +99,12 @@ private:
 public:
   //  methods
   MyModel(): hDC(NULL), hRC (NULL), hWnd (NULL), active (true),fullscreen(false), cursor(true), captured(false), illumin(true),
-		fullview(false),startscreen_fullview(true), gameover_fullview(false), riddle_fullview(false),matrix_fullview(false),hogwarts_fullview(false),cancello_fullview(false),qr_fullview(false),
+		fullview(false),startscreen_fullview(true), gameover_fullview(false), riddle_fullview(false),matrix_fullview(false),hogwarts_fullview(false),gate_fullview(false),qr_fullview(false),
 		angle(0.0), angley(0.0), px (0.5), pz(0.5), NoWalls(false), StartScreen (true), 
-		Vinto (false), qr_vinto(false), matrix_vinto(false), hogwarts_vinto(false), cancello_vinto(false), suono_giusto(false), suono_sbagliato(false),
+		won (false), qr_won(false), matrix_won(false), hogwarts_won(false), gate_won(false), correct_sound(false), incorrect_sound(false),
 		timeleft(100000),timeout(false),solved_fullview(false){
 		
-		indice = 0;
+		index = 0;
 		solved_riddles = 0;
 
 		ldx = 10; ldz = 8;
@@ -136,7 +136,7 @@ public:
   bool InitGL(void);
   void ReSizeGLScene(int width, int height);
   void glPrint(const char *fmt, ...);			// Custom GL "Print" Routine
-	bool verifica_risposta(char* answer);
+	bool verify_answer(char* answer);
 
 private:
   void DrawFloorText();

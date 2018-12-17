@@ -1,4 +1,7 @@
 /*
+ *		EDIT: this code was edited by Gianluca Ceccoli and Chiara Leoni as Computer Graphics academic project	
+ *		inside Master Degree in Computer Engineering (2018)	
+ *
  *    CREDITS: this program is based on the new nehe lesson 06.
  *    Modifiyed by Aldo Grattarola for the Computer Graphics course.
  *
@@ -8,26 +11,6 @@
  *		If You've Found This Code Useful, Please Let Me Know.
  *		Visit My Site At nehe.gamedev.net
  */
-
-///////////////////////////////////////////////////////////////////
-//  A basic skeleton for 2D like game developpers.
-//  How to:
-//  - load textures
-//  - simulate a 2D rendering
-//  - using transparency
-//  - ....
-/////////////////////////////////----------------------------------
-//  VERSION 1: added
-//  - correct timing
-//  - animated textures
-//  - how to write on the window
-///////////////////////////////////////////////////////////////////
-//  VERSION 2: added
-//  - sounds via the audiere library (GNU LESSER GENERAL PUBLIC LICENSE)
-//    see audiere.sourceforge.net
-//  NOTE: if you uso the debug configuration copy the audiere.dll file to
-//        the Debug directory!
-///////////////////////////////////////////////////////////////////
 
 #include <windows.h>		// Header File For Windows
 #include <stdio.h>			// Header File For Standard Input/Output
@@ -45,7 +28,6 @@ using namespace audiere;
 
 class MyModel Data;
 int i = 0;	//index for char array for user input answering riddles 
-char risp[99];	//array for answering riddles
 POINTS last_mouse_p;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
@@ -354,67 +336,66 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 		case WM_KEYDOWN: // Is A Key Being Held Down?
 		{							
 			if (Data.riddle_fullview) {		
-				//Se si è in una schermata indovinello, i tasti premuti corrispondono alla risposta dell'utente (vanno dentro all'array di char answer)
+				//if in riddle view, keys corresponds to user's answer
 				
 				//ESC
 				if (wParam == VK_ESCAPE) {	
-					//tutte le fullview a false
+					//all fullviews to false
 					Data.riddle_fullview = false;
 					Data.matrix_fullview = false;
 					Data.hogwarts_fullview = false;
-					Data.cancello_fullview = false;
+					Data.gate_fullview = false;
 					Data.qr_fullview = false;
-					//l'array answer deve essere resettato
-					Data.indice = 0;
-					Data.answer[Data.indice] = '\0';
+					//array cleaned
+					Data.index = 0;
+					Data.answer[Data.index] = '\0';
 				}
 
-				//ENTER, l'utente conferma la rispostas
+				//ENTER, confirm answer
 				else if (wParam == VK_RETURN) {
-					//se non sono nella fullview del cancello
-					if (!Data.cancello_fullview) {
-						//Confrontare la stringa immessa con la risposta relativa all'indovinello attivo.
-						if (Data.verifica_risposta(Data.answer)) {
-							//suono giusto
+					//if not gate fullview
+					if (!Data.gate_fullview) {
+						//verify answer
+						if (Data.verify_answer(Data.answer)) {
+							//correct sound
 							Data.solved_riddles += 1;
 							if (Data.solved_riddles != 3) {
-								Data.suono_giusto = true;
+								Data.correct_sound = true;
 							}
 						}
-						//se la risposta è sbagliata
+						//if answer is wrong
 						else {
-							//suono sbagliato
-							Data.suono_sbagliato = true;
+							//incorrect sound
+							Data.incorrect_sound = true;
 						}
-						//a prescindere che la risposta sia giusta o sbagliata
+						//in any case
 						Data.riddle_fullview = false;
-						//pulire l'array di caratteri
-						Data.indice = 0;
-						Data.answer[Data.indice] = '\0';
+						//clean the char array
+						Data.index = 0;
+						Data.answer[Data.index] = '\0';
 					}
-					//se sono nella fullview del cancello enter mi fa uscire
+					//if in gate fullview
 					else {
 						Data.riddle_fullview = false;
-						Data.cancello_fullview = false;
+						Data.gate_fullview = false;
 					}
 				}
-				//qualsiasi altro tasto all'infuori di ESC e ENTER
+				//any other key but ESC or ENTER
 				else {
-					if (!Data.cancello_fullview) {
+					if (!Data.gate_fullview) {
 						if (wParam == VK_BACK) {
-							//Cancellare dall'array o dal vector l'ultimo carattere
-							if (Data.indice > 0) {
-								Data.indice--;
-								Data.answer[Data.indice] = '\0';
+							//delete last char
+							if (Data.index > 0) {
+								Data.index--;
+								Data.answer[Data.index] = '\0';
 							}
 						}
 						else {
-							//Codice per stampare a video i caratteri schiacciati dall'utente
-							//gestiamo l'input in un vector o in un array
-							if (Data.indice < ans_size - 1 && ((wParam > 47 && wParam < 58) || (wParam > 64 && wParam < 91) || wParam == 32)) {
-								Data.answer[Data.indice] = static_cast<char>(wParam);
-								Data.answer[Data.indice + 1] = '\0';
-								Data.indice++;
+							//handle user input into char array
+							if (Data.index < ans_size - 1 && ((wParam > 47 && wParam < 58) || (wParam > 64 && wParam < 91) || wParam == 32)) {
+								Data.answer[Data.index] = static_cast<char>(wParam);
+								Data.answer[Data.index + 1] = '\0';
+								Data.index++;
 							}
 						}
 					}
@@ -477,7 +458,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	else {
 		dx = 640; dy = 480;
 	}
-	if (!CreateGLWindow("Project boh",dx,dy,8,Data.fullscreen))
+	if (!CreateGLWindow("A-mazing game",dx,dy,8,Data.fullscreen))
 	{
 		return 0;									// Quit If Window Was Not Created
 	}
@@ -553,7 +534,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					else floor_footstep->play();
 				}
 			}
-			//andare avanti
+			//go forward
 			if (Data.keys['W']) {
 				double r = 0.01;
 				double npx, npz;
@@ -585,7 +566,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					else floor_footstep->play();
 				}
 			}
-			//andare indietro
+			//go backward
 			if (Data.keys['S']) {
 				double r = 0.01;
 				double npx, npz;
@@ -601,7 +582,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					else floor_footstep->play();
 				}
 			}
-			//muoversi a destra
+			//go right
 			if (Data.keys['D']) {
 				double r = 0.01;
 				double npx, npz;
@@ -620,7 +601,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			}
 
 
-			//muoversi a sinistra
+			//go left
 			if (Data.keys['A']) {
 				double r = 0.01;
 				double npx, npz;
@@ -658,15 +639,15 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			if (Data.keys['O']) {
 				Data.illumin = false;
 			}
-			if (Data.suono_giusto) {
+			if (Data.correct_sound) {
 				bell->setVolume(0.5f);
 				bell->play();
-				Data.suono_giusto = false;
+				Data.correct_sound = false;
 			}
-			if (Data.suono_sbagliato) {
+			if (Data.incorrect_sound) {
 				stupid->setVolume(0.5f);
 				stupid->play();
-				Data.suono_sbagliato = false;
+				Data.incorrect_sound = false;
 			}
 
 			if (Data.timeout) {
@@ -677,7 +658,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				}
 				done = true;
 			}
-			//risolto tutti gli indovinelli
+			//all riddles solved
 			if (Data.solved_fullview) {
 				stream->stop();
 				sttheme->stop();

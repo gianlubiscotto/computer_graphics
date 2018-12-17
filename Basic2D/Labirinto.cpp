@@ -16,7 +16,7 @@
 //  Init to a "full closed maze"
 //  nrows and ncols are the dimensions
 CLabR::CLabR( int nrows, int ncols ): dx(nrows), dy(ncols),
-  xg(0), yg(0), xs(0), ys(0), xu(0), yu(0), vinto(false)
+  xg(0), yg(0), xs(0), ys(0), xu(0), yu(0), won(false)
 {
   CellaR C;
   for(int i=0; i < dx*dy; i++) L.push_back(C);
@@ -227,7 +227,7 @@ bool CLabR::autoMove()
   }
   if( m != -1 && aa < L[cur].a ) {
     GetXY(m,xg,yg); L[cur].visitata++;
-    if( xg == xu && yg == yu ) vinto = true;
+    if( xg == xu && yg == yu ) won = true;
     return true;
   }
   return false;
@@ -453,8 +453,8 @@ void CLabR::mettiMuri() {
 	//modifico le texture
 	L[0].WallsTexture[0] = 27; //9 e 3/4
 
-	L[37].WallsTexture[1] = 3; //cancello
-	L[38].WallsTexture[3] = 3; //cancello dall'altro lato
+	L[37].WallsTexture[1] = 3; //gate
+	L[38].WallsTexture[3] = 3; //gate dall'altro lato
 	L[37].WallsTransparency[1] = true;
 
 	L[51].WallsTexture[0] = 19;	

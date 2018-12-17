@@ -41,7 +41,7 @@ public:
   bool special;
   
   COLORREF colore;
-  //  texture indices
+  //  texture indexs
   int floorTexture;
   int ceilTexture;
   int WallsTexture[4];  // 0-3 see NORT EST ...
@@ -86,7 +86,7 @@ public:
   int xs, ys;             // entrata - entrance
   int xu, yu;             // uscita - exit
 
-  bool vinto;             // flag se arrivo in fondo, true if end reached
+  bool won;             // flag se arrivo in fondo, true if end reached
 
 public:
 	CLabR();								// non c'e` - do not exist
@@ -100,13 +100,13 @@ public:
   void CreaMuroOrizzontale(int ym, int x0, int x1, bool porta);
 
   //  Utilita` per gestire
-  inline int GetIn(int x, int y) {      // indice da x,y
+  inline int GetIn(int x, int y) {      // index da x,y
     return (y*dx + x); }
 
   inline CellaR & GetC(int x, int y) {  //  Cella  x,y
     return L[GetIn(x,y)]; }
 
-  void GetXY(int i, int &x, int &y) {   // da indice a x,y
+  void GetXY(int i, int &x, int &y) {   // da index a x,y
     y = i / this->dx; x = (i % this->dx); }
 
   //  Torna nel nome il numero di muri della cella index, in
