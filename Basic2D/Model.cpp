@@ -154,8 +154,9 @@ bool MyModel::LoadGLTextures(void)
 	if (!this->Load_a_texture("../Data/math2.jpg", 25)) return false;
 	if (!this->Load_a_texture("../Data/math4_2.jpg", 26)) return false;
 	//hint 9 3/4
-	if (!this->Load_a_texture("../Data/murooltrepassabile.png", 27)) return false;
-	
+	//if (!this->Load_a_texture("../Data/murooltrepassabile.png", 27)) return false;
+	if (!this->Load_a_texture("../Data/hint3.png", 27)) return false;
+
 	//game over
 	if (!this->Load_a_texture("../Data/gameover.jpg", 28)) return false;
 	//win
