@@ -280,78 +280,77 @@ void MyModel::DrawFloorFullview()
 
 		glEnd();
 
-		bool muro_sotto;
-		bool muro_ovest;
+		bool muroN;
+		bool muroW;
 		if (this->Maze->L[i].visitata) {
 			glLoadIdentity();
 			int ix, iy;
 			this->Maze->GetXY(i, ix, iy);
 			int it;
 			if (i<10) {
-				muro_sotto = true;
+				muroN = true;
 			}
 			else {
-				muro_sotto = this->Maze->L[i - this->ldx].muroS;
+				muroN = this->Maze->L[i - this->ldx].muroS;
 			}
 				
-
 			if (i == 0) {
-				muro_ovest = true;
+				muroW = true;
 			}
 			else {
-				muro_ovest = this->Maze->L[i - 1].muroE;
+				muroW = this->Maze->L[i - 1].muroE;
 			}
 				
 			
-			//se ha due muri a est e ovest linea verticale
-			if (this->Maze->L[i].muroE && muro_ovest) {
+			//if muroE and muroW -> vertical line
+			if (this->Maze->L[i].muroE && muroW) {
 				it = 30;
 			}
-			//se ha due muri a nord e sud linea orizzontale
-			else if (this->Maze->L[i].muroS && muro_sotto) {
+			//if muroS and muroN -> horizontal line
+			else if (this->Maze->L[i].muroS && muroN) {
 				it = 31;
 			}
-			//se ha solo un muro a est
-			else if (this->Maze->L[i].muroE && !muro_ovest
-				&& !this->Maze->L[i].muroS && !muro_sotto) {
+			//if only muroE  -> T_est line
+			else if (this->Maze->L[i].muroE && !muroW
+				&& !this->Maze->L[i].muroS && !muroN) {
 				it = 32;
 			}
-			//se ha solo il muro sud
+			//if only muroS -> T_sud line
 			else if (this->Maze->L[i].muroS && !this->Maze->L[i].muroE
-				&& !muro_ovest && !muro_sotto) {
+				&& !muroW && !muroN) {
 				it = 33;
 			}
-			//se ha il muro sud e est
+			//if muroE and muroS -> corner line
 			else if (this->Maze->L[i].muroS && this->Maze->L[i].muroE
-				&& !muro_ovest && !muro_sotto) {
+				&& !muroW && !muroN) {
 				it = 34;
 			}
-			//se ha il muro nord e est
+			//if muroE and muroN -> corner line
 			else if (!this->Maze->L[i].muroS && this->Maze->L[i].muroE
-				&& !muro_ovest && muro_sotto) {
+				&& !muroW && muroN) {
 				it = 35;
 			}
-			//se ha il muro nord e ovest
+			//if muroN and muroW -> corner line
 			else if (!this->Maze->L[i].muroS && !this->Maze->L[i].muroE
-				&& muro_ovest && muro_sotto) {
+				&& muroW && muroN) {
 				it = 36;
 			}
-			//se ha il muro sud e ovest
+			//if muroS and muroW -> corner line
 			else if (this->Maze->L[i].muroS && !this->Maze->L[i].muroE
-				&& this->Maze->L[i - 1].muroE && !muro_sotto) {
+				&& this->Maze->L[i - 1].muroE && !muroN) {
 				it = 37;
 			}
-			//se ha il muro nord e basta
-			else if (muro_sotto && !this->Maze->L[i].muroE
-				&& !muro_ovest && !this->Maze->L[i].muroS) {
+			//if only muroN -> T_nord line
+			else if (muroN && !this->Maze->L[i].muroE
+				&& !muroW && !this->Maze->L[i].muroS) {
 				it = 39;
 			}
-			//se ha il muro ovest e basta
-			else if (muro_ovest && !this->Maze->L[i].muroE
-				&& !this->Maze->L[i].muroS && !muro_sotto) {
+			//if only muroW -> T_ovest line
+			else if (muroW && !this->Maze->L[i].muroE
+				&& !this->Maze->L[i].muroS && !muroN) {
 				it = 40;
 			}
-			else {
+			else {	//no walls-> cross
 				it = 38;
 			}
 			glBindTexture(GL_TEXTURE_2D, texture[it]);	
@@ -395,7 +394,6 @@ void MyModel::DrawRiddleFullview() {
 	glEnable(GL_TEXTURE_2D);
 	glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
 	glLoadIdentity();
-	//tex viene modificata in move or collide con la texture corrispondente
 	glBindTexture(GL_TEXTURE_2D, texture[this->fullview_texture]);
 		glBegin(GL_QUADS);
 			glColor3f(1, 1, 1);	
@@ -407,10 +405,11 @@ void MyModel::DrawRiddleFullview() {
 
 	// Position The Text On The Screen
 	//glDisable(GL_TEXTURE_2D);
-	//risposta dell'utente
-		glColor3f(0,0,0);
+	
+	glColor3f(0,0,0);
 	glRasterPos3f(8.05f, 0.7f, 2.0f);
 	if (!this->cancello_fullview && !this->gameover_fullview && !this->solved_fullview) {
+		//user's answer
 		Data.glPrint(this->answer);
 	}
 }
@@ -661,7 +660,7 @@ bool MyModel::DrawGLScene(void)
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
   glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
-	glLoadIdentity();									// Reset The View
+  glLoadIdentity();									// Reset The View
   //  In this way texture and surface color are blended
   glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
 	if (!illumin) glDisable(GL_LIGHTING);
@@ -672,7 +671,7 @@ bool MyModel::DrawGLScene(void)
 
 	}
 
-  //  floor solo se mappa dall'alto o dentro il gioco
+	
 	if (!this->riddle_fullview && !this->fullview && !this->startscreen_fullview) {
 		this->DrawWallsText(false);	//non png
 		this->DrawCeilText();
@@ -680,12 +679,11 @@ bool MyModel::DrawGLScene(void)
 		this->DrawWallsText(true);	//png files
 	}
 	
-  //  walls
+  
 	if (this->fullview) {
-		//this->DrawWallsFullview(); //disegna le righe rosse e il pg
 		this->DrawFloorFullview();
 	}
-	//schermata indovinello
+	
 	if (this->riddle_fullview || this->startscreen_fullview) {
 		if (this->startscreen_fullview) {
 			this->fullview_texture = 41;
@@ -698,15 +696,15 @@ bool MyModel::DrawGLScene(void)
   //  Some text in map mode
   if( this->fullview ) {
     glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
- 	  glLoadIdentity();									// Reset The Current Modelview Matrix
-	  glDisable(GL_TEXTURE_2D);
+ 	glLoadIdentity();									// Reset The Current Modelview Matrix
+	glDisable(GL_TEXTURE_2D);
     glDisable(GL_LIGHTING);
 		
- 	  // Color
-	  glColor3f(0.8f,0.0f,0.0f);
-	  // Position The Text On The Screen
-		glRasterPos3f((float) ldx, 1.0f, (float) ldz-0.1f );
-		this->glPrint("You have %2.0f minutes e %0.2d seconds left.  ", timeleft/60, (int)timeleft%60);
+ 	// Color
+	glColor3f(0.8f,0.0f,0.0f);
+	// Position The Text On The Screen
+	glRasterPos3f((float) ldx, 1.0f, (float) ldz-0.1f );
+	this->glPrint("You have %2.0f minutes e %0.2d seconds left.  ", timeleft/60, (int)timeleft%60);
 	
   }
 
@@ -716,7 +714,6 @@ bool MyModel::DrawGLScene(void)
 bool MyModel::verifica_risposta(char* answer) {
 	
 	if (this->matrix_fullview) {
-		//controllo se answer corrisponde alla risposta esatta
 		int j = 0;
 		bool flag = false;
 		while (!flag && j<7) {
@@ -740,7 +737,7 @@ bool MyModel::verifica_risposta(char* answer) {
 			this->walls_height();
 			this->Maze->mettiMuri();
 			if (this->cancello_vinto) {
-				this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
+				this->Maze->L[37].muroE = false;	
 			}
 			return true;
 		}
@@ -750,7 +747,6 @@ bool MyModel::verifica_risposta(char* answer) {
 	}
 	else if (this->qr_fullview) {
 		
-		//controllo se answer corrisponde alla risposta esatta
 		int j = 0;
 		bool flag = false;
 		while (!flag && j < 18) {
@@ -774,7 +770,7 @@ bool MyModel::verifica_risposta(char* answer) {
 			this->walls_height();
 			this->Maze->mettiMuri();
 			if (this->cancello_vinto) {
-				this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
+				this->Maze->L[37].muroE = false;	
 			}
 			return true;
 		}
@@ -783,7 +779,7 @@ bool MyModel::verifica_risposta(char* answer) {
 		}
 	}
 	else if (this->hogwarts_fullview) {
-		//controllo se answer corrisponde alla risposta esatta
+		
 		int j = 0;
 		bool flag = false;
 		while (!flag && j < 3) {
@@ -807,7 +803,7 @@ bool MyModel::verifica_risposta(char* answer) {
 			this->walls_height();
 			this->Maze->mettiMuri();
 			if (this->cancello_vinto) {
-				this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
+				this->Maze->L[37].muroE = false;	
 			}
 			return true;
 		}
@@ -901,13 +897,13 @@ OKMOVE:
 	int cella = this->Maze->GetIn(px, pz);
 	this->Maze->L[cella].visitata = true;
 
-	//hogwarts non risolto
+	//hogwarts_riddle not solved
 	if (oi != ni && ni == 51 && !hogwarts_vinto) { 
 		this->fullview_texture = 20;
 		this->riddle_fullview = true;
 		this->hogwarts_fullview = true;
 	}
-	//matrix non risolto
+	//matrix_riddle not solved
 	else if (oi != ni && ni == 55 && !matrix_vinto) {	
 		this->fullview_texture = 5;
 		this->riddle_fullview = true;
@@ -919,19 +915,19 @@ OKMOVE:
 		this->fullview_texture = 4;	
 		this->riddle_fullview = true;
 		this->cancello_fullview = true;
-		//TODO: texture di matrix
+		
 	}
 	//cancello che si apre
 	else if (oi != ni && ni == 38 && matrix_vinto && this->Maze->L[37].muroE) {
 		this->cancello_vinto = true;
-		this->Maze->L[37].muroE = false;	//todo MURO CHE SI ALZA
+		this->Maze->L[37].muroE = false;	
 	}
-	//qr non risolto
+	//qr_riddle not solved
 	else if (oi != ni && ni == 6 && !qr_vinto) {
 		this->fullview_texture = 12;
 		this->riddle_fullview = true;
 		this->qr_fullview = true;
-		//TODO: texture di matrix
+		
 	}
 	return true;
 }
