@@ -8,7 +8,6 @@
 #include <stdio.h>			// Header File For Standard Input/Output
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
 #include <gl\glu.h>			// Header File For The GLu32 Library
-
 #include "Model.h"
 #include "SOIL.h"
 
@@ -703,8 +702,10 @@ bool MyModel::DrawGLScene(void)
  	// Color
 	glColor3f(0.8f,0.0f,0.0f);
 	// Position The Text On The Screen
+	double mins = timeleft / 60;
+	mins = std::floor(mins);
 	glRasterPos3f((float) ldx, 1.0f, (float) ldz-0.1f );
-	this->glPrint("You have %2.0f minutes e %0.2d seconds left.  ", timeleft/60, (int)timeleft%60);
+	this->glPrint("You have %2.0f minutes e %0.2d seconds left.  ", mins, (int)timeleft%60);
 	
   }
 
