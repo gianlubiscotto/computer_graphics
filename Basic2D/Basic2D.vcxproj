@@ -74,7 +74,6 @@
   <ItemGroup>
     <ClInclude Include="audiere.h" />
     <ClInclude Include="first_dialog.h" />
-    <ClInclude Include="Soundclass.h" />
     <ClInclude Include="Labirinto.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="resource.h" />

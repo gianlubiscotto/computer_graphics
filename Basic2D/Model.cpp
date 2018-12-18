@@ -255,6 +255,7 @@ void MyModel::DrawFloorText()
 }
 
 //  DRAW THE FLOOR - TEXTURE - NO ILLUMINATION
+//	Draw the map
 void MyModel::DrawFloorFullview()
 {
 	glEnable(GL_TEXTURE_2D);
@@ -371,6 +372,7 @@ void MyModel::DrawFloorFullview()
 		
 	}
 }
+
 void MyModel::DrawCeilText() {
 	glEnable(GL_TEXTURE_2D);
 	int it = this->Maze->L[0].ceilTexture;
@@ -386,7 +388,6 @@ void MyModel::DrawCeilText() {
 		}
 	}
 }
-
 
 //draw the matrix dialog box
 void MyModel::DrawRiddleFullview() {
@@ -414,7 +415,7 @@ void MyModel::DrawRiddleFullview() {
 }
 
 //  Draw the walls: special case for the map
-void MyModel::DrawWallsFullview()
+/*void MyModel::DrawWallsFullview()
 {
   glDisable(GL_TEXTURE_2D);
   glDisable(GL_LIGHTING);
@@ -467,7 +468,7 @@ void MyModel::DrawWallsFullview()
 
 
   glEnd();
-}
+}*/
 
 //  DRAW THE WALLS - TEXTURE - NO ILLUMINATION
 
@@ -814,7 +815,7 @@ bool MyModel::verify_answer(char* answer) {
 		}
 	}
 }
-//////////////////////////////////////////////////////////////////////
+
 //////////////////////////////////////////////////////////////////////
 //  bitmap fonts
 void MyModel::BuildFont(void)								// Build Our Bitmap Font

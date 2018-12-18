@@ -84,8 +84,6 @@ void CLabR::Init_Perfect0()
 }
 
 
-
-
 //  Init con caselle nere casuali
 //  Same as Init_Perfect0 with holes (unreachable rooms)
 void CLabR::Init_Perfect0_parcroc()

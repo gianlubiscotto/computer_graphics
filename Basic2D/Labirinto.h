@@ -27,8 +27,8 @@
 class CellaR
 {
 public:
-  bool visitata;    // how many times has benn visited
-  int a;                // spare int for processing
+  bool visitata;    // how many times has been visited
+  int a;            // spare int for processing
   //  Ogni cella ha solo due muri, gli altri sono delle celle
   //  vicine (l'ultima riga e l'ultima colonna hanno piu`
   //  muri del necessario)
@@ -46,7 +46,6 @@ public:
   int ceilTexture;
   int WallsTexture[4];  // 0-3 see NORT EST ...
   bool WallsTransparency[2]; //0 per nord/sud 1 per est/ovest
-	//dare id per facciata e retro
 public:
   CellaR(): visitata(0), a(0), muroE(true), muroS(true), 
     special(false), floorTexture(0), ceilTexture(1)
